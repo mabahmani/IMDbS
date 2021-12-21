@@ -13,6 +13,6 @@ data class BoxOffice(
         val weeks: String,
         val title: String,
         val titleId: TitleId,
-        val image: Image,
+        val image: Image?,
     )
 }

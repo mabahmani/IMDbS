@@ -3,7 +3,6 @@ package com.mabahmani.domain.vo
 import com.mabahmani.domain.vo.common.*
 
 data class TitleDetails(
-    val titleId: TitleId,
     val name: String,
     val releaseYear: String,
     val certificate: String,

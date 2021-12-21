@@ -1,7 +1,7 @@
 package com.mabahmani.domain.vo
 
-import android.media.Image
 import com.mabahmani.domain.vo.common.Id
+import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.Video
 
 data class Suggestion(

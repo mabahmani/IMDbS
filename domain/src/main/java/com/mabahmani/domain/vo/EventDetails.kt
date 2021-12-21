@@ -8,7 +8,6 @@ data class EventDetails(
     val eventName: String,
     val eventCaption: String,
     val eventYear: String,
-    val eventId: EventId,
     val awards:List<Award>
 ){
     data class Award(
@@ -16,7 +15,8 @@ data class EventDetails(
         val awardCategories: List<AwardCategory>
     ){
         data class AwardCategory(
-            val awardCategoryTitle: String
+            val awardCategoryTitle: String,
+            val nominees: List<Nominee>
         ){
             data class Nominee(
                 val winner: Boolean,
