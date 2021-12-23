@@ -1,0 +1,4 @@
+syntax = "proto3";
+message KeywordsProto {
+  repeated string keywords = 1;
+}

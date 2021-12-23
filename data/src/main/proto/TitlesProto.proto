@@ -1,0 +1,24 @@
+syntax = "proto3";
+message TitlesProto {
+  repeated TitleProto titles = 1;
+}
+
+message TitleProto{
+  string certificate = 1;
+  string cover = 2;
+  repeated NameProto directors = 3;
+  string genres = 4;
+  string imdbRating = 5;
+  string numberOfVotes = 6;
+  string runtime = 7;
+  repeated NameProto stars = 8;
+  string summary = 9;
+  string title = 10;
+  string titleId = 11;
+  string year = 12;
+}
+
+message NameProto{
+  string name = 1;
+  string nameId = 2;
+}

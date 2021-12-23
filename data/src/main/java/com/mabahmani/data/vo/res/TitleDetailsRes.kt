@@ -75,6 +75,7 @@ data class TitleDetailsRes(
         val title: String,
         val trailerDuration: String,
         val trailerPreview: String,
+        val trailerVideoId: String,
         val writers: List<Writer>
     ) {
         data class Director(
@@ -187,7 +188,7 @@ data class TitleDetailsRes(
             overview.imdbRating,
             overview.numberOfRate,
             Image(overview.cover),
-            Video(VideoId(videos[0].id), Image(overview.trailerPreview), "", overview.runtime),
+            Video(VideoId(overview.trailerVideoId), Image(overview.trailerPreview), "", overview.runtime),
             overview.genres.map { it.title },
             overview.plot,
             overview.directors.map { NameLink(it.realName, NameId(it.id)) },

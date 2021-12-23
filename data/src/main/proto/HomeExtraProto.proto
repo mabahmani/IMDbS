@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+message HomeExtraProto {
+  repeated BornTodayProto bornTodayList = 1;
+  repeated HomeExtraTitleProto comingSoonMovies = 2;
+  repeated HomeExtraTitleProto fanPicksTitles = 3;
+  repeated HomeExtraTitleProto showTimesTitles = 4;
+  repeated StreamingTitleProto streamingTitles = 5;
+}
+
+message BornTodayProto{
+  string birth = 1;
+  string death = 2;
+  string image = 3;
+  string nameId = 4;
+  string title = 5;
+}
+
+message HomeExtraTitleProto{
+  string certificate = 1;
+  string cover = 2;
+  int32 rate = 3;
+  string releaseDay = 4;
+  string releaseMonth = 5;
+  string releaseYear = 6;
+  int32 runtime = 7;
+  string title = 8;
+  string titleId = 9;
+  string videoId = 10;
+  int32 voteCount = 11;
+}
+
+message StreamingTitleProto{
+  string name = 1;
+  repeated HomeExtraTitleProto titles = 2;
+}

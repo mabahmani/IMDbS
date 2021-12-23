@@ -1,0 +1,4 @@
+syntax = "proto3";
+message GenresProto {
+  repeated string genres = 1;
+}

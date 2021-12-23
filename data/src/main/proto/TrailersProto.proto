@@ -1,0 +1,15 @@
+syntax = "proto3";
+message TrailersProto {
+  repeated TrailerProto trailers = 1;
+}
+
+message TrailerProto{
+  string title = 1;
+  string titleCover = 2;
+  string titleId = 3;
+  string videoDescription = 4;
+  string videoId = 5;
+  string videoName = 6;
+  int32 videoRuntime = 7;
+  string videoThumbnail = 8;
+}
