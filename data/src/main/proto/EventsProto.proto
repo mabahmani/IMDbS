@@ -1,9 +1,0 @@
-syntax = "proto3";
-message EventsProto {
-  repeated EventProto events = 1;
-}
-
-message EventProto{
-  string eventId = 1;
-  string eventName = 2;
-}

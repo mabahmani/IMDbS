@@ -34,7 +34,8 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':data')
+    api project(path: ':data')
+    api project(path: ':domain')
 
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
