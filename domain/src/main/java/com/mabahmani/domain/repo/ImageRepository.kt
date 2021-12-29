@@ -1,16 +1,15 @@
 package com.mabahmani.domain.repo
 
-import android.database.AbstractCursor
 import com.mabahmani.domain.vo.ImageDetails
 import com.mabahmani.domain.vo.common.*
 
 interface ImageRepository {
 
-    suspend fun getTitleImages(titleId: TitleId) : Result<List<Image>>
+    suspend fun getTitleImages(titleId: TitleId, page: String) : Result<List<ImageLink>>
 
-    suspend fun getNameImages(nameId: NameId) : Result<List<Image>>
+    suspend fun getNameImages(nameId: NameId, page: String) : Result<List<ImageLink>>
 
-    suspend fun getListImages(listId: ListId) : Result<List<Image>>
+    suspend fun getListImages(listId: ListId) : Result<List<ImageLink>>
 
     suspend fun getTitleImagesWithDetails(
         afterCursor: String? = null,
@@ -19,7 +18,7 @@ interface ImageRepository {
         numberOfLastImages: Int? = null,
         imageId: ImageId? = null,
         titleId: TitleId
-    ) : Result<List<ImageDetails>>
+    ) : Result<ImageDetails>
 
     suspend fun getNameImagesWithDetails(
         afterCursor: String? = null,
@@ -28,7 +27,7 @@ interface ImageRepository {
         numberOfLastImages: Int? = null,
         imageId: ImageId? = null,
         nameId: NameId
-    ) : Result<List<ImageDetails>>
+    ) : Result<ImageDetails>
 
     suspend fun getListImagesWithDetails(
         afterCursor: String? = null,
@@ -37,5 +36,5 @@ interface ImageRepository {
         numberOfLastImages: Int? = null,
         imageId: ImageId? = null,
         listId: ListId
-    ) : Result<List<ImageDetails>>
+    ) : Result<ImageDetails>
 }

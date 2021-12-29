@@ -15,5 +15,5 @@ interface ChartRepository {
 
     suspend fun getBottom100Movies() : Result<List<Title>>
 
-    suspend fun getBoxOffice() : Result<List<BoxOffice>>
+    suspend fun getBoxOffice() : Result<BoxOffice>
 }

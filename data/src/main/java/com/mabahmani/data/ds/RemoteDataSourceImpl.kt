@@ -119,11 +119,11 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getListImagesWithDetails(
         listId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
             safeApiCall {
@@ -152,11 +152,11 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getNameImagesWithDetails(
         nameId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
             safeApiCall {
@@ -185,11 +185,11 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleImagesWithDetails(
         titleId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
             safeApiCall {
@@ -205,7 +205,7 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getKeywords(): Result<ApiResponse<List<GenresRes>>> {
+    override suspend fun getKeywords(): Result<ApiResponse<List<String>>> {
         return withContext(ioDispatcher){
             safeApiCall {
                 imdbScrapingApiService.getKeywords()
@@ -246,19 +246,19 @@ class RemoteDataSourceImpl @Inject constructor(
     }
 
     override suspend fun searchNames(
-        bio: String,
-        birthDate: String,
-        birthMonthDay: String,
-        birthPlace: String,
-        deathDate: String,
-        deathPlace: String,
-        gender: String,
-        groups: String,
-        name: String,
-        roles: String,
-        sort: String,
-        starSign: String,
-        start: String
+        bio: String?,
+        birthDate: String?,
+        birthMonthDay: String?,
+        birthPlace: String?,
+        deathDate: String?,
+        deathPlace: String?,
+        gender: String?,
+        groups: String?,
+        name: String?,
+        roles: String?,
+        sort: String?,
+        starSign: String?,
+        start: String?
     ): Result<ApiResponse<List<SearchNameRes>>> {
         return withContext(ioDispatcher){
             safeApiCall {
@@ -270,25 +270,25 @@ class RemoteDataSourceImpl @Inject constructor(
     }
 
     override suspend fun searchTitles(
-        certificates: String,
-        colors: String,
-        companies: String,
-        countries: String,
-        genres: String,
-        groups: String,
-        keywords: String,
-        languages: String,
-        locations: String,
-        plot: String,
-        releaseDate: String,
-        role: String,
-        runtime: String,
-        sort: String,
-        start: String,
-        title: String,
-        titleType: String,
-        userRating: String
-    ): Result<ApiResponse<List<SearchNameRes>>> {
+        certificates: String?,
+        colors: String?,
+        companies: String?,
+        countries: String?,
+        genres: String?,
+        groups: String?,
+        keywords: String?,
+        languages: String?,
+        locations: String?,
+        plot: String?,
+        releaseDate: String?,
+        role: String?,
+        runtime: String?,
+        sort: String?,
+        start: String?,
+        title: String?,
+        titleType: String?,
+        userRating: String?
+    ): Result<ApiResponse<List<SearchTitlesRes>>> {
         return withContext(ioDispatcher){
             safeApiCall {
                 imdbScrapingApiService.searchTitles(certificates, colors, companies, countries, genres, groups, keywords, languages, locations, plot, releaseDate, role, runtime, sort, start, title, titleType, userRating)
@@ -336,7 +336,7 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTitlesCalender(): Result<ApiResponse<CalenderRes>> {
+    override suspend fun getTitlesCalender(): Result<ApiResponse<List<CalenderRes>>> {
         return withContext(ioDispatcher){
             safeApiCall {
                 imdbScrapingApiService.getTitlesCalender()

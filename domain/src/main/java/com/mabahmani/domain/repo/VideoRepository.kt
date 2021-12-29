@@ -10,7 +10,7 @@ interface VideoRepository {
 
     suspend fun getVideoDetails(videoId: VideoId) : Result<VideoDetails>
 
-    suspend fun getTitleVideos(titleId: TitleId) : Result<List<Video>>
+    suspend fun getTitleVideos(titleId: TitleId, page: String) : Result<List<Video>>
 
-    suspend fun getNameVideos(nameId: NameId) : Result<List<Video>>
+    suspend fun getNameVideos(nameId: NameId, page: String) : Result<List<Video>>
 }

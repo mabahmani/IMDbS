@@ -51,11 +51,11 @@ interface ImdbScrapingApiService {
     @GET("images/list/{listId}/slider")
     suspend fun getListImagesWithDetails(
         @Path("listId") listId: String,
-        @Query("after") after: String,
-        @Query("before") before: String,
-        @Query("first") first: Int,
-        @Query("last") last: Int,
-        @Query("imageId") imageId: String,
+        @Query("after") after: String?,
+        @Query("before") before: String?,
+        @Query("first") first: Int?,
+        @Query("last") last: Int?,
+        @Query("imageId") imageId: String?,
     ): Response<ApiResponse<ImageDetailsRes>>
 
     @GET("images/names/{nameId}")
@@ -67,11 +67,11 @@ interface ImdbScrapingApiService {
     @GET("images/names/{nameId}/slider")
     suspend fun getNameImagesWithDetails(
         @Path("nameId") nameId: String,
-        @Query("after") after: String,
-        @Query("before") before: String,
-        @Query("first") first: Int,
-        @Query("last") last: Int,
-        @Query("imageId") imageId: String,
+        @Query("after") after: String?,
+        @Query("before") before: String?,
+        @Query("first") first: Int?,
+        @Query("last") last: Int?,
+        @Query("imageId") imageId: String?,
     ): Response<ApiResponse<ImageDetailsRes>>
 
     @GET("images/titles/{titleId}")
@@ -83,15 +83,15 @@ interface ImdbScrapingApiService {
     @GET("images/titles/{titleId}/slider")
     suspend fun getTitleImagesWithDetails(
         @Path("titleId") titleId: String,
-        @Query("after") after: String,
-        @Query("before") before: String,
-        @Query("first") first: Int,
-        @Query("last") last: Int,
-        @Query("imageId") imageId: String,
+        @Query("after") after: String?,
+        @Query("before") before: String?,
+        @Query("first") first: Int?,
+        @Query("last") last: Int?,
+        @Query("imageId") imageId: String?,
     ): Response<ApiResponse<ImageDetailsRes>>
 
     @GET("keywords/")
-    suspend fun getKeywords(): Response<ApiResponse<List<GenresRes>>>
+    suspend fun getKeywords(): Response<ApiResponse<List<String>>>
 
     @GET("names/{nameId}")
     suspend fun getNameDetails(@Path("nameId") nameId: String): Response<ApiResponse<NameDetailsRes>>
@@ -107,42 +107,42 @@ interface ImdbScrapingApiService {
 
     @GET("search/names")
     suspend fun searchNames(
-        @Query("bio") bio: String,
-        @Query("birthDate") birthDate: String,
-        @Query("birthMonthDay") birthMonthDay: String,
-        @Query("birthPlace") birthPlace: String,
-        @Query("deathDate") deathDate: String,
-        @Query("deathPlace") deathPlace: String,
-        @Query("gender") gender: String,
-        @Query("groups") groups: String,
-        @Query("name") name: String,
-        @Query("roles") roles: String,
-        @Query("sort") sort: String,
-        @Query("starSign") starSign: String,
-        @Query("start") start: String,
+        @Query("bio") bio: String?,
+        @Query("birthDate") birthDate: String?,
+        @Query("birthMonthDay") birthMonthDay: String?,
+        @Query("birthPlace") birthPlace: String?,
+        @Query("deathDate") deathDate: String?,
+        @Query("deathPlace") deathPlace: String?,
+        @Query("gender") gender: String?,
+        @Query("groups") groups: String?,
+        @Query("name") name: String?,
+        @Query("roles") roles: String?,
+        @Query("sort") sort: String?,
+        @Query("starSign") starSign: String?,
+        @Query("start") start: String?,
     ): Response<ApiResponse<List<SearchNameRes>>>
 
     @GET("search/titles")
     suspend fun searchTitles(
-        @Query("certificates") certificates: String,
-        @Query("colors") colors: String,
-        @Query("companies") companies: String,
-        @Query("countries") countries: String,
-        @Query("genres") genres: String,
-        @Query("groups") groups: String,
-        @Query("keywords") keywords: String,
-        @Query("languages") languages: String,
-        @Query("locations") locations: String,
-        @Query("plot") plot: String,
-        @Query("releaseDate") releaseDate: String,
-        @Query("role") role: String,
-        @Query("runtime") runtime: String,
-        @Query("sort") sort: String,
-        @Query("start") start: String,
-        @Query("title") title: String,
-        @Query("titleType") titleType: String,
-        @Query("userRating") userRating: String
-    ): Response<ApiResponse<List<SearchNameRes>>>
+        @Query("certificates") certificates: String?,
+        @Query("colors") colors: String?,
+        @Query("companies") companies: String?,
+        @Query("countries") countries: String?,
+        @Query("genres") genres: String?,
+        @Query("groups") groups: String?,
+        @Query("keywords") keywords: String?,
+        @Query("languages") languages: String?,
+        @Query("locations") locations: String?,
+        @Query("plot") plot: String?,
+        @Query("releaseDate") releaseDate: String?,
+        @Query("role") role: String?,
+        @Query("runtime") runtime: String?,
+        @Query("sort") sort: String?,
+        @Query("start") start: String?,
+        @Query("title") title: String?,
+        @Query("titleType") titleType: String?,
+        @Query("userRating") userRating: String?
+    ): Response<ApiResponse<List<SearchTitlesRes>>>
 
     @GET("titles/{titleId}")
     suspend fun getTitleDetails(@Path("titleId") titleId: String): Response<ApiResponse<TitleDetailsRes>>
@@ -160,7 +160,7 @@ interface ImdbScrapingApiService {
     suspend fun getTitleTechnicalSpecs(@Path("titleId") titleId: String): Response<ApiResponse<TitleTechnicalSpecsRes>>
 
     @GET("titles/calender")
-    suspend fun getTitlesCalender(): Response<ApiResponse<CalenderRes>>
+    suspend fun getTitlesCalender(): Response<ApiResponse<List<CalenderRes>>>
 
     @GET("trailers/anticipated")
     suspend fun getTrailersAnticipated(): Response<ApiResponse<List<TrailerRes>>>

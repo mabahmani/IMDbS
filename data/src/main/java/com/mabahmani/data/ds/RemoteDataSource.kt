@@ -34,11 +34,11 @@ interface RemoteDataSource {
 
     suspend fun getListImagesWithDetails(
         listId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String,
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?,
     ): Result<ApiResponse<ImageDetailsRes>>
 
     suspend fun getNameImages(
@@ -48,11 +48,11 @@ interface RemoteDataSource {
 
     suspend fun getNameImagesWithDetails(
         nameId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String,
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?,
     ): Result<ApiResponse<ImageDetailsRes>>
 
     suspend fun getTitleImages(
@@ -62,14 +62,14 @@ interface RemoteDataSource {
 
     suspend fun getTitleImagesWithDetails(
         titleId: String,
-        after: String,
-        before: String,
-        first: Int,
-        last: Int,
-        imageId: String,
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?,
     ): Result<ApiResponse<ImageDetailsRes>>
 
-    suspend fun getKeywords(): Result<ApiResponse<List<GenresRes>>>
+    suspend fun getKeywords(): Result<ApiResponse<List<String>>>
 
     suspend fun getNameDetails(nameId: String): Result<ApiResponse<NameDetailsRes>>
 
@@ -80,41 +80,41 @@ interface RemoteDataSource {
     suspend fun getNewsDetails(newsId: String): Result<ApiResponse<NewsDetailsRes>>
 
     suspend fun searchNames(
-        bio: String,
-        birthDate: String,
-        birthMonthDay: String,
-        birthPlace: String,
-        deathDate: String,
-        deathPlace: String,
-        gender: String,
-        groups: String,
-        name: String,
-        roles: String,
-        sort: String,
-        starSign: String,
-        start: String,
+        bio: String?,
+        birthDate: String?,
+        birthMonthDay: String?,
+        birthPlace: String?,
+        deathDate: String?,
+        deathPlace: String?,
+        gender: String?,
+        groups: String?,
+        name: String?,
+        roles: String?,
+        sort: String?,
+        starSign: String?,
+        start: String?,
     ): Result<ApiResponse<List<SearchNameRes>>>
 
     suspend fun searchTitles(
-        certificates: String,
-        colors: String,
-        companies: String,
-        countries: String,
-        genres: String,
-        groups: String,
-        keywords: String,
-        languages: String,
-        locations: String,
-        plot: String,
-        releaseDate: String,
-        role: String,
-        runtime: String,
-        sort: String,
-        start: String,
-        title: String,
-        titleType: String,
-        userRating: String
-    ): Result<ApiResponse<List<SearchNameRes>>>
+        certificates: String?,
+        colors: String?,
+        companies: String?,
+        countries: String?,
+        genres: String?,
+        groups: String?,
+        keywords: String?,
+        languages: String?,
+        locations: String?,
+        plot: String?,
+        releaseDate: String?,
+        role: String?,
+        runtime: String?,
+        sort: String?,
+        start: String?,
+        title: String?,
+        titleType: String?,
+        userRating: String?
+    ): Result<ApiResponse<List<SearchTitlesRes>>>
 
     suspend fun getTitleDetails(titleId: String): Result<ApiResponse<TitleDetailsRes>>
 
@@ -126,7 +126,7 @@ interface RemoteDataSource {
 
     suspend fun getTitleTechnicalSpecs(titleId: String): Result<ApiResponse<TitleTechnicalSpecsRes>>
 
-    suspend fun getTitlesCalender(): Result<ApiResponse<CalenderRes>>
+    suspend fun getTitlesCalender(): Result<ApiResponse<List<CalenderRes>>>
 
     suspend fun getTrailersAnticipated(): Result<ApiResponse<List<TrailerRes>>>
 
