@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_IMDbScraping)
         setContentView(R.layout.activity_main)
 
         homeViewModel.getHome()
