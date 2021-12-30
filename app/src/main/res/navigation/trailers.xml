@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trailers"
+    app:startDestination="@id/trailersFragment">
+
+    <fragment
+        android:id="@+id/trailersFragment"
+        android:name="com.mabahmani.imdb_scraping.trailers.TrailersFragment"
+        android:label="TrailersFragment"
+        tools:layout="@layout/fragment_trailers"
+        />
+</navigation>

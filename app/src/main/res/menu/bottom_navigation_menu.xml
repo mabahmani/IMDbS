@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/bn_home"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/bn_search"
+        android:title="@string/search"/>
+
+    <item
+        android:id="@+id/charts"
+        android:enabled="true"
+        android:icon="@drawable/bn_charts"
+        android:title="@string/charts"/>
+
+    <item
+        android:id="@+id/trailers"
+        android:enabled="true"
+        android:icon="@drawable/bn_trailers"
+        android:title="@string/trailers"/>
+</menu>

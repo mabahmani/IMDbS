@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/charts"
+    app:startDestination="@id/chartsFragment">
+
+    <fragment
+        android:id="@+id/chartsFragment"
+        android:name="com.mabahmani.imdb_scraping.charts.ChartsFragment"
+        android:label="ChartsFragment"
+        tools:layout="@layout/fragment_charts"
+        />
+</navigation>
