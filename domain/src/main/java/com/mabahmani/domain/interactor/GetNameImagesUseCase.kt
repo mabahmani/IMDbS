@@ -8,5 +8,5 @@ import com.mabahmani.domain.vo.enum.SuggestionType
 import javax.inject.Inject
 
 class GetNameImagesUseCase @Inject constructor(private val imageRepository: ImageRepository){
-    suspend operator fun invoke(nameId: NameId) = imageRepository.getNameImages(nameId)
+    suspend operator fun invoke(nameId: NameId, page: String) = imageRepository.getNameImages(nameId, page)
 }

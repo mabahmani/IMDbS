@@ -7,5 +7,5 @@ import com.mabahmani.domain.vo.enum.SuggestionType
 import javax.inject.Inject
 
 class GetTitleVideosUseCase @Inject constructor(private val videoRepository: VideoRepository){
-    suspend operator fun invoke(titleId: TitleId) = videoRepository.getTitleVideos(titleId)
+    suspend operator fun invoke(titleId: TitleId, page: String) = videoRepository.getTitleVideos(titleId, page)
 }
