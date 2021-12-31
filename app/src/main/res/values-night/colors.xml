@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
+
+    <color name="gray_050">#060504</color>
+    <color name="gray_100">#0C0B09</color>
+    <color name="gray_200">#1A1814</color>
+    <color name="gray_300">#2E2A24</color>
+    <color name="gray_400">#635C50</color>
+    <color name="gray_500">#948D7F</color>
+    <color name="gray_600">#B4AA9C</color>
+    <color name="gray_700">#C8BEAE</color>
+    <color name="gray_800">#E0D6C8</color>
+    <color name="gray_900">#EEE7D8</color>
+
+
+    <color name="blue_gray_050">#070503</color>
+    <color name="blue_gray_100">#0E0A06</color>
+    <color name="blue_gray_200">#1D170F</color>
+    <color name="blue_gray_300">#342A1E</color>
+    <color name="blue_gray_400">#6B5C47</color>
+    <color name="blue_gray_500">#9B8B74</color>
+    <color name="blue_gray_600">#B8AA96</color>
+    <color name="blue_gray_700">#CCBEAA</color>
+    <color name="blue_gray_800">#E1D6C4</color>
+    <color name="blue_gray_900">#F0E8D5</color>
+
+    <color name="yellow_050">#010317</color>
+    <color name="yellow_100">#01063C</color>
+    <color name="yellow_300">#021FB8</color>
+    <color name="yellow_500">#154CF7</color>
+
+    <color name="rose_200">#01322C</color>
+
+    <color name="emerald_100">#2E051A</color>
+
+    <color name="sky_050">#0F0600</color>
+    <color name="sky_700">#FC965E</color>
+    <color name="sky_800">#F8A67A</color>
+    <color name="sky_900">#F3B591</color>
+</resources>

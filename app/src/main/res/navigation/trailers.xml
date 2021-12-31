@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/trailersFragment"
-        android:name="com.mabahmani.imdb_scraping.trailers.TrailersFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.trailers.TrailersFragment"
         android:label="TrailersFragment"
         tools:layout="@layout/fragment_trailers"
         />

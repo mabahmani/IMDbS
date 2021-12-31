@@ -1,4 +1,4 @@
-package com.mabahmani.imdb_scraping.charts
+package com.mabahmani.imdb_scraping.ui.main.charts
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ActionBarWidget">
+        <attr name="ABW_Title" format="string" />
+        <attr name="ABW_ActionIcon" format="reference" />
+        <attr name="ABW_ShowBackAction" format="boolean" />
+        <attr name="ABW_ShowSearchIcon" format="boolean" />
+        <attr name="ABW_Type" format="enum">
+            <enum name="Default" value="0" />
+            <enum name="SearchBar" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>
