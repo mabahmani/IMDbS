@@ -11,4 +11,8 @@
     <string name="charts">Charts</string>
     <string name="trailers">Trailers</string>
     <string name="imdbs">IMDbS</string>
+
+    <string name="network_connection_error">Network Connection Error</string>
+    <string name="network_connection_error_suggest">Please check your network connection and try again.</string>
+    <string name="try_again">Try Again</string>
 </resources>

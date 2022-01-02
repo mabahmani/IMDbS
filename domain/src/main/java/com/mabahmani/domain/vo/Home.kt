@@ -8,7 +8,7 @@ data class Home(
     val featuredToday: List<Media>,
     val imdbOriginals: List<Media>,
     val editorPicks: List<Media>,
-    val boxOffice: BoxOffice,
+    val boxOffice: BoxOffice?,
     val news: List<News>,
 
     ) {
