@@ -12,4 +12,12 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="TitleWidget">
+        <attr name="TW_Title" format="string" />
+        <attr name="TW_Subtitle" format="string" />
+        <attr name="TW_TitleColor" format="color" />
+        <attr name="TW_SubtitleColor" format="color" />
+        <attr name="TW_DividerColor" format="color" />
+    </declare-styleable>
+
 </resources>

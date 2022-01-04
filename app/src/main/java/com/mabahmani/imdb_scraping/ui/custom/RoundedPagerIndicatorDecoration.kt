@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.imdb_scraping.util.dp
 
-class CirclePagerIndicatorDecoration : RecyclerView.ItemDecoration() {
+class RoundedPagerIndicatorDecoration : RecyclerView.ItemDecoration() {
 
     private val colorActive = Color.parseColor("#0C4A6E")
     private val colorInactive = Color.parseColor("#CBD5E1")

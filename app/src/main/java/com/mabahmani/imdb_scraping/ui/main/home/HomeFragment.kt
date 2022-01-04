@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.mabahmani.domain.vo.common.Trailer
 import com.mabahmani.imdb_scraping.databinding.FragmentHomeBinding
-import com.mabahmani.imdb_scraping.ui.custom.CirclePagerIndicatorDecoration
+import com.mabahmani.imdb_scraping.ui.custom.RoundedPagerIndicatorDecoration
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.vm.HomeViewModel
@@ -103,7 +103,7 @@ class HomeFragment: Fragment() {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.trailersList)
         binding.trailersList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.trailersList.addItemDecoration(CirclePagerIndicatorDecoration())
+        binding.trailersList.addItemDecoration(RoundedPagerIndicatorDecoration())
         binding.trailersList.adapter = adapter
 
         adapter.submitList(trailers)

@@ -5,7 +5,7 @@ import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.HomeMediaType
 
 data class HomeRes(
-    val boxOffice: BoxOffice?,
+    val boxOffice: BoxOffice,
     val editorPicks: List<EditorPick>,
     val featuredToday: List<FeaturedToday>,
     val imdbOriginals: List<ImdbOriginal>,
@@ -15,7 +15,7 @@ data class HomeRes(
     data class BoxOffice(
         val weekendStartDate: String,
         val weekendEndDate: String,
-        val data: List<Data>
+        val data: List<Data>? = null
     ) {
         data class Data(
             val weekendGross: Int,
@@ -116,21 +116,19 @@ data class HomeRes(
                 }
                 Home.Media(it.title, it.caption, mediaType, Image(it.cover), it.id)
             },
-            BoxOffice(
-                boxOffice?.weekendStartDate.toString(),
-                boxOffice?.weekendEndDate.toString(),
-                boxOffice?.data
-                    ?.map {
-                        com.mabahmani.domain.vo.common.BoxOffice.BoxOfficeItem(
-                            it.weekendGross.toString(),
-                            "",
-                            "",
-                            it.title,
-                            TitleId(it.titleId),
-                            null
-                        )
-                    }
-                    ?: mutableListOf()
+            com.mabahmani.domain.vo.common.BoxOffice(
+                boxOffice.weekendStartDate,
+                boxOffice.weekendEndDate,
+                boxOffice.data?.map {
+                    com.mabahmani.domain.vo.common.BoxOffice.BoxOfficeItem(
+                        it.weekendGross.toString(),
+                        "",
+                        "",
+                        it.title,
+                        TitleId(it.titleId),
+                        null
+                    )
+                }
             ),
             news.map {
                 News(

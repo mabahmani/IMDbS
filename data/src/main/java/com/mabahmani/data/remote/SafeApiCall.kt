@@ -16,7 +16,6 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Result<T> {
         }
     }
     catch (throwable: Throwable){
-        Log.d("safeApiCall %s", throwable.message.toString())
         Result.failure(throwable)
     }
 }
