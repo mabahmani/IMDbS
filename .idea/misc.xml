@@ -7,6 +7,7 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_app_launcher_icon.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_gradient.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_gradient_home_media.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_gradient_home_trailer_bottom.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_splash.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/bg_splash_gradient.xml" value="0.26666666666666666" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_home.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_search.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_trailers.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_home_media.xml" value="0.3" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_home_trailer.xml" value="0.3" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_home.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25052083333333336" />

@@ -14,4 +14,11 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
+
+    <style name="ShapeAppearanceOverlay4DpRadius">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+
 </resources>

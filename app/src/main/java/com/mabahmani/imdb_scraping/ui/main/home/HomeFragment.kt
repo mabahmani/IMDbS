@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.mabahmani.domain.vo.Home
 import com.mabahmani.domain.vo.common.Trailer
 import com.mabahmani.imdb_scraping.databinding.FragmentHomeBinding
 import com.mabahmani.imdb_scraping.ui.custom.RoundedPagerIndicatorDecoration
@@ -73,14 +74,17 @@ class HomeFragment: Fragment() {
             is HomeUiState.Loading ->{
                 showLoading()
             }
-            is HomeUiState.ShowNetworkError ->{
-                showNetworkError()
-            }
-            is HomeUiState.ShowTrailers ->{
-                showTrailers(state.trailers)
+            is HomeUiState.ShowData ->{
+                showTrailers(state.home.trailers)
+                showFeaturedToday(state.home.featuredToday)
+                showImdbOriginals(state.home.imdbOriginals)
+                showEditorPicks(state.home.editorPicks)
             }
             is HomeUiState.ShowError ->{
                 showError(state.message)
+            }
+            is HomeUiState.ShowNetworkError ->{
+                showNetworkError()
             }
         }
     }
@@ -110,6 +114,36 @@ class HomeFragment: Fragment() {
 
         binding.shimmer.stopShimmer()
         binding.shimmer.visibility = View.GONE
+    }
+
+    private fun showFeaturedToday(medias: List<Home.Media>) {
+        val adapter = HomeMediaAdapter{
+
+        }
+
+        binding.featuredTodayList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.featuredTodayList.adapter = adapter
+        adapter.submitList(medias)
+    }
+
+    private fun showImdbOriginals(medias: List<Home.Media>) {
+        val adapter = HomeMediaAdapter{
+
+        }
+
+        binding.imdbOriginalsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.imdbOriginalsList.adapter = adapter
+        adapter.submitList(medias)
+    }
+
+    private fun showEditorPicks(medias: List<Home.Media>) {
+        val adapter = HomeMediaAdapter{
+
+        }
+
+        binding.editorPicksList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.editorPicksList.adapter = adapter
+        adapter.submitList(medias)
     }
 
     private fun showLoading() {

@@ -15,4 +15,8 @@
     <string name="network_connection_error">Network Connection Error</string>
     <string name="network_connection_error_suggest">Please check your network connection and try again.</string>
     <string name="try_again">Try Again</string>
+    <string name="featured_today">Featured Today</string>
+    <string name="imdb_originals">IMDb Originals</string>
+    <string name="imdb_originals_subtitle">Celebrity interviews, trending entertainment stories, and expert analysis</string>
+    <string name="editor_picks">Editor\'s picks</string>
 </resources>

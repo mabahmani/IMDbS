@@ -59,6 +59,55 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:TW_Title="@string/featured_today"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    />
+                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                    android:id="@+id/featuredTodayList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:clipToPadding="false"
+                    />
+
+                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:TW_Title="@string/imdb_originals"
+                    app:TW_Subtitle="@string/imdb_originals_subtitle"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    />
+                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                    android:id="@+id/imdbOriginalsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:clipToPadding="false"
+                    />
+
+                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:TW_Title="@string/editor_picks"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    />
+                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                    android:id="@+id/editorPicksList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:clipToPadding="false"
+                    />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
 

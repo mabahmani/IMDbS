@@ -39,8 +39,14 @@ class TitleWidget @JvmOverloads constructor(
                 title.text = titleText
                 title.setTextColor(titleColor)
 
-                subtitle.text = subtitleText
-                subtitle.setTextColor(subtitleColor)
+                if (subtitleText.isNullOrEmpty()){
+                    subtitle.visibility = View.GONE
+                }
+                else{
+                    subtitle.text = subtitleText
+                    subtitle.setTextColor(subtitleColor)
+                }
+
 
                 divider.background = Shape.createRectangleWithCustomRadiusShape(
                     dividerColor,

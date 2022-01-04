@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
             if (home.isSuccess){
 
                 home.getOrNull()?.let {
-                    _homeUiState.emit(HomeUiState.ShowTrailers(it.trailers))
+                    _homeUiState.emit(HomeUiState.ShowData(it))
                 }
 
             }

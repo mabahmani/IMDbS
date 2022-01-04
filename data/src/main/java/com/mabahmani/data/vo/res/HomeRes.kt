@@ -13,8 +13,8 @@ data class HomeRes(
     val trailers: List<Trailer>
 ) {
     data class BoxOffice(
-        val weekendStartDate: String,
-        val weekendEndDate: String,
+        val weekendStartDate: String?,
+        val weekendEndDate: String?,
         val data: List<Data>? = null
     ) {
         data class Data(
@@ -117,8 +117,8 @@ data class HomeRes(
                 Home.Media(it.title, it.caption, mediaType, Image(it.cover), it.id)
             },
             com.mabahmani.domain.vo.common.BoxOffice(
-                boxOffice.weekendStartDate,
-                boxOffice.weekendEndDate,
+                boxOffice.weekendStartDate.toString(),
+                boxOffice.weekendEndDate.toString(),
                 boxOffice.data?.map {
                     com.mabahmani.domain.vo.common.BoxOffice.BoxOfficeItem(
                         it.weekendGross.toString(),
