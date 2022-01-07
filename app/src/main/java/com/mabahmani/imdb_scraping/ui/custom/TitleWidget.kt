@@ -62,4 +62,13 @@ class TitleWidget @JvmOverloads constructor(
         }
     }
 
+    fun setTitle(title: String){
+        findViewById<AppCompatTextView>(R.id.title).text = title
+    }
+
+    fun setSubtitle(subtitle: String){
+        val subtitleView = findViewById<AppCompatTextView>(R.id.subtitle)
+        subtitleView.text = subtitle
+        subtitleView.visibility = VISIBLE
+    }
 }

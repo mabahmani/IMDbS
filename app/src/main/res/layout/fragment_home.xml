@@ -16,99 +16,406 @@
             android:id="@+id/nestedParent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            >
+            android:fillViewport="true">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                >
+                android:paddingBottom="16dp">
 
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer"
+                    android:id="@+id/trailersShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:orientation="vertical"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <include layout="@layout/shimmer_home"/>
+                    <include layout="@layout/shimmer_home_trailers" />
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/trailersParent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
                         android:id="@+id/trailersList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintDimensionRatio="H,1:0.4"
                         android:background="@drawable/bg_gradient_home_trailer_top"
-                        />
+                        app:layout_constraintDimensionRatio="H,1:0.4"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/featuredTodayShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:TW_Title="@string/featured_today"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="32dp"
-                    />
-                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
-                    android:id="@+id/featuredTodayList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="8dp"
-                    android:clipToPadding="false"
-                    />
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:TW_Title="@string/imdb_originals"
-                    app:TW_Subtitle="@string/imdb_originals_subtitle"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="32dp"
-                    />
-                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
-                    android:id="@+id/imdbOriginalsList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="8dp"
-                    android:clipToPadding="false"
-                    />
+                    <include layout="@layout/shimmer_home_media" />
 
-                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/featuredTodayParent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:TW_Title="@string/editor_picks"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="32dp"
-                    />
-                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
-                    android:id="@+id/editorPicksList"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/featured_today" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/featuredTodayList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/fanFavoritesShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="8dp"
-                    android:clipToPadding="false"
-                    />
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_movie" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/fanFavoritesParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Subtitle="@string/fan_favorites_subtitle"
+                        app:TW_Title="@string/fan_favorites" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/fanFavoritesList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/imdbOriginalsShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_media" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/imdbOriginalsParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Subtitle="@string/imdb_originals_subtitle"
+                        app:TW_Title="@string/imdb_originals" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/imdbOriginalsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/streamProvidersShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_movie" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/streamProvidersParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/explore_whats_streaming" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/streamProvidersTabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:overScrollMode="never"
+                        app:tabIndicatorColor="@color/yellow_500"
+                        app:tabIndicatorHeight="2dp"
+                        app:tabMode="scrollable"
+                        app:tabSelectedTextColor="@color/blue_gray_700"
+                        app:tabTextColor="@color/blue_gray_500" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/streamProvidersViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/inTheatersShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_movie" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/inTheatersParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/in_theaters" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/inTheatersList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/boxOfficeParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:id="@+id/boxOfficeTitleWidget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/top_box_office" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/boxOfficeList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/comingSoonShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_media" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/comingSoonParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Subtitle="@string/coming_soon_to_theaters_subtitle"
+                        app:TW_Title="@string/coming_soon_to_theaters" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/comingSoonList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/editorPicksShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_media" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/editorPicksParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/editor_picks" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/editorPicksList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/bornTodayShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_born_today" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/bornTodayParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:id="@+id/bornTodayTitleWidget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/born_today" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/bornTodayList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/newsShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <include layout="@layout/shimmer_home_news" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/newsParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/top_news" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/newsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
 
 
@@ -116,11 +423,10 @@
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:ABW_Title="@string/imdbs"
-            app:ABW_ShowBackAction="false"
             app:ABW_ActionIcon="@drawable/ic_bx_cog"
-            />
+            app:ABW_ShowBackAction="false"
+            app:ABW_Title="@string/imdbs"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

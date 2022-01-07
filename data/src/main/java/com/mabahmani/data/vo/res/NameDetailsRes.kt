@@ -106,6 +106,9 @@ data class NameDetailsRes(
                     null,
                     null,
                     TitleId(it.titleId),
+                    null,
+                    null,
+                    null,
                     null
                 )
             },

@@ -20,5 +20,10 @@
         <item name="cornerSize">4dp</item>
     </style>
 
+    <style name="ShapeAppearanceOverlayCircle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 
 </resources>

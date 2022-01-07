@@ -1,21 +1,33 @@
 package com.mabahmani.data.remote
 
 import android.util.Log
+import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Response
 
-suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Result<T> {
+suspend fun <T> safeApiCall(
+    okHttpClient: OkHttpClient? = null,
+    apiCall: suspend () -> Response<T>
+): Result<T> {
 
     return try {
-        val response =  apiCall.invoke()
-        if (response.isSuccessful){
+        val response = apiCall.invoke()
+        if (response.isSuccessful) {
             Result.success(response.body()!!)
-        }
-        else{
+        } else {
+            try {
+                okHttpClient?.cache?.delete()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
             Result.failure(HttpException(response))
         }
-    }
-    catch (throwable: Throwable){
+    } catch (throwable: Throwable) {
+        try {
+            okHttpClient?.cache?.delete()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
         Result.failure(throwable)
     }
 }

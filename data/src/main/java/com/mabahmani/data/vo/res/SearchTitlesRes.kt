@@ -44,6 +44,9 @@ data class SearchTitlesRes(
             stars.map { NameLink(it.name, NameId(it.nameId)) },
             directors.map { NameLink(it.name, NameId(it.nameId)) },
             TitleId(titleId),
+            null,
+            null,
+            null,
             null
         )
     }

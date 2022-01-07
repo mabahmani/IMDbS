@@ -16,5 +16,8 @@ data class Title(
     val starts:List<NameLink>?,
     val directors:List<NameLink>?,
     val titleId: TitleId?,
-    val videoId: VideoId?
+    val videoId: VideoId?,
+    val videoName: String?,
+    val videoPreview: Image?,
+    val videoRuntime: String?,
 )

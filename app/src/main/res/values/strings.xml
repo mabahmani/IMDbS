@@ -14,9 +14,23 @@
 
     <string name="network_connection_error">Network Connection Error</string>
     <string name="network_connection_error_suggest">Please check your network connection and try again.</string>
+    <string name="unexpected_error">Oops!</string>
+    <string name="unexpected_error_suggest">Something went wrong! Please try again later.</string>
     <string name="try_again">Try Again</string>
     <string name="featured_today">Featured Today</string>
     <string name="imdb_originals">IMDb Originals</string>
     <string name="imdb_originals_subtitle">Celebrity interviews, trending entertainment stories, and expert analysis</string>
     <string name="editor_picks">Editor\'s picks</string>
+    <string name="trailer">Trailer</string>
+    <string name="fan_favorites">Fan favorites</string>
+    <string name="fan_favorites_subtitle">This week\'s top TV and movies</string>
+    <string name="explore_whats_streaming">Explore what’s streaming</string>
+    <string name="in_theaters">In theaters</string>
+    <string name="top_box_office">Top box office</string>
+    <string name="top_box_office_subtitle">Weekend of %s</string>
+    <string name="coming_soon_to_theaters">Coming soon to theaters</string>
+    <string name="coming_soon_to_theaters_subtitle">Trailers for upcoming releases</string>
+    <string name="born_today">Born today</string>
+    <string name="born_today_subtitle">People born on %s</string>
+    <string name="top_news">Top news</string>
 </resources>

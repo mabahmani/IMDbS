@@ -8,10 +8,12 @@ import com.mabahmani.data.vo.generic.ApiResponse
 import com.mabahmani.data.vo.res.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val okHttpClient: OkHttpClient,
     private val imdbScrapingApiService: ImdbScrapingApiService,
     private val imdbSuggestionApiService: ImdbSuggestionApiService
     ): RemoteDataSource {
@@ -19,7 +21,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartBottom100(): Result<ApiResponse<List<ChartRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getChartBottom100()
             }
         }
@@ -27,7 +29,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartBoxOffice(): Result<ApiResponse<ChartBoxOfficeRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getChartBoxOffice()
             }
         }
@@ -35,7 +37,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartPopular(): Result<ApiResponse<List<ChartRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient){
                 imdbScrapingApiService.getChartPopular()
             }
         }
@@ -43,7 +45,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartTop250(): Result<ApiResponse<List<ChartRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient){
                 imdbScrapingApiService.getChartTop250()
             }
         }
@@ -51,7 +53,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartTvPopular(): Result<ApiResponse<List<ChartRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient){
                 imdbScrapingApiService.getChartTvPopular()
             }
         }
@@ -59,7 +61,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getChartTopTv250(): Result<ApiResponse<List<ChartRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getChartTopTv250()
             }
         }
@@ -67,7 +69,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getEvents(): Result<ApiResponse<List<EventRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getEvents()
             }
         }
@@ -78,7 +80,7 @@ class RemoteDataSourceImpl @Inject constructor(
         year: String
     ): Result<ApiResponse<EventDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getEventDetails(eventId, year)
             }
         }
@@ -86,7 +88,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getGenres(): Result<ApiResponse<List<GenresRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getGenres()
             }
         }
@@ -95,7 +97,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun getHome(): Result<ApiResponse<HomeRes>> {
 
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getHome()
             }
         }
@@ -103,7 +105,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getHomeExtra(): Result<ApiResponse<HomeExtraRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getHomeExtra()
             }
         }
@@ -111,7 +113,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getListImages(listId: String): Result<ApiResponse<ImagesRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getListImages(listId)
             }
         }
@@ -126,7 +128,7 @@ class RemoteDataSourceImpl @Inject constructor(
         imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getListImagesWithDetails(
                     listId,
                     after,
@@ -144,7 +146,7 @@ class RemoteDataSourceImpl @Inject constructor(
         page: String
     ): Result<ApiResponse<ImagesRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameImages(nameId, page)
             }
         }
@@ -159,7 +161,7 @@ class RemoteDataSourceImpl @Inject constructor(
         imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameImagesWithDetails(
                     nameId,
                     after,
@@ -177,7 +179,7 @@ class RemoteDataSourceImpl @Inject constructor(
         page: String
     ): Result<ApiResponse<ImagesRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleImages(titleId, page)
             }
         }
@@ -192,7 +194,7 @@ class RemoteDataSourceImpl @Inject constructor(
         imageId: String?
     ): Result<ApiResponse<ImageDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleImagesWithDetails(
                     titleId,
                     after,
@@ -207,7 +209,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getKeywords(): Result<ApiResponse<List<String>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getKeywords()
             }
         }
@@ -215,7 +217,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getNameDetails(nameId: String): Result<ApiResponse<NameDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameDetails(nameId)
             }
         }
@@ -223,7 +225,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getNameAwards(nameId: String): Result<ApiResponse<NameAwardsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameAwards(nameId)
             }
         }
@@ -231,7 +233,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getNameBio(nameId: String): Result<ApiResponse<NameBioRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameBio(nameId)
             }
         }
@@ -239,7 +241,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getNewsDetails(newsId: String): Result<ApiResponse<NewsDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNewsDetails(newsId)
             }
         }
@@ -261,7 +263,7 @@ class RemoteDataSourceImpl @Inject constructor(
         start: String?
     ): Result<ApiResponse<List<SearchNameRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.searchNames(
                     bio, birthDate, birthMonthDay, birthPlace, deathDate, deathPlace, gender, groups, name, roles, sort, starSign, start
                 )
@@ -290,7 +292,7 @@ class RemoteDataSourceImpl @Inject constructor(
         userRating: String?
     ): Result<ApiResponse<List<SearchTitlesRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.searchTitles(certificates, colors, companies, countries, genres, groups, keywords, languages, locations, plot, releaseDate, role, runtime, sort, start, title, titleType, userRating)
             }
         }
@@ -298,7 +300,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleDetails(titleId: String): Result<ApiResponse<TitleDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleDetails(titleId)
             }
         }
@@ -306,7 +308,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleAwards(titleId: String): Result<ApiResponse<TitleAwardsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleAwards(titleId)
             }
         }
@@ -314,7 +316,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleFullCredits(titleId: String): Result<ApiResponse<TitleFullCreditsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleFullCredits(titleId)
             }
         }
@@ -322,7 +324,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleParentalGuide(titleId: String): Result<ApiResponse<TitleParentsGuideRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleParentalGuide(titleId)
             }
         }
@@ -330,7 +332,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitleTechnicalSpecs(titleId: String): Result<ApiResponse<TitleTechnicalSpecsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleTechnicalSpecs(titleId)
             }
         }
@@ -338,7 +340,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTitlesCalender(): Result<ApiResponse<List<CalenderRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitlesCalender()
             }
         }
@@ -346,7 +348,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTrailersAnticipated(): Result<ApiResponse<List<TrailerRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTrailersAnticipated()
             }
         }
@@ -354,7 +356,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTrailersPopular(): Result<ApiResponse<List<TrailerRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTrailersPopular()
             }
         }
@@ -362,7 +364,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTrailersRecent(): Result<ApiResponse<List<TrailerRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTrailersRecent()
             }
         }
@@ -370,7 +372,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getTrailersTrending(): Result<ApiResponse<List<TrailerRes>>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTrailersTrending()
             }
         }
@@ -378,7 +380,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getVideoDetails(videoId: String): Result<ApiResponse<VideoDetailsRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getVideoDetails(videoId)
             }
         }
@@ -389,7 +391,7 @@ class RemoteDataSourceImpl @Inject constructor(
         page: String
     ): Result<ApiResponse<VideosRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameVideos(nameId, page)
             }
         }
@@ -400,7 +402,7 @@ class RemoteDataSourceImpl @Inject constructor(
         page: String
     ): Result<ApiResponse<VideosRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getTitleVideos(titleId, page)
             }
         }
@@ -411,7 +413,7 @@ class RemoteDataSourceImpl @Inject constructor(
         term: String
     ): Result<ApiResponse<SuggestRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbSuggestionApiService.suggestAll(firstLetter,term)
             }
         }
@@ -422,7 +424,7 @@ class RemoteDataSourceImpl @Inject constructor(
         term: String
     ): Result<ApiResponse<SuggestRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbSuggestionApiService.suggestTitles(firstLetter,term)
             }
         }    }
@@ -432,7 +434,7 @@ class RemoteDataSourceImpl @Inject constructor(
         term: String
     ): Result<ApiResponse<SuggestRes>> {
         return withContext(ioDispatcher){
-            safeApiCall {
+            safeApiCall(okHttpClient) {
                 imdbSuggestionApiService.suggestNames(firstLetter,term)
             }
         }

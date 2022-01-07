@@ -55,6 +55,10 @@ class HomeMediaAdapter(private val itemClickListener: (Home.Media) -> Unit) : Li
                 binding.imageUrl = model.image.getCustomImageWidthUrl(512)
                 binding.titleText = model.title
 
+                if (model.date != null){
+                    binding.dateText = model.date
+                }
+
                 binding.root.setOnClickListener {
                     itemClickListener.invoke(model)
                 }

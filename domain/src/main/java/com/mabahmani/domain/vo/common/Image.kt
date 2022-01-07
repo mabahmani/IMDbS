@@ -1,15 +1,19 @@
 package com.mabahmani.domain.vo.common
 
-import android.util.Log
-
 data class Image(val value: String) {
 
     fun getOriginalImageSizeUrl(): String {
 
         if (value.isNotEmpty()) {
-            val urlWithoutJPG = value.replace(".jpg", "")
-            val baseUrl = urlWithoutJPG.substring(0,urlWithoutJPG.lastIndexOf("."))
-            return "$baseUrl.jpg"
+            return try {
+                val urlWithoutJPG = value.replace(".jpg", "")
+                val baseUrl = urlWithoutJPG.substring(0,urlWithoutJPG.lastIndexOf("."))
+                "$baseUrl.jpg"
+
+            }catch (ex: Exception){
+                value
+            }
+
         }
 
         return value

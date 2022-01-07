@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="subtitle"
+            type="String" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageParent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+            android:layout_margin="8dp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+                bind:background="@tools:sample/backgrounds/scenic"
+                bind:imageUrl="@{imageUrl}"
+                />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_gray_900"
+            app:layout_constraintTop_toBottomOf="@id/imageParent"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center"
+            android:text="@{title}"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_gray_500"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:gravity="center"
+            fontPath="@string/font_medium"
+            android:text="@{subtitle}"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

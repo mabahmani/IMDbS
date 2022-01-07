@@ -50,7 +50,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
                     bind:background="@tools:sample/backgrounds/scenic"
-                    bind:imageUrl="@{imageUrl}" />
+                    bind:imageUrl="@{imageUrl}"
+                    android:background="@color/blue_gray_900"
+                    />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gradientGuide"

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/gray_200" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageParent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+                android:layout_margin="16dp"
+                android:background="@color/gray_200" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_900"
+                app:layout_constraintTop_toBottomOf="@id/imageParent"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:background="@color/gray_300"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_500"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                fontPath="@string/font_medium"
+                android:background="@color/gray_300"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageParent2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+                android:layout_margin="16dp"
+                android:background="@color/gray_200" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_900"
+                app:layout_constraintTop_toBottomOf="@id/imageParent2"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:background="@color/gray_300"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/age2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_500"
+                app:layout_constraintTop_toBottomOf="@id/name2"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                fontPath="@string/font_medium"
+                android:background="@color/gray_300"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageParent3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+                android:layout_margin="16dp"
+                android:background="@color/gray_200" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_900"
+                app:layout_constraintTop_toBottomOf="@id/imageParent3"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:background="@color/gray_300"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/age3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_gray_500"
+                app:layout_constraintTop_toBottomOf="@id/name3"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                fontPath="@string/font_medium"
+                android:background="@color/gray_300"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

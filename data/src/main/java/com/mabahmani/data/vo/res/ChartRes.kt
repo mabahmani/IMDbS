@@ -29,6 +29,9 @@ data class ChartRes(
             null,
             null,
             TitleId(titleId),
+            null,
+            null,
+            null,
             null
         )
     }

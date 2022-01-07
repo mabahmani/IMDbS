@@ -8,7 +8,7 @@ data class Home(
     val featuredToday: List<Media>,
     val imdbOriginals: List<Media>,
     val editorPicks: List<Media>,
-    val boxOffice: BoxOffice?,
+    val boxOffice: BoxOffice,
     val news: List<News>,
 
     ) {
@@ -18,7 +18,8 @@ data class Home(
         val caption: String,
         val type: HomeMediaType,
         val image: Image,
-        val id: String
+        val id: String,
+        val date: String? = null
     )
 
 }

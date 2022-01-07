@@ -56,6 +56,9 @@ data class VideoDetailsRes(
                 null,
                 null,
                 TitleId(titleId),
+                null,
+                null,
+                null,
                 null
             ),
             relatedVideos.map {
