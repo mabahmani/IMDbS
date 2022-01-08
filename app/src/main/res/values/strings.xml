@@ -15,7 +15,7 @@
     <string name="network_connection_error">Network Connection Error</string>
     <string name="network_connection_error_suggest">Please check your network connection and try again.</string>
     <string name="unexpected_error">Oops!</string>
-    <string name="unexpected_error_suggest">Something went wrong! Please try again later.</string>
+    <string name="unexpected_error_suggest">Something went wrong!</string>
     <string name="try_again">Try Again</string>
     <string name="featured_today">Featured Today</string>
     <string name="imdb_originals">IMDb Originals</string>

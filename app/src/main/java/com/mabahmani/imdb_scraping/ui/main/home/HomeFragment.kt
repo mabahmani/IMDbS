@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.HomeMediaType
 import com.mabahmani.imdb_scraping.R
+import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -292,19 +293,13 @@ class HomeFragment: Fragment() {
     }
 
     private fun showHomeError(message: String) {
-        Timber.d("showError %s", message)
-
-//        requireContext().showUnexpectedError{
-//            viewModel.launchHomeExtraUseCase()
-//        }
+        requireContext().showUnexpectedError()
+        viewModel.launchHomeUseCase()
     }
 
     private fun showHomeExtraError(message: String) {
-        Timber.d("showError %s", message)
-
-//        requireContext().showUnexpectedError{
-//            viewModel.launchHomeExtraUseCase()
-//        }
+        requireContext().showUnexpectedError()
+        viewModel.launchHomeExtraUseCase()
     }
 
     private fun showTrailers(trailers: List<Trailer>) {
