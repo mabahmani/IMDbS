@@ -1,6 +1,5 @@
 package com.mabahmani.data.remote
 
-import android.util.Log
 import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Response

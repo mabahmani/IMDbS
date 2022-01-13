@@ -172,7 +172,7 @@ data class HomeExtraRes(
                             it.voteCount.toString(),
                             null,
                             null,
-                            it.runtime.toString(),
+                            it.runtime.toHumanReadableTime(),
                             it.title,
                             it.releaseYear,
                             it.releaseMonth,

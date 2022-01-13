@@ -4,7 +4,7 @@ import com.mabahmani.domain.vo.common.*
 
 data class ChartRes(
     val cover: String,
-    val imdbRating: Int,
+    val imdbRating: Float,
     val link: String,
     val numberOfRating: Int,
     val rank: Int,

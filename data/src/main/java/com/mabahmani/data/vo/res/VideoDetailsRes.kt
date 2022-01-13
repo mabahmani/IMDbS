@@ -10,7 +10,7 @@ data class VideoDetailsRes(
     val relationCertificateRating: String,
     val relationCertificateRatingsBody: String,
     val relationGenres: List<String>,
-    val relationIMDbRating: Int,
+    val relationIMDbRating: Float,
     val relationIsIMDbTVTitle: Boolean,
     val relationIsReleased: Boolean,
     val relationPoster: String,

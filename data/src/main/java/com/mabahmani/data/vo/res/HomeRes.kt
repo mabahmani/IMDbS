@@ -103,7 +103,7 @@ data class HomeRes(
             featuredToday?.map {
                 val mediaType: HomeMediaType = when {
                     it.video.orFalse() -> HomeMediaType.VIDEO
-                    it.rmId.isNullOrEmpty().orFalse() -> HomeMediaType.GALLERY
+                    it.rmId?.isNotEmpty().orFalse() -> HomeMediaType.GALLERY
                     else -> HomeMediaType.LIST
                 }
                 Home.Media(it.title.orEmpty(), it.caption.orEmpty(), mediaType, Image(it.cover.orEmpty()), it.id.orEmpty())
@@ -111,7 +111,7 @@ data class HomeRes(
             imdbOriginals?.map {
                 val mediaType: HomeMediaType = when {
                     it.video.orFalse() -> HomeMediaType.VIDEO
-                    it.rmId.isNullOrEmpty().orFalse() -> HomeMediaType.GALLERY
+                    it.rmId?.isNotEmpty().orFalse() -> HomeMediaType.GALLERY
                     else -> HomeMediaType.LIST
                 }
                 Home.Media(it.title.orEmpty(), it.caption.orEmpty(), mediaType, Image(it.cover.orEmpty()), it.id.orEmpty())
@@ -119,7 +119,7 @@ data class HomeRes(
             editorPicks?.map {
                 val mediaType: HomeMediaType = when {
                     it.video.orFalse()  -> HomeMediaType.VIDEO
-                    it.rmId.isNullOrEmpty().orFalse() -> HomeMediaType.GALLERY
+                    it.rmId?.isNotEmpty().orFalse() -> HomeMediaType.GALLERY
                     else -> HomeMediaType.LIST
                 }
                 Home.Media(it.title.orEmpty(), it.caption.orEmpty(), mediaType, Image(it.cover.orEmpty()), it.id.orEmpty())

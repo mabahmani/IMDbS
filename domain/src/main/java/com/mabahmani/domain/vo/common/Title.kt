@@ -13,7 +13,7 @@ data class Title(
     val releaseDay: String?,
     val certificate: String?,
     val summary: String?,
-    val starts:List<NameLink>?,
+    val stars:List<NameLink>?,
     val directors:List<NameLink>?,
     val titleId: TitleId?,
     val videoId: VideoId?,
