@@ -38,7 +38,7 @@ interface SearchRepository {
         companies: List<Company>? = null,
         countries: List<String>? = null,
         genres: List<String>? = null,
-        groups: List<NameGroup>? = null,
+        groups: List<TitleGroup>? = null,
         keywords: List<String>? = null,
         languages: List<String>? = null,
         locations: List<String>? = null,

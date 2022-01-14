@@ -130,7 +130,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
         companies: List<Company>?,
         countries: List<String>?,
         genres: List<String>?,
-        groups: List<NameGroup>?,
+        groups: List<TitleGroup>?,
         keywords: List<String>?,
         languages: List<String>?,
         locations: List<String>?,
@@ -149,7 +149,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
         val colorsJoinString = colors?.joinToString { it.name }
         val companiesJoinString = companies?.joinToString { it.name }
         val countriesJoinString = countries?.joinToString()
-        val genresJoinString = countries?.joinToString()
+        val genresJoinString = genres?.joinToString()
         val groupsJoinString = groups?.joinToString { it.name }
         val keywordsJoinString = keywords?.joinToString()
         val languagesJoinString = languages?.joinToString()
