@@ -1,6 +1,5 @@
-package com.mabahmani.domain
+package com.mabahmani.domain.vo.common
 
-import com.mabahmani.domain.vo.common.Image
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
