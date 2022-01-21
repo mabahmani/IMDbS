@@ -1,6 +1,6 @@
 package com.mabahmani.imdb_scraping.vm
 
-import com.mabahmani.domain.interactor.GetGenresUseCase
+import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.Genre
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
@@ -26,12 +26,43 @@ import java.net.UnknownHostException
 class SearchViewModelTest {
 
     @RelaxedMockK
+    lateinit var advancedNameSearchUseCase: AdvancedNameSearchUseCase
+
+    @RelaxedMockK
+    lateinit var advancedTitleSearchUseCase: AdvancedTitleSearchUseCase
+
+    @RelaxedMockK
+    lateinit var getCalenderUseCase: GetCalenderUseCase
+
+    @RelaxedMockK
+    lateinit var getCelebsUseCase: GetCelebsUseCase
+
+    @RelaxedMockK
+    lateinit var getEventsUseCase: GetEventsUseCase
+
+    @RelaxedMockK
     lateinit var getGenresUseCase: GetGenresUseCase
 
+    @RelaxedMockK
+    lateinit var getKeywordsUseCase: GetKeywordsUseCase
 
+    @RelaxedMockK
+    lateinit var searchTitlesByGenreUseCase: SearchTitlesByGenreUseCase
+
+    @RelaxedMockK
+    lateinit var searchTitlesByKeywordsUseCase: SearchTitlesByKeywordsUseCase
+
+    @RelaxedMockK
+    lateinit var suggestCelebUseCase: SuggestCelebUseCase
+
+    @RelaxedMockK
+    lateinit var suggestTitleUseCase: SuggestTitleUseCase
+
+    @RelaxedMockK
+    lateinit var suggestUseCase: SuggestUseCase
 
     @InjectMockKs
-    lateinit var viewModel: SearchViewModel
+    private lateinit var viewModel: SearchViewModel
 
     private lateinit var coroutineDispatcher: TestDispatcher
 
@@ -43,19 +74,20 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `test getGenres initial state`() = runTest{
+    fun `test getGenres initial state`() = runTest {
         val state = viewModel.genresUiState.first()
 
         assert(state == GenresUiState.Loading)
     }
 
     @Test
-    fun `test getGenres success`() = runTest{
-        val genres = listOf(mockk<Genre>())
+    fun `test getGenres success`() = runTest {
+        val genre = mockk<Genre>()
 
-        every { genres } returns listOf(Genre("genreName", Image("genreImage")))
+        every { genre getProperty "name" } returns "genreName"
+        every { genre getProperty "image" } returns Image("genreImage")
 
-        coEvery { getGenresUseCase() } returns Result.success(genres)
+        coEvery { getGenresUseCase() } returns Result.success(listOf(genre))
 
         viewModel.launchGetGenresUseCase()
 
@@ -70,7 +102,7 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `test getGenres network failure`() = runTest{
+    fun `test getGenres network failure`() = runTest {
 
         coEvery { getGenresUseCase() } returns Result.failure(UnknownHostException())
 
@@ -85,7 +117,7 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `test getGenres failure`() = runTest{
+    fun `test getGenres failure`() = runTest {
 
         coEvery { getGenresUseCase() } returns Result.failure(RuntimeException("error message"))
 
