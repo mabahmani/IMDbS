@@ -66,31 +66,36 @@ class SearchViewModel @Inject constructor(
     }
 
     fun launchGetGenresUseCase(){
-        viewModelScope.launch {
-            _genresUiState.emit(GenresUiState.Loading)
 
-            val genres = getGenresUseCase()
+        if (_genresUiState.value !is GenresUiState.ShowSearchData){
 
-            if (genres.isSuccess){
-                genres.getOrNull()?.let{
-                    _genresUiState.emit(GenresUiState.ShowSearchData(it))
+            viewModelScope.launch {
+                _genresUiState.emit(GenresUiState.Loading)
+
+                val genres = getGenresUseCase()
+
+                if (genres.isSuccess){
+                    genres.getOrNull()?.let{
+                        _genresUiState.emit(GenresUiState.ShowSearchData(it))
+                    }
                 }
-            }
 
-            else{
-                genres.exceptionOrNull()?.let{
-                    when(it){
-                        is UnknownHostException ->{
-                            _genresUiState.emit(GenresUiState.NetworkError)
-                        }
+                else{
+                    genres.exceptionOrNull()?.let{
+                        when(it){
+                            is UnknownHostException ->{
+                                _genresUiState.emit(GenresUiState.NetworkError)
+                            }
 
-                        else ->{
-                            _genresUiState.emit(GenresUiState.Error(it.message.toString()))
+                            else ->{
+                                _genresUiState.emit(GenresUiState.Error(it.message.toString()))
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 
     fun launchGetKeywordsUseCase(){
