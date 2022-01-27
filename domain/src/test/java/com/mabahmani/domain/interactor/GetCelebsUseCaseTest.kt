@@ -40,30 +40,10 @@ class GetCelebsUseCaseTest {
     @Test
     fun `test getCelebsUseCase return success`() = runTest{
 
-        coEvery { searchRepository.searchNames() } returns
-                Result.success(listOfNames)
-
-        val result = getCelebsUseCase()
-
-        coVerify { searchRepository.searchNames() }
-
-        assert(result.isSuccess)
-
-        assert(result.getOrNull() == listOfNames)
     }
 
     @Test
     fun `test getCelebsUseCase return failure`() = runTest {
 
-        coEvery { searchRepository.searchNames() } returns
-                Result.failure(Throwable("message"))
-
-        val result = getCelebsUseCase()
-
-        coVerify { searchRepository.searchNames() }
-
-        assert(result.isFailure)
-
-        assert(result.exceptionOrNull()?.message == "message")
     }
 }

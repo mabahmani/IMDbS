@@ -1,10 +1,10 @@
 package com.mabahmani.domain.repo
 
+import androidx.paging.Pager
 import com.mabahmani.domain.vo.Calender
 import com.mabahmani.domain.vo.Suggestion
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.*
-import java.security.cert.Certificate
 
 interface SearchRepository {
 
@@ -30,7 +30,7 @@ interface SearchRepository {
         sort: NameSort? = null,
         starSign: List<NameSign>? = null,
         startPosition: Int? = null
-    ): Result<List<Name>>
+    ): Pager<Int, Name>
 
     suspend fun searchTitles(
         certificate: List<USCertificate>? = null,

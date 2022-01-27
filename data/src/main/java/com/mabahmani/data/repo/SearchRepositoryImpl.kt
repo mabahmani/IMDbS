@@ -1,12 +1,19 @@
 package com.mabahmani.data.repo
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.mabahmani.data.ds.RemoteDataSource
+import com.mabahmani.data.ps.SearchNamesPagingSource
 import com.mabahmani.domain.repo.NameRepository
 import com.mabahmani.domain.repo.NewsRepository
 import com.mabahmani.domain.repo.SearchRepository
 import com.mabahmani.domain.vo.*
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.*
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource): SearchRepository {
@@ -76,7 +83,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
         sort: NameSort?,
         starSign: List<NameSign>?,
         startPosition: Int?
-    ): Result<List<Name>> {
+    ): Pager<Int, Name> {
 
         val birthPlaceJoinString = birthPlace?.joinToString()
         val deathPlaceJoinString = deathPlace?.joinToString()
@@ -97,31 +104,23 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
             NameSort.DEATH_DATE_DESC -> sortString = "death_date,desc"
         }
 
-
-        val remoteResult = remoteDataSource.searchNames(
-            bio,
-            birthDate,
-            birthMonthDay,
-            birthPlaceJoinString,
-            deathDate,
-            deathPlaceJoinString,
-            genderJoinString,
-            groupJoinString,
-            name,
-            role?.value,
-            sortString,
-            starJoinString,
-            startPosition.toString()
-        )
-
-        return if (remoteResult.isSuccess) {
-            try {
-                Result.success(remoteResult.getOrNull()!!.data.map { it.toName()})
-            } catch (ex: Exception) {
-                Result.failure(ex)
-            }
-        } else
-            Result.failure(remoteResult.exceptionOrNull() ?: java.lang.Exception())
+        return Pager(PagingConfig(50)){
+            SearchNamesPagingSource(
+                remoteDataSource,
+                bio,
+                birthDate,
+                birthMonthDay,
+                birthPlaceJoinString,
+                deathDate,
+                deathPlaceJoinString,
+                genderJoinString,
+                groupJoinString,
+                name,
+                role?.value,
+                sortString,
+                starJoinString,
+            )
+        }
     }
 
     override suspend fun searchTitles(

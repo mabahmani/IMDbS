@@ -1,9 +1,13 @@
 package com.mabahmani.imdb_scraping.vm
 
+import androidx.paging.Pager
 import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.Genre
 import com.mabahmani.domain.vo.common.Image
+import com.mabahmani.domain.vo.common.Name
+import com.mabahmani.domain.vo.common.NameId
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
+import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -132,6 +136,25 @@ class SearchViewModelTest {
         coVerify { getGenresUseCase() }
     }
 
+    @Test
+    fun `test getCelebs initial state`() = runTest {
+        val state = viewModel.celebsUiState.first()
+
+        assert(state == CelebsUiState.Loading)
+    }
+
+    @Test
+    fun `test getCelebs success`() = runTest {
+
+        viewModel.launchGetCelebsUseCase()
+
+        val stateList = viewModel.celebsUiState.take(2).toList()
+
+        assert(stateList[0] is CelebsUiState.Loading)
+        assert(stateList[1] is CelebsUiState.ShowSearchData)
+
+        coVerify { getCelebsUseCase() }
+    }
 
     @After
     fun tearDown() {

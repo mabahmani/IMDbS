@@ -2,6 +2,7 @@ package com.mabahmani.imdb_scraping.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.mabahmani.domain.interactor.*
 import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -58,7 +59,18 @@ class SearchViewModel @Inject constructor(
     }
 
     fun launchGetCelebsUseCase(){
+        if (_celebsUiState.value !is CelebsUiState.ShowSearchData){
 
+            viewModelScope.launch {
+
+                _celebsUiState.emit(CelebsUiState.Loading)
+
+                _celebsUiState.emit(CelebsUiState.ShowSearchData(
+                    getCelebsUseCase().flow.cachedIn(viewModelScope)
+                ))
+
+            }
+        }
     }
 
     fun launchGetEventsUseCase(){

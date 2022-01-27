@@ -11,7 +11,7 @@ class SearchFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapter(frag
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> GenresFragment()
-
+            1 -> NamesFragment()
             else -> Fragment()
         }
     }
