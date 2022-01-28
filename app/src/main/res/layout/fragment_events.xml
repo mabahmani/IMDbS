@@ -17,6 +17,8 @@
             app:fastScrollPopupBgColor="@color/sky_900"
             app:fastScrollPopupTextColor="@color/white"
             app:fastScrollThumbColor="@color/sky_900"
+            app:fastScrollTrackColor="@color/gray_100"
+            app:fastScrollEnableThumbInactiveColor="false"
             />
 
         <com.facebook.shimmer.ShimmerFrameLayout
