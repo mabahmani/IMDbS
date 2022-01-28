@@ -127,7 +127,34 @@ class SearchViewModel @Inject constructor(
     }
 
     fun launchGetKeywordsUseCase(){
+        if (_keywordsUiState.value !is KeywordsUiState.ShowSearchData){
 
+            viewModelScope.launch {
+                _keywordsUiState.emit(KeywordsUiState.Loading)
+
+                val keywords = getKeywordsUseCase()
+
+                if (keywords.isSuccess){
+                    keywords.getOrNull()?.let{
+                        _keywordsUiState.emit(KeywordsUiState.ShowSearchData(it))
+                    }
+                }
+
+                else{
+                    keywords.exceptionOrNull()?.let{
+                        when(it){
+                            is UnknownHostException ->{
+                                _keywordsUiState.emit(KeywordsUiState.NetworkError)
+                            }
+
+                            else ->{
+                                _keywordsUiState.emit(KeywordsUiState.Error(it.message.toString()))
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun launchSearchTitlesByGenreUseCase(){

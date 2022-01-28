@@ -13,6 +13,7 @@ class SearchFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapter(frag
             0 -> GenresFragment()
             1 -> NamesFragment()
             2 -> TitlesFragment()
+            3 -> KeywordsFragment()
             else -> Fragment()
         }
     }

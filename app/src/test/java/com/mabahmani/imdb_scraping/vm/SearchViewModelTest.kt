@@ -5,6 +5,7 @@ import com.mabahmani.domain.vo.common.Genre
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
+import com.mabahmani.imdb_scraping.ui.main.search.state.KeywordsUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.TitlesUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -173,6 +174,63 @@ class SearchViewModelTest {
         assert(stateList[1] is TitlesUiState.ShowSearchData)
 
         coVerify { getTitlesUseCase() }
+    }
+
+
+    @Test
+    fun `test getKeywords initial state`() = runTest {
+        val state = viewModel.keywordsUiState.first()
+
+        assert(state == KeywordsUiState.Loading)
+    }
+
+    @Test
+    fun `test getKeywords success`() = runTest {
+        
+        val keyword = "keywordName"
+
+        coEvery { getKeywordsUseCase() } returns Result.success(listOf(keyword))
+
+        viewModel.launchGetKeywordsUseCase()
+
+        val stateList = viewModel.keywordsUiState.take(2).toList()
+
+        assert(stateList[0] is KeywordsUiState.Loading)
+        assert(stateList[1] is KeywordsUiState.ShowSearchData)
+        assert((stateList[1] as KeywordsUiState.ShowSearchData).keywords[0] == "keywordName")
+
+        coVerify { getKeywordsUseCase() }
+    }
+
+    @Test
+    fun `test getKeywords network failure`() = runTest {
+
+        coEvery { getKeywordsUseCase() } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetKeywordsUseCase()
+
+        val stateList = viewModel.keywordsUiState.take(2).toList()
+
+        assert(stateList[0] is KeywordsUiState.Loading)
+        assert(stateList[1] is KeywordsUiState.NetworkError)
+
+        coVerify { getKeywordsUseCase() }
+    }
+
+    @Test
+    fun `test getKeywords failure`() = runTest {
+
+        coEvery { getKeywordsUseCase() } returns Result.failure(RuntimeException("error message"))
+
+        viewModel.launchGetKeywordsUseCase()
+
+        val stateList = viewModel.keywordsUiState.take(2).toList()
+
+        assert(stateList[0] is KeywordsUiState.Loading)
+        assert(stateList[1] is KeywordsUiState.Error)
+        assert((stateList[1] as KeywordsUiState.Error).message == "error message")
+
+        coVerify { getKeywordsUseCase() }
     }
 
     @After

@@ -10,9 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.common.Genre
-import com.mabahmani.imdb_scraping.databinding.FragmentGenresBinding
-import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
+import com.mabahmani.imdb_scraping.databinding.FragmentKeywordsBinding
+import com.mabahmani.imdb_scraping.ui.main.search.state.KeywordsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
@@ -20,9 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GenresFragment : Fragment() {
+class KeywordsFragment : Fragment() {
 
-    lateinit var binding: FragmentGenresBinding
+    lateinit var binding: FragmentKeywordsBinding
 
     private val viewModel: SearchViewModel by viewModels()
 
@@ -31,42 +32,42 @@ class GenresFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGenresBinding.inflate(inflater, container, false)
+        binding = FragmentKeywordsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initGenresStateObserver()
+        initKeywordsStateObserver()
     }
 
-    private fun initGenresStateObserver() {
+    private fun initKeywordsStateObserver() {
 
-        viewModel.launchGetGenresUseCase()
+        viewModel.launchGetKeywordsUseCase()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.genresUiState.collect {
-                    handleGenresStates(it)
+                viewModel.keywordsUiState.collect {
+                    handleKeywordsStates(it)
                 }
             }
         }
     }
 
-    private fun handleGenresStates(state: GenresUiState) {
+    private fun handleKeywordsStates(state: KeywordsUiState) {
 
         when (state) {
-            is GenresUiState.Loading -> {
+            is KeywordsUiState.Loading -> {
                 showLoading()
             }
-            is GenresUiState.ShowSearchData -> {
-                showGenres(state.genres)
+            is KeywordsUiState.ShowSearchData -> {
+                showKeywords(state.keywords)
             }
-            is GenresUiState.Error -> {
+            is KeywordsUiState.Error -> {
                 showError(state.message)
             }
-            is GenresUiState.NetworkError -> {
+            is KeywordsUiState.NetworkError -> {
                 showNetworkError()
             }
         }
@@ -83,16 +84,16 @@ class GenresFragment : Fragment() {
         viewModel.launchGetGenresUseCase()
     }
 
-    private fun showGenres(genres: List<Genre>) {
+    private fun showKeywords(keywords: List<String>) {
 
-        val adapter = GenresAdapter {
+        val adapter = KeywordsAdapter {
 
         }
 
-        binding.list.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter
 
-        adapter.submitList(genres)
+        adapter.submitList(keywords)
 
         hideLoading()
     }
