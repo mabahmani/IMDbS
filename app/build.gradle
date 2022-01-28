@@ -63,5 +63,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation "androidx.paging:paging-runtime-ktx:3.1.0"
+    implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
+
 
 }

@@ -1,12 +1,11 @@
 package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.*
+import com.mabahmani.domain.vo.common.Event
+import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.domain.vo.common.Genre
 import com.mabahmani.domain.vo.common.Image
-import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.KeywordsUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.TitlesUiState
+import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -186,7 +185,7 @@ class SearchViewModelTest {
 
     @Test
     fun `test getKeywords success`() = runTest {
-        
+
         val keyword = "keywordName"
 
         coEvery { getKeywordsUseCase() } returns Result.success(listOf(keyword))
@@ -231,6 +230,66 @@ class SearchViewModelTest {
         assert((stateList[1] as KeywordsUiState.Error).message == "error message")
 
         coVerify { getKeywordsUseCase() }
+    }
+
+    @Test
+    fun `test getEvents initial state`() = runTest {
+        val state = viewModel.eventsUiState.first()
+
+        assert(state == EventsUiState.Loading)
+    }
+
+    @Test
+    fun `test getEvents success`() = runTest {
+
+        val event = mockk<Event>()
+
+        every { event getProperty "name" } returns "eventName"
+        every { event getProperty "eventId" } returns EventId("ev000000")
+
+        coEvery { getEventsUseCase() } returns Result.success(listOf(event))
+
+        viewModel.launchGetEventsUseCase()
+
+        val stateList = viewModel.eventsUiState.take(2).toList()
+
+        assert(stateList[0] is EventsUiState.Loading)
+        assert(stateList[1] is EventsUiState.ShowSearchData)
+        assert((stateList[1] as EventsUiState.ShowSearchData).events[0].name == "eventName")
+        assert((stateList[1] as EventsUiState.ShowSearchData).events[0].eventId.value == "ev000000")
+
+        coVerify { getEventsUseCase() }
+    }
+
+    @Test
+    fun `test getEvents network failure`() = runTest {
+
+        coEvery { getEventsUseCase() } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetEventsUseCase()
+
+        val stateList = viewModel.eventsUiState.take(2).toList()
+
+        assert(stateList[0] is EventsUiState.Loading)
+        assert(stateList[1] is EventsUiState.NetworkError)
+
+        coVerify { getEventsUseCase() }
+    }
+
+    @Test
+    fun `test getEvents failure`() = runTest {
+
+        coEvery { getEventsUseCase() } returns Result.failure(RuntimeException("error message"))
+
+        viewModel.launchGetEventsUseCase()
+
+        val stateList = viewModel.eventsUiState.take(2).toList()
+
+        assert(stateList[0] is EventsUiState.Loading)
+        assert(stateList[1] is EventsUiState.Error)
+        assert((stateList[1] as EventsUiState.Error).message == "error message")
+
+        coVerify { getEventsUseCase() }
     }
 
     @After

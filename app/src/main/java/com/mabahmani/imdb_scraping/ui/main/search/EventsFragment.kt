@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mabahmani.domain.vo.common.Genre
-import com.mabahmani.imdb_scraping.databinding.FragmentKeywordsBinding
-import com.mabahmani.imdb_scraping.ui.main.search.state.KeywordsUiState
+import com.mabahmani.domain.vo.common.Event
+import com.mabahmani.imdb_scraping.databinding.FragmentEventsBinding
+import com.mabahmani.imdb_scraping.ui.main.search.state.EventsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
@@ -21,9 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class KeywordsFragment : Fragment() {
+class EventsFragment : Fragment() {
 
-    lateinit var binding: FragmentKeywordsBinding
+    lateinit var binding: FragmentEventsBinding
 
     private val viewModel: SearchViewModel by viewModels()
 
@@ -32,42 +31,42 @@ class KeywordsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentKeywordsBinding.inflate(inflater, container, false)
+        binding = FragmentEventsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initKeywordsStateObserver()
+        initEventsStateObserver()
     }
 
-    private fun initKeywordsStateObserver() {
+    private fun initEventsStateObserver() {
 
-        viewModel.launchGetKeywordsUseCase()
+        viewModel.launchGetEventsUseCase()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.keywordsUiState.collect {
-                    handleKeywordsStates(it)
+                viewModel.eventsUiState.collect {
+                    handleEventsStates(it)
                 }
             }
         }
     }
 
-    private fun handleKeywordsStates(state: KeywordsUiState) {
+    private fun handleEventsStates(state: EventsUiState) {
 
         when (state) {
-            is KeywordsUiState.Loading -> {
+            is EventsUiState.Loading -> {
                 showLoading()
             }
-            is KeywordsUiState.ShowSearchData -> {
-                showKeywords(state.keywords)
+            is EventsUiState.ShowSearchData -> {
+                showEvents(state.events)
             }
-            is KeywordsUiState.Error -> {
+            is EventsUiState.Error -> {
                 showError(state.message)
             }
-            is KeywordsUiState.NetworkError -> {
+            is EventsUiState.NetworkError -> {
                 showNetworkError()
             }
         }
@@ -75,25 +74,25 @@ class KeywordsFragment : Fragment() {
 
     private fun showNetworkError() {
         requireContext().showNetworkConnectionError {
-            viewModel.launchGetKeywordsUseCase()
+            viewModel.launchGetEventsUseCase()
         }
     }
 
     private fun showError(message: String) {
         requireContext().showUnexpectedError()
-        viewModel.launchGetKeywordsUseCase()
+        viewModel.launchGetEventsUseCase()
     }
 
-    private fun showKeywords(keywords: List<String>) {
+    private fun showEvents(events: List<Event>) {
 
-        val adapter = KeywordsAdapter {
+        val adapter = EventsAdapter {
 
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter
 
-        adapter.submitList(keywords)
+        adapter.submitList(events)
 
         hideLoading()
     }

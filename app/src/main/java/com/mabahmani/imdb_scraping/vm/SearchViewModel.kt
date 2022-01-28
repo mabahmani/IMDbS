@@ -91,6 +91,34 @@ class SearchViewModel @Inject constructor(
 
     fun launchGetEventsUseCase(){
 
+        if (_eventsUiState.value !is EventsUiState.ShowSearchData){
+
+            viewModelScope.launch {
+                _eventsUiState.emit(EventsUiState.Loading)
+
+                val events = getEventsUseCase()
+
+                if (events.isSuccess){
+                    events.getOrNull()?.let{
+                        _eventsUiState.emit(EventsUiState.ShowSearchData(it))
+                    }
+                }
+
+                else{
+                    events.exceptionOrNull()?.let{
+                        when(it){
+                            is UnknownHostException ->{
+                                _eventsUiState.emit(EventsUiState.NetworkError)
+                            }
+
+                            else ->{
+                                _eventsUiState.emit(EventsUiState.Error(it.message.toString()))
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun launchGetGenresUseCase(){

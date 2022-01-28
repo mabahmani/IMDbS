@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+        <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
+            app:fastScrollPopupBgColor="@color/sky_900"
+            app:fastScrollPopupTextColor="@color/white"
+            app:fastScrollThumbColor="@color/sky_900"
             />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -32,58 +34,52 @@
                 >
 
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
                 <include
-                    layout="@layout/shimmer_keyword"
-                    />
-                <include
-                    layout="@layout/shimmer_keyword"
-                    />
-                <include
-                    layout="@layout/shimmer_keyword"
+                    layout="@layout/shimmer_event"
                     />
 
             </LinearLayout>
