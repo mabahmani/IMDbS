@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="coverUrl"
+            type="String" />
+
+        <variable
+            name="titleName"
+            type="String" />
+
+        <variable
+            name="titleInfo"
+            type="String" />
+
+        <variable
+            name="rate"
+            type="String" />
+
+        <variable
+            name="directors"
+            type="String" />
+
+        <variable
+            name="stars"
+            type="String" />
+
+        <variable
+            name="votes"
+            type="String" />
+
+        <variable
+            name="summary"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cover"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1.5"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:scaleType="centerCrop"
+                bind:background="@tools:sample/backgrounds/scenic"
+                bind:imageUrl="@{coverUrl}"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@id/cover"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="8dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/sky_900"
+                    bind:text="No Time To Die (2021)"
+                    android:text="@{titleName}"
+                    fontPath="@string/font_medium"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_600"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp"
+                    bind:text="PG-13 | 163 min | Action, Adventure, Thriller"
+                    android:text="@{titleInfo}"
+                    fontPath="@string/font_light"
+                    />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:visibility="@{TextUtils.isEmpty(rate) ? View.GONE : View.VISIBLE}"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        app:srcCompat="@drawable/ic_bxs_star"
+                        app:tint="@color/yellow_500"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/sky_900"
+                        android:text="@{rate}"
+                        bind:text="7.4"
+                        android:layout_marginHorizontal="4dp"
+                        fontPath="@string/font_bold"
+                        />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="8dp"
+                        android:visibility="@{TextUtils.isEmpty(votes) ? View.GONE : View.VISIBLE}"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="@color/gray_600"
+                            android:text="@string/votes_with_colon"
+                            fontPath="@string/font_light"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="@color/sky_900"
+                            android:text="@{votes}"
+                            bind:text="207,407"
+                            android:layout_marginHorizontal="4dp"
+                            fontPath="@string/font_medium"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_600"
+                    android:layout_marginTop="8dp"
+                    android:text="@{summary}"
+                    bind:text="@tools:sample/lorem"
+                    android:textSize="12sp"
+                    android:justificationMode="inter_word"
+                    fontPath="@string/font_light"
+                    android:visibility="@{TextUtils.isEmpty(summary) ? View.GONE : View.VISIBLE}"
+                    />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:visibility="@{TextUtils.isEmpty(directors) ? View.GONE : View.VISIBLE}"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_700"
+                        android:text="@string/director_with_colon"
+                        fontPath="@string/font_medium"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        android:textColor="@color/sky_700"
+                        android:text="@{directors}"
+                        bind:text="Cary Joji Fukunaga"
+                        android:layout_marginHorizontal="4dp"
+                        fontPath="@string/font_light"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:visibility="@{TextUtils.isEmpty(stars) ? View.GONE : View.VISIBLE}"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_700"
+                        android:text="@string/stars_with_colon"
+                        fontPath="@string/font_medium"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        android:textColor="@color/sky_700"
+                        android:text="@{stars}"
+                        bind:text="Cary Joji Fukunaga"
+                        android:layout_marginHorizontal="4dp"
+                        fontPath="@string/font_light"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/gray_100"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

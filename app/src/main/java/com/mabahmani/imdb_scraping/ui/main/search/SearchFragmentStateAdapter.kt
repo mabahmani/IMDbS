@@ -12,6 +12,7 @@ class SearchFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapter(frag
         return when(position){
             0 -> GenresFragment()
             1 -> NamesFragment()
+            2 -> TitlesFragment()
             else -> Fragment()
         }
     }

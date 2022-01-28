@@ -18,6 +18,7 @@ class SearchViewModel @Inject constructor(
     private val advancedTitleSearchUseCase: AdvancedTitleSearchUseCase,
     private val getCalenderUseCase: GetCalenderUseCase,
     private val getCelebsUseCase: GetCelebsUseCase,
+    private val getTitlesUseCase: GetTitlesUseCase,
     private val getEventsUseCase: GetEventsUseCase,
     private val getGenresUseCase: GetGenresUseCase,
     private val getKeywordsUseCase: GetKeywordsUseCase,
@@ -67,6 +68,21 @@ class SearchViewModel @Inject constructor(
 
                 _celebsUiState.emit(CelebsUiState.ShowSearchData(
                     getCelebsUseCase().flow.cachedIn(viewModelScope)
+                ))
+
+            }
+        }
+    }
+
+    fun launchGetTitlesUseCase(){
+        if (_titlesUiState.value !is TitlesUiState.ShowSearchData){
+
+            viewModelScope.launch {
+
+                _titlesUiState.emit(TitlesUiState.Loading)
+
+                _titlesUiState.emit(TitlesUiState.ShowSearchData(
+                    getTitlesUseCase().flow.cachedIn(viewModelScope)
                 ))
 
             }

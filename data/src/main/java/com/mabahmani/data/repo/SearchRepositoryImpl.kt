@@ -6,6 +6,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.ps.SearchNamesPagingSource
+import com.mabahmani.data.ps.SearchTitlesPagingSource
 import com.mabahmani.domain.repo.NameRepository
 import com.mabahmani.domain.repo.NewsRepository
 import com.mabahmani.domain.repo.SearchRepository
@@ -142,7 +143,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
         title: String?,
         titleTypes: List<TitleType>?,
         userRating: String?
-    ): Result<List<Title>> {
+    ): Pager<Int, Title> {
 
         val certificateJoinString = certificate?.joinToString { it.name }
         val colorsJoinString = colors?.joinToString { it.name }
@@ -177,35 +178,29 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
         }
 
 
-        val remoteResult = remoteDataSource.searchTitles(
-            certificateJoinString,
-            colorsJoinString,
-            companiesJoinString,
-            countriesJoinString,
-            genresJoinString,
-            groupsJoinString,
-            keywordsJoinString,
-            languagesJoinString,
-            locationsJoinString,
-            plot,
-            releaseDate,
-            role?.value,
-            runtime,
-            sortString,
-            startPosition.toString(),
-            title,
-            titleTypesJoinString,
-            userRating
-        )
+        return Pager(PagingConfig(50)){
+            SearchTitlesPagingSource(
+                remoteDataSource,
+                certificateJoinString,
+                colorsJoinString,
+                companiesJoinString,
+                countriesJoinString,
+                genresJoinString,
+                groupsJoinString,
+                keywordsJoinString,
+                languagesJoinString,
+                locationsJoinString,
+                plot,
+                releaseDate,
+                role?.value,
+                runtime,
+                sortString,
+                title,
+                titleTypesJoinString,
+                userRating
+            )
+        }
 
-        return if (remoteResult.isSuccess) {
-            try {
-                Result.success(remoteResult.getOrNull()!!.data.map { it.toTitle()})
-            } catch (ex: Exception) {
-                Result.failure(ex)
-            }
-        } else
-            Result.failure(remoteResult.exceptionOrNull() ?: java.lang.Exception())
     }
 
     override suspend fun getSuggestion(

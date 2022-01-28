@@ -37,4 +37,7 @@
     <string name="titles">Titles</string>
     <string name="keywords">Keywords</string>
     <string name="events">Events</string>
+    <string name="director_with_colon">Director:</string>
+    <string name="stars_with_colon">Stars:</string>
+    <string name="votes_with_colon">Votes:</string>
 </resources>

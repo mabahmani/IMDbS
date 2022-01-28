@@ -1,10 +1,10 @@
 package com.mabahmani.imdb_scraping.ui.main.search.state
 
+import androidx.paging.PagingData
 import com.mabahmani.domain.vo.common.Title
+import kotlinx.coroutines.flow.Flow
 
 sealed class TitlesUiState {
     object  Loading : TitlesUiState()
-    object  NetworkError : TitlesUiState()
-    class   Error(val message: String) : TitlesUiState()
-    class   ShowSearchData(val titles: List<Title>) : TitlesUiState()
+    class   ShowSearchData(val pagingData: Flow<PagingData<Title>>) : TitlesUiState()
 }

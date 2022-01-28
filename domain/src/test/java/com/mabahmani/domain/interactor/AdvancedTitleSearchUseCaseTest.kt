@@ -40,30 +40,10 @@ class AdvancedTitleSearchUseCaseTest {
     @Test
     fun `test advancedTitleSearchUseCase return success`() = runTest{
 
-        coEvery { searchRepository.searchTitles() } returns
-                Result.success(listOfTitles)
-
-        val result = advancedTitleSearchUseCase()
-
-        coVerify { searchRepository.searchTitles() }
-
-        assert(result.isSuccess)
-
-        assert(result.getOrNull() == listOfTitles)
     }
 
     @Test
     fun `test advancedTitleSearchUseCase return failure`() = runTest {
 
-        coEvery { searchRepository.searchTitles() } returns
-                Result.failure(Throwable("message"))
-
-        val result = advancedTitleSearchUseCase()
-
-        coVerify { searchRepository.searchTitles() }
-
-        assert(result.isFailure)
-
-        assert(result.exceptionOrNull()?.message == "message")
     }
 }

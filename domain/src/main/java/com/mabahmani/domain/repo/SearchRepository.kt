@@ -51,7 +51,7 @@ interface SearchRepository {
         title: String? = null,
         titleTypes: List<TitleType>? = null,
         userRating: String? = null,
-        ): Result<List<Title>>
+        ): Pager<Int, Title>
 
     suspend fun getSuggestion(
         suggestionType: SuggestionType = SuggestionType.ALL,

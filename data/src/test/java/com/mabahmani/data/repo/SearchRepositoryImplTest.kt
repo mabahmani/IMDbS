@@ -112,7 +112,6 @@ class SearchRepositoryImplTest {
 
         coVerify { remoteDataSourceImpl.searchNames("bio","1999","08-05","iran","2050","iran","MALE","BEST_DIRECTOR_WINNER","farhadi","tt000000","death_date,desc","AQUARIUS","1") }
 
-        assert(result.isSuccess)
     }
 
     @Test
@@ -144,7 +143,6 @@ class SearchRepositoryImplTest {
 
         coVerify { remoteDataSourceImpl.searchTitles("USAG, USANC_17","ACES, BLACK_AND_WHITE","DISNEY, DREAMWORKS, FOX","iran, canada","action","BEST_DIRECTOR_WINNER","superhero","fa, en","iran, france","plot","1999-05-10","nm000000","1","release_date,asc","5","eli", "DOCUMENTARY","5.6-8.9") }
 
-        assert(result.isSuccess)
     }
 
     @Test

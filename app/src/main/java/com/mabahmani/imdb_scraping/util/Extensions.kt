@@ -5,6 +5,9 @@ import android.content.res.Resources
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mabahmani.imdb_scraping.R
+import java.lang.Exception
+import java.text.NumberFormat
+import java.util.*
 
 fun String?.orDefault() = this ?: ""
 
@@ -35,4 +38,20 @@ fun Context.showNetworkConnectionError(retry: () -> Unit){
 
 fun Context.showUnexpectedError(){
     Toast.makeText(this, resources.getString(R.string.unexpected_error_suggest), Toast.LENGTH_SHORT).show()
+}
+
+fun Int.formatNumber(): String{
+    return try {
+        NumberFormat.getInstance(Locale.US).format(this)
+    } catch (e: Exception) {
+        ""
+    }
+}
+
+fun String.formatNumber(): String{
+    return try {
+        NumberFormat.getInstance(Locale.US).format(this.toInt())
+    } catch (e: Exception) {
+        ""
+    }
 }

@@ -1,14 +1,11 @@
 package com.mabahmani.imdb_scraping.vm
 
-import androidx.paging.Pager
 import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.Genre
 import com.mabahmani.domain.vo.common.Image
-import com.mabahmani.domain.vo.common.Name
-import com.mabahmani.domain.vo.common.NameId
-import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
+import com.mabahmani.imdb_scraping.ui.main.search.state.TitlesUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -18,7 +15,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-import org.junit.Assert.*
 
 import org.junit.After
 import org.junit.Before
@@ -40,6 +36,9 @@ class SearchViewModelTest {
 
     @RelaxedMockK
     lateinit var getCelebsUseCase: GetCelebsUseCase
+
+    @RelaxedMockK
+    lateinit var getTitlesUseCase: GetTitlesUseCase
 
     @RelaxedMockK
     lateinit var getEventsUseCase: GetEventsUseCase
@@ -154,6 +153,26 @@ class SearchViewModelTest {
         assert(stateList[1] is CelebsUiState.ShowSearchData)
 
         coVerify { getCelebsUseCase() }
+    }
+
+    @Test
+    fun `test getTitles initial state`() = runTest {
+        val state = viewModel.titlesUiState.first()
+
+        assert(state == TitlesUiState.Loading)
+    }
+
+    @Test
+    fun `test getTitles success`() = runTest {
+
+        viewModel.launchGetTitlesUseCase()
+
+        val stateList = viewModel.titlesUiState.take(2).toList()
+
+        assert(stateList[0] is TitlesUiState.Loading)
+        assert(stateList[1] is TitlesUiState.ShowSearchData)
+
+        coVerify { getTitlesUseCase() }
     }
 
     @After
