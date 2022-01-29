@@ -47,6 +47,9 @@ class SearchViewModel @Inject constructor(
     private val _titlesUiState = MutableStateFlow<TitlesUiState>(TitlesUiState.Loading)
     val titlesUiState: StateFlow<TitlesUiState> = _titlesUiState
 
+    private val _calenderUiState = MutableStateFlow<CalenderUiState>(CalenderUiState.Loading)
+    val calenderUiState: StateFlow<CalenderUiState> = _calenderUiState
+
     fun launchAdvancedNameSearchUseCase(){
 
     }
@@ -57,7 +60,33 @@ class SearchViewModel @Inject constructor(
 
     fun launchGetCalenderUseCase(){
 
+        viewModelScope.launch {
+            _calenderUiState.emit(CalenderUiState.Loading)
+
+            val calender = getCalenderUseCase()
+
+            if (calender.isSuccess){
+                calender.getOrNull()?.let{
+                    _calenderUiState.emit(CalenderUiState.ShowSearchData(it))
+                }
+            }
+
+            else{
+                calender.exceptionOrNull()?.let{
+                    when(it){
+                        is UnknownHostException ->{
+                            _calenderUiState.emit(CalenderUiState.NetworkError)
+                        }
+
+                        else ->{
+                            _calenderUiState.emit(CalenderUiState.Error(it.message.toString()))
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     fun launchGetCelebsUseCase(){
         if (_celebsUiState.value !is CelebsUiState.ShowSearchData){

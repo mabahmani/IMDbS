@@ -11,4 +11,10 @@
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search"
         />
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.CalenderFragment"
+        android:label="CalenderFragment"
+        tools:layout="@layout/fragment_calender"
+        />
 </navigation>

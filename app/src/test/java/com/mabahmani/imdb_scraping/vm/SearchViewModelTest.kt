@@ -1,10 +1,8 @@
 package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.*
-import com.mabahmani.domain.vo.common.Event
-import com.mabahmani.domain.vo.common.EventId
-import com.mabahmani.domain.vo.common.Genre
-import com.mabahmani.domain.vo.common.Image
+import com.mabahmani.domain.vo.Calender
+import com.mabahmani.domain.vo.common.*
 import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -290,6 +288,70 @@ class SearchViewModelTest {
         assert((stateList[1] as EventsUiState.Error).message == "error message")
 
         coVerify { getEventsUseCase() }
+    }
+
+    @Test
+    fun `test getCalenders initial state`() = runTest {
+        val state = viewModel.calenderUiState.first()
+
+        assert(state == CalenderUiState.Loading)
+    }
+
+    @Test
+    fun `test getCalenders success`() = runTest {
+
+        val calender = mockk<Calender>()
+        val calenderTitle = mockk<TitleLink>()
+
+        every { calender getProperty "date" } returns "01 December 2021"
+        every { calender getProperty "titles" } returns listOf(calenderTitle)
+        every { calenderTitle getProperty "title" } returns "movieName"
+        every { calenderTitle getProperty "titleId" } returns TitleId("tt000000")
+
+        coEvery { getCalenderUseCase() } returns Result.success(listOf(calender))
+
+        viewModel.launchGetCalenderUseCase()
+
+        val stateList = viewModel.calenderUiState.take(2).toList()
+
+        assert(stateList[0] is CalenderUiState.Loading)
+        assert(stateList[1] is CalenderUiState.ShowSearchData)
+        assert((stateList[1] as CalenderUiState.ShowSearchData).calenders[0].date == "01 December 2021")
+        assert((stateList[1] as CalenderUiState.ShowSearchData).calenders[0].titles[0].title == "movieName")
+        assert((stateList[1] as CalenderUiState.ShowSearchData).calenders[0].titles[0].titleId.value == "tt000000")
+
+        coVerify { getCalenderUseCase() }
+    }
+
+    @Test
+    fun `test getCalenders network failure`() = runTest {
+
+        coEvery { getCalenderUseCase() } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetCalenderUseCase()
+
+        val stateList = viewModel.calenderUiState.take(2).toList()
+
+        assert(stateList[0] is CalenderUiState.Loading)
+        assert(stateList[1] is CalenderUiState.NetworkError)
+
+        coVerify { getCalenderUseCase() }
+    }
+
+    @Test
+    fun `test getCalenders failure`() = runTest {
+
+        coEvery { getCalenderUseCase() } returns Result.failure(RuntimeException("error message"))
+
+        viewModel.launchGetCalenderUseCase()
+
+        val stateList = viewModel.calenderUiState.take(2).toList()
+
+        assert(stateList[0] is CalenderUiState.Loading)
+        assert(stateList[1] is CalenderUiState.Error)
+        assert((stateList[1] as CalenderUiState.Error).message == "error message")
+
+        coVerify { getCalenderUseCase() }
     }
 
     @After

@@ -103,4 +103,8 @@ class ActionBarWidget @JvmOverloads constructor(
     fun setBackgroundAlpha(alpha: Int){
        findViewById<AppBarLayout>(R.id.actionBar).background.alpha = alpha
     }
+
+    fun getActionView(): AppCompatImageView? {
+        return findViewById(R.id.actionIcon)
+    }
 }
