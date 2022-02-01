@@ -1,5 +1,6 @@
 package com.mabahmani.data.ds
 
+import android.util.Log
 import com.mabahmani.data.di.IoDispatcher
 import com.mabahmani.data.remote.ImdbScrapingApiService
 import com.mabahmani.data.remote.ImdbSuggestionApiService
@@ -411,10 +412,10 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun suggestAll(
         firstLetter: String,
         term: String
-    ): Result<ApiResponse<SuggestRes>> {
+    ): Result<SuggestRes> {
         return withContext(ioDispatcher){
             safeApiCall(okHttpClient) {
-                imdbSuggestionApiService.suggestAll(firstLetter,term)
+               imdbSuggestionApiService.suggestAll(firstLetter,term)
             }
         }
     }
@@ -422,7 +423,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun suggestTitles(
         firstLetter: String,
         term: String
-    ): Result<ApiResponse<SuggestRes>> {
+    ): Result<SuggestRes> {
         return withContext(ioDispatcher){
             safeApiCall(okHttpClient) {
                 imdbSuggestionApiService.suggestTitles(firstLetter,term)
@@ -432,7 +433,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override suspend fun suggestNames(
         firstLetter: String,
         term: String
-    ): Result<ApiResponse<SuggestRes>> {
+    ): Result<SuggestRes> {
         return withContext(ioDispatcher){
             safeApiCall(okHttpClient) {
                 imdbSuggestionApiService.suggestNames(firstLetter,term)

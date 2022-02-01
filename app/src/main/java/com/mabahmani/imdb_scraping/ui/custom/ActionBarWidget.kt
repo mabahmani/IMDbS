@@ -3,6 +3,7 @@ package com.mabahmani.imdb_scraping.ui.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -106,5 +107,13 @@ class ActionBarWidget @JvmOverloads constructor(
 
     fun getActionView(): AppCompatImageView? {
         return findViewById(R.id.actionIcon)
+    }
+
+    fun getSearchView(): AppCompatEditText? {
+        return findViewById(R.id.searchInput)
+    }
+
+    fun getParentView(): ConstraintLayout? {
+        return findViewById(R.id.contentParent)
     }
 }

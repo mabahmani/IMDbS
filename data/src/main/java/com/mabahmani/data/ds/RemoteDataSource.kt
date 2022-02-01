@@ -151,15 +151,15 @@ interface RemoteDataSource {
     suspend fun suggestAll(
         firstLetter: String,
         term: String,
-    ): Result<ApiResponse<SuggestRes>>
+    ): Result<SuggestRes>
 
     suspend fun suggestTitles(
         firstLetter: String,
         term: String,
-    ): Result<ApiResponse<SuggestRes>>
+    ): Result<SuggestRes>
 
     suspend fun suggestNames(
         firstLetter: String,
         term: String,
-    ): Result<ApiResponse<SuggestRes>>
+    ): Result<SuggestRes>
 }

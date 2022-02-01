@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageParent"
+            android:layout_width="64dp"
+            android:layout_height="90dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+            android:background="@color/gray_200"
+            />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/imageParent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="8dp"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_900"
+                android:background="@color/gray_300"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_500"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_300"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_500"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_300"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/videoImage1"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@color/gray_200"
+                        />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@id/videoImage1"
+                        app:layout_constraintLeft_toLeftOf="@id/videoImage1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_vertical"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_bx_play_circle"
+                            app:tint="@color/blue_gray_050"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="32dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray_050"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@color/gray_300"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/videoImage1"
+                        android:layout_marginTop="8dp"
+                        android:paddingHorizontal="4dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_900"
+                        android:background="@color/gray_300"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    >
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/videoImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@color/gray_200"
+                        />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@id/videoImage2"
+                        app:layout_constraintLeft_toLeftOf="@id/videoImage2"
+                        android:layout_margin="8dp"
+                        android:gravity="center_vertical"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_bx_play_circle"
+                            app:tint="@color/blue_gray_050"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="32dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray_050"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@color/gray_300"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/videoImage2"
+                        android:layout_marginTop="8dp"
+                        android:paddingHorizontal="4dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_900"
+                        android:background="@color/gray_300"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_300"
+        />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

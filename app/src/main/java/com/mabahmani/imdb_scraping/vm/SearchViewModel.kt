@@ -41,7 +41,7 @@ class SearchViewModel @Inject constructor(
     private val _keywordsUiState = MutableStateFlow<KeywordsUiState>(KeywordsUiState.Loading)
     val keywordsUiState: StateFlow<KeywordsUiState> = _keywordsUiState
 
-    private val _suggestionsUiState = MutableStateFlow<SuggestionsUiState>(SuggestionsUiState.Loading)
+    private val _suggestionsUiState = MutableStateFlow<SuggestionsUiState>(SuggestionsUiState.Idle)
     val suggestionsUiState: StateFlow<SuggestionsUiState> = _suggestionsUiState
 
     private val _titlesUiState = MutableStateFlow<TitlesUiState>(TitlesUiState.Loading)
@@ -222,15 +222,89 @@ class SearchViewModel @Inject constructor(
 
     }
 
-    fun launchSuggestCelebUseCase(){
+    fun launchSuggestCelebUseCase(term: String){
+        viewModelScope.launch {
+            _suggestionsUiState.emit(SuggestionsUiState.Loading)
 
+            val suggestions = suggestCelebUseCase(term)
+
+            if (suggestions.isSuccess){
+                suggestions.getOrNull()?.let{
+                    _suggestionsUiState.emit(SuggestionsUiState.ShowSearchData(it))
+                }
+            }
+
+            else{
+                suggestions.exceptionOrNull()?.let{
+                    when(it){
+                        is UnknownHostException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
+                        }
+
+                        else ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.Error(it.message.toString()))
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    fun launchSuggestTitleUseCase(){
+    fun launchSuggestTitleUseCase(term: String){
+        viewModelScope.launch {
+            _suggestionsUiState.emit(SuggestionsUiState.Loading)
 
+            val suggestions = suggestTitleUseCase(term)
+
+            if (suggestions.isSuccess){
+                suggestions.getOrNull()?.let{
+                    _suggestionsUiState.emit(SuggestionsUiState.ShowSearchData(it))
+                }
+            }
+
+            else{
+                suggestions.exceptionOrNull()?.let{
+                    when(it){
+                        is UnknownHostException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
+                        }
+
+                        else ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.Error(it.message.toString()))
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    fun launchSuggestUseCaseUseCase(){
+    fun launchSuggestUseCase(term: String){
+
+        viewModelScope.launch {
+            _suggestionsUiState.emit(SuggestionsUiState.Loading)
+
+            val suggestions = suggestUseCase(term)
+
+            if (suggestions.isSuccess){
+                suggestions.getOrNull()?.let{
+                    _suggestionsUiState.emit(SuggestionsUiState.ShowSearchData(it))
+                }
+            }
+
+            else{
+                suggestions.exceptionOrNull()?.let{
+                    when(it){
+                        is UnknownHostException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
+                        }
+
+                        else ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.Error(it.message.toString()))
+                        }
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -2,6 +2,8 @@ package com.mabahmani.imdb_scraping.util
 
 import android.content.Context
 import android.content.res.Resources
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mabahmani.imdb_scraping.R
@@ -54,4 +56,15 @@ fun String.formatNumber(): String{
     } catch (e: Exception) {
         ""
     }
+}
+
+fun View.showKeyboard() {
+    this.requestFocus()
+    val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun View.hideKeyboard() {
+    val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }

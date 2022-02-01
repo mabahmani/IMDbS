@@ -234,7 +234,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
 
         return if (remoteResult.isSuccess) {
             try {
-                Result.success(remoteResult.getOrNull()!!.data.toSuggestion())
+                Result.success(remoteResult.getOrNull()!!.toSuggestion())
             } catch (ex: Exception) {
                 Result.failure(ex)
             }

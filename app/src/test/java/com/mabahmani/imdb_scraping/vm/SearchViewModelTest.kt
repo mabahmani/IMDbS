@@ -2,6 +2,7 @@ package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.Calender
+import com.mabahmani.domain.vo.Suggestion
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import io.mockk.*
@@ -352,6 +353,64 @@ class SearchViewModelTest {
         assert((stateList[1] as CalenderUiState.Error).message == "error message")
 
         coVerify { getCalenderUseCase() }
+    }
+
+    @Test
+    fun `test suggest initial state`() = runTest {
+        val state = viewModel.suggestionsUiState.first()
+
+        assert(state == SuggestionsUiState.Idle)
+    }
+
+    @Test
+    fun `test suggest success`() = runTest {
+
+        val suggestion = mockk<Suggestion>()
+
+        every { suggestion getProperty "name" } returns "suggest name"
+
+        coEvery { suggestUseCase(any()) } returns Result.success(listOf(suggestion))
+
+        viewModel.launchSuggestUseCase("harry")
+
+        val stateList = viewModel.suggestionsUiState.take(2).toList()
+
+        assert(stateList[0] is SuggestionsUiState.Loading)
+        assert(stateList[1] is SuggestionsUiState.ShowSearchData)
+        assert((stateList[1] as SuggestionsUiState.ShowSearchData).suggestions[0].name == "suggest name")
+
+        coVerify { suggestUseCase("harry") }
+    }
+
+    @Test
+    fun `test suggest network failure`() = runTest {
+
+        coEvery { suggestUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchSuggestUseCase("harry")
+
+        val stateList = viewModel.suggestionsUiState.take(2).toList()
+
+        assert(stateList[0] is SuggestionsUiState.Loading)
+        assert(stateList[1] is SuggestionsUiState.NetworkError)
+
+        coVerify { suggestUseCase("harry") }
+    }
+
+    @Test
+    fun `test suggest failure`() = runTest {
+
+        coEvery { suggestUseCase(any()) } returns Result.failure(RuntimeException("error message"))
+
+        viewModel.launchSuggestUseCase("harry")
+
+        val stateList = viewModel.suggestionsUiState.take(2).toList()
+
+        assert(stateList[0] is SuggestionsUiState.Loading)
+        assert(stateList[1] is SuggestionsUiState.Error)
+        assert((stateList[1] as SuggestionsUiState.Error).message == "error message")
+
+        coVerify { suggestUseCase("harry") }
     }
 
     @After

@@ -1,29 +1,40 @@
 package com.mabahmani.imdb_scraping.ui.main.search
 
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mabahmani.imdb_scraping.R
-import com.mabahmani.imdb_scraping.databinding.FragmentSearchBinding
+import com.mabahmani.imdb_scraping.databinding.FragmentSuggestionBinding
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.doAfterTextChanged
+import com.mabahmani.imdb_scraping.util.showKeyboard
 import timber.log.Timber
 
-class SearchFragment : Fragment() {
 
-    lateinit var binding: FragmentSearchBinding
+class SuggestionFragment: Fragment() {
+
+    lateinit var binding: FragmentSuggestionBinding
+
+    companion object{
+        var searchView : AppCompatEditText? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = FragmentSuggestionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,23 +48,18 @@ class SearchFragment : Fragment() {
     private fun setupAppBarr() {
 
         binding.appBar.getActionView()?.setOnClickListener {
-            findNavController().navigate(R.id.calenderFragment)
+
         }
 
-        binding.appBar.getSearchView()?.isFocusable = false
-        binding.appBar.getSearchView()?.setOnClickListener {
-            findNavController().navigate(R.id.suggestionFragment)
-        }
-        binding.appBar.getParentView()?.setOnClickListener {
-            findNavController().navigate(R.id.suggestionFragment)
-        }
+        searchView = binding.appBar.getSearchView()
+
     }
 
     private fun setupViewPager() {
 
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter = SearchFragmentStateAdapter(this@SearchFragment)
+            adapter = SuggestionFragmentStateAdapter(this@SuggestionFragment)
         }
 
     }
@@ -61,12 +67,10 @@ class SearchFragment : Fragment() {
     private fun setupTabLayout() {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = getString(R.string.genres)
-                1 -> tab.text = getString(R.string.celebs)
-                2 -> tab.text = getString(R.string.titles)
-                3 -> tab.text = getString(R.string.keywords)
-                4 -> tab.text = getString(R.string.events)
+            when(position){
+                0 -> tab.text = getString(R.string.all)
+                1 -> tab.text = getString(R.string.titles)
+                2 -> tab.text = getString(R.string.celebs)
             }
         }.attach()
 
@@ -86,17 +90,22 @@ class SearchFragment : Fragment() {
                     tabViewChild.textSize = 10f
 
                     tabViewChild.setTypeface(
-                        Typeface.createFromAsset(
-                            resources.assets, resources.getString(
-                                R.string.font_medium
-                            )
-                        ), Typeface.NORMAL
-                    )
+                        Typeface.createFromAsset(resources.assets,resources.getString(
+                            R.string.font_medium)), Typeface.NORMAL)
 
 
                 }
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        focusOnSearchViewAndOpenKeyboard()
+    }
+
+    private fun focusOnSearchViewAndOpenKeyboard() {
+       binding.appBar.getSearchView()?.showKeyboard()
     }
 }

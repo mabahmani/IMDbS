@@ -42,4 +42,5 @@
     <string name="votes_with_colon">Votes:</string>
     <string name="calender">Calender</string>
     <string name="calender_subtitle">Upcoming Releases for United States</string>
+    <string name="all">All</string>
 </resources>

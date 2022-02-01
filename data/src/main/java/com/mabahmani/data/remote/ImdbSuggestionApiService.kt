@@ -13,18 +13,18 @@ interface ImdbSuggestionApiService {
     suspend fun suggestAll(
         @Path("firstLetter") firstLetter: String,
         @Path("term") term: String,
-    ): Response<ApiResponse<SuggestRes>>
+    ): Response<SuggestRes>
 
     @GET("titles/{firstLetter}/{term}" + ".json")
     suspend fun suggestTitles(
         @Path("firstLetter") firstLetter: String,
         @Path("term") term: String,
-    ): Response<ApiResponse<SuggestRes>>
+    ): Response<SuggestRes>
 
     @GET("names/{firstLetter}/{term}" + ".json")
     suspend fun suggestNames(
         @Path("firstLetter") firstLetter: String,
         @Path("term") term: String,
-    ): Response<ApiResponse<SuggestRes>>
+    ): Response<SuggestRes>
 
 }
