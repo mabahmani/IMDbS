@@ -116,4 +116,8 @@ class ActionBarWidget @JvmOverloads constructor(
     fun getParentView(): ConstraintLayout? {
         return findViewById(R.id.contentParent)
     }
+
+    fun getTitleView(): AppCompatTextView? {
+        return findViewById(R.id.title)
+    }
 }

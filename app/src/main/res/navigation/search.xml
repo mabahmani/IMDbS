@@ -24,9 +24,16 @@
         tools:layout="@layout/fragment_suggestion"
         />
     <fragment
-        android:id="@+id/advancedSearchFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.AdvancedSearchFragment"
-        android:label="AdvancedSearchFragment"
-        tools:layout="@layout/fragment_advanced_search"
+        android:id="@+id/searchTitlesByGenreFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByGenreFragment"
+        android:label="SearchTitlesByGenreFragment"
+        tools:layout="@layout/fragment_search_titles_by_genre"
         />
+    <fragment
+        android:id="@+id/searchTitlesByKeywordFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByKeywordFragment"
+        android:label="SearchTitlesByKeywordFragment"
+        tools:layout="@layout/fragment_search_titles_by_keyword"
+        />
+
 </navigation>

@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabahmani.domain.vo.common.Genre
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentGenresBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -87,6 +89,29 @@ class GenresFragment : Fragment() {
 
         val adapter = GenresAdapter {
 
+            if (it.name.contains("superhero", true)) {
+                findNavController().navigate(R.id.searchTitlesByKeywordFragment,
+                    Bundle().apply {
+                        putString("keyword", it.name)
+                    })
+            } else {
+                findNavController().navigate(R.id.searchTitlesByGenreFragment,
+                    Bundle().apply {
+                        when {
+                            it.name.contains("-romance", true) -> {
+                                putString("genre", "Comedy,Romance")
+                            }
+                            it.name.contains("-comedy", true) -> {
+                                putString("genre", "Action,Comedy")
+                            }
+                            else -> {
+                                putString("genre", it.name)
+                            }
+                        }
+                    }
+                )
+            }
+
         }
 
         binding.list.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -97,7 +122,7 @@ class GenresFragment : Fragment() {
         hideLoading()
     }
 
-    private fun hideLoading(){
+    private fun hideLoading() {
         binding.shimmer.visibility = View.GONE
         binding.shimmer.stopShimmer()
     }

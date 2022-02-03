@@ -42,6 +42,10 @@ class KeywordsAdapter(private val itemClickListener: (String) -> Unit) :
 
             binding.keyword = model
 
+            binding.parent.setOnClickListener {
+                itemClickListener.invoke(model.orEmpty())
+            }
+
         }
     }
 

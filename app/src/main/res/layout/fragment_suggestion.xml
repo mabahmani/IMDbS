@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:ABW_Type="SearchBar"
-            app:ABW_ActionIcon="@drawable/ic_advanced_search"
             />
 
         <com.google.android.material.tabs.TabLayout

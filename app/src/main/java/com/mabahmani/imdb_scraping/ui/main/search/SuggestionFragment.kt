@@ -47,13 +47,7 @@ class SuggestionFragment: Fragment() {
     }
 
     private fun setupAppBarr() {
-
-        binding.appBar.getActionView()?.setOnClickListener {
-            findNavController().navigate(R.id.advancedSearchFragment)
-        }
-
         searchView = binding.appBar.getSearchView()
-
     }
 
     private fun setupViewPager() {

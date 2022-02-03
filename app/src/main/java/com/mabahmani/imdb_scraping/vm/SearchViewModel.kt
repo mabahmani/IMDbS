@@ -14,8 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val advancedNameSearchUseCase: AdvancedNameSearchUseCase,
-    private val advancedTitleSearchUseCase: AdvancedTitleSearchUseCase,
     private val getCalenderUseCase: GetCalenderUseCase,
     private val getCelebsUseCase: GetCelebsUseCase,
     private val getTitlesUseCase: GetTitlesUseCase,
@@ -49,14 +47,6 @@ class SearchViewModel @Inject constructor(
 
     private val _calenderUiState = MutableStateFlow<CalenderUiState>(CalenderUiState.Loading)
     val calenderUiState: StateFlow<CalenderUiState> = _calenderUiState
-
-    fun launchAdvancedNameSearchUseCase(){
-
-    }
-
-    fun launchAdvancedTitleSearchUseCase(){
-
-    }
 
     fun launchGetCalenderUseCase(){
 
@@ -214,12 +204,32 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun launchSearchTitlesByGenreUseCase(){
+    fun launchSearchTitlesByGenreUseCase(genre: String){
+        if (_titlesUiState.value !is TitlesUiState.ShowSearchData){
 
+            viewModelScope.launch {
+
+                _titlesUiState.emit(TitlesUiState.Loading)
+
+                _titlesUiState.emit(TitlesUiState.ShowSearchData(
+                    searchTitlesByGenreUseCase(genre).flow.cachedIn(viewModelScope)
+                ))
+            }
+        }
     }
 
-    fun launchSearchTitlesByKeywordsUseCase(){
+    fun launchSearchTitlesByKeywordsUseCase(keyword: String){
+        if (_titlesUiState.value !is TitlesUiState.ShowSearchData){
 
+            viewModelScope.launch {
+
+                _titlesUiState.emit(TitlesUiState.Loading)
+
+                _titlesUiState.emit(TitlesUiState.ShowSearchData(
+                    searchTitlesByKeywordsUseCase(keyword).flow.cachedIn(viewModelScope)
+                ))
+            }
+        }
     }
 
     fun launchSuggestCelebUseCase(term: String){

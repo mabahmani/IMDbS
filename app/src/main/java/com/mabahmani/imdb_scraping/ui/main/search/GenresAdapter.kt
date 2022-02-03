@@ -34,6 +34,10 @@ class GenresAdapter (private val itemClickListener: (Genre) -> Unit) : ListAdapt
         }
         fun bind(model: Genre){
             binding.imageUrl = model.image.getOriginalImageSizeUrl()
+
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(model)
+            }
         }
     }
 

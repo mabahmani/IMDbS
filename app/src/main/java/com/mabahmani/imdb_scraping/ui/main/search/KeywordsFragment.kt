@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.common.Genre
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentKeywordsBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.KeywordsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -19,6 +21,7 @@ import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class KeywordsFragment : Fragment() {
@@ -87,7 +90,11 @@ class KeywordsFragment : Fragment() {
     private fun showKeywords(keywords: List<String>) {
 
         val adapter = KeywordsAdapter {
-
+            findNavController().navigate(
+                R.id.searchTitlesByKeywordFragment,
+                Bundle().apply {
+                    putString("keyword", it)
+                })
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
