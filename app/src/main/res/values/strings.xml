@@ -209,4 +209,12 @@
     <string name="advanced_search">Advanced Search</string>
     <string name="advanced_title_search">Advanced Title Search</string>
     <string name="advanced_name_search">Advanced Name Search</string>
+    <string name="imdb_charts">IMDb Charts</string>
+    <string name="top_250">Top 250</string>
+    <string name="popular">Popular</string>
+    <string name="box_office">Box Office</string>
+    <string name="bottom_100">Bottom 100</string>
+    <string name="weekend">Weekend:</string>
+    <string name="groos">Groos:</string>
+    <string name="weeks">Weeks:</string>
 </resources>

@@ -26,7 +26,7 @@ data class ChartBoxOfficeRes(
                     it.weeks,
                     it.title,
                     TitleId(it.titleId),
-                    null
+                    Image(it.cover)
                 )
             }
         )

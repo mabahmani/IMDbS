@@ -1,7 +1,9 @@
 package com.mabahmani.data.di
 
+import com.mabahmani.data.repo.ChartRepositoryImpl
 import com.mabahmani.data.repo.HomeRepositoryImpl
 import com.mabahmani.data.repo.SearchRepositoryImpl
+import com.mabahmani.domain.repo.ChartRepository
 import com.mabahmani.domain.repo.HomeRepository
 import com.mabahmani.domain.repo.SearchRepository
 import dagger.Binds
@@ -22,4 +24,9 @@ abstract class RepositoryModule {
     abstract fun bindSearchRepository(
         searchRepositoryImpl: SearchRepositoryImpl
     ): SearchRepository
+
+    @Binds
+    abstract fun bindChartRepository(
+        chartRepositoryImpl: ChartRepositoryImpl
+    ): ChartRepository
 }
