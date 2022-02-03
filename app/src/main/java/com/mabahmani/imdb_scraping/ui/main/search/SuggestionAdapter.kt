@@ -1,6 +1,7 @@
 package com.mabahmani.imdb_scraping.ui.main.search
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -50,15 +51,18 @@ class SuggestionAdapter (private val itemClickListener: (Suggestion) -> Unit) : 
                     binding.videoDuration2 = model.videos[1].runtime
                     binding.videoTitle1 = model.videos[0].title
                     binding.videoTitle2 = model.videos[1].title
+                    binding.videoParent.visibility = View.VISIBLE
                 }
                 model.videos.isNotEmpty() -> {
                     binding.videoCover1 = model.videos[0].preview.getCustomImageWidthUrl(256)
                     binding.videoDuration1 = model.videos[0].runtime
                     binding.videoTitle1 = model.videos[0].title
+                    binding.videoParent.visibility = View.VISIBLE
                 }
                 else -> {
                     binding.videoCover1 = ""
                     binding.videoCover2 = ""
+                    binding.videoParent.visibility = View.GONE
                 }
             }
 

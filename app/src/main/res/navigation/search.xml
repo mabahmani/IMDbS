@@ -23,4 +23,10 @@
         android:label="SuggestionFragment"
         tools:layout="@layout/fragment_suggestion"
         />
+    <fragment
+        android:id="@+id/advancedSearchFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.AdvancedSearchFragment"
+        android:label="AdvancedSearchFragment"
+        tools:layout="@layout/fragment_advanced_search"
+        />
 </navigation>

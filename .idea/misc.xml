@@ -25,9 +25,12 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/thumb.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/drawable/thumb_drawable.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/activity_main.xml" value="0.25052083333333336" />
-        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/custom_action_bar_widget.xml" value="0.2" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/custom_action_bar_widget.xml" value="0.268" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/custom_actionbar_widget.xml" value="0.36" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/custom_title_widget.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_advanced_name_search.xml" value="0.2847838957963292" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_advanced_search.xml" value="0.2" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_advanced_title_search.xml" value="0.12406499871034304" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_calender.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_celebs.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_chart.xml" value="0.25052083333333336" />

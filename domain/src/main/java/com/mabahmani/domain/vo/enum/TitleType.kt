@@ -13,5 +13,6 @@ enum class TitleType {
     VIDEO,
     TV_SHORT,
     PODCAST_SERIES,
-    PODCAST_EPISODE
+    PODCAST_EPISODE,
+    MUSIC_VIDEO
 }

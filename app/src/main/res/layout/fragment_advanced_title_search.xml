@@ -1,0 +1,1396 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.mabahmani.imdb_scraping.ui.custom.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/title"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/e_g_the_godfather"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_type"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/titleTypeGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="3">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/feature_film"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/tv_movie"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/tv_series"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/tv_episode"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/tv_special"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/mini_series"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/documentary"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/video_game"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/short_film"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/video"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/tv_short"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/podcast_series"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/podcast_episode"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/music_video"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/release_date"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/releaseDateStart"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/yyyy_mm_dd"
+                    android:inputType="text"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="@string/font_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="@string/to"
+                    android:textColor="@color/blue_gray_900" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/releaseDateEnd"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/yyyy_mm_dd"
+                    android:inputType="text"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/user_rating"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/userRateStart"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/_1_10"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="@string/font_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="@string/to"
+                    android:textColor="@color/blue_gray_900" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/userRateEnd"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/_1_10"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/number_of_votes"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/numberOfVotesStart"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="@string/font_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="@string/to"
+                    android:textColor="@color/blue_gray_900" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/numberOfVotesEnd"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/genres"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/genresGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="3">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/action"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/adventure"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/animation"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/biography"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/comedy"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/crime"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/documentary"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/drama"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/family"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/fantasy"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/film_noir"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/game_show"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/history"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/horror"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/music"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/musical"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/mystery"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/news"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/reality_tv"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/romance"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/sci_fi"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/sport"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/talk_show"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/thriller"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/war"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/western"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_groups"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/titleGroupsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="2">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_top_100"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_top_250"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_top_1000"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/oscar_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/emmy_award_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/golden_globe_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/oscar_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/emmy_award_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/golden_globe_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/best_picture_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/best_director_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/now_playing"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/best_picture_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/best_director_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/national_film_board_preserved"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/razzie_winning"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/razzie_nominated"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_bottom_100"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_bottom_250"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/imdb_bottom_1000"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/companies"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/companiesGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="3">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/_20th_century_fox"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/sony"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/dreamworks"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/mgm"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/paramount"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/universal"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/walt_disney"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/warner_bros"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/us_certificates"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/usCertificatesGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="3">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/g"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/pg"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/pg_13"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/r"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/nc_17"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/color_info"
+                android:textColor="@color/blue_gray_900" />
+
+            <GridLayout
+                android:id="@+id/colorInfoGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:alignmentMode="alignBounds"
+                android:columnCount="3">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/color"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/black_white"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/colorized"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/aces"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </GridLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/countries"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/countries"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/_2_letter_e_g_ir_us_ca_uk"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/languages"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/languages"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/language_code_e_g_fa_en"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/keyword"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/keywords"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/e_g_superhero"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/filming_location"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/locations"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/e_g_iran"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/plot"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/plot"
+                fontPath="@string/font_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/search_for_words_that_might_appear_in_the_plot_summary"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/blue_gray_900"
+                android:textSize="12sp"
+                bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                bind:rectangleBackgroundRadius="@{12}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/runtime"
+                android:textColor="@color/blue_gray_900" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/runtimeStart"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/min"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="@string/font_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="@string/to"
+                    android:textColor="@color/blue_gray_900" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/runtimeEnd"
+                    fontPath="@string/font_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/min"
+                    android:inputType="number"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp"
+                    bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+                    bind:rectangleBackgroundRadius="@{12}" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/sort"
+                android:textColor="@color/blue_gray_900" />
+
+            <RadioGroup
+                android:id="@+id/sortRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/popularity_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/popularity_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/a_z_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/a_z_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/user_rating_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/user_rating_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/num_votes_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/num_votes_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/us_box_office_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/us_box_office_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/runtime_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/runtime_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/year_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/year_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/release_date_ascending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/release_date_descending"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/your_rating_high_to_low"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/your_rating_low_to_high"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/date_of_your_rating_new_to_old"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/sky_900"
+                    android:text="@string/date_of_your_rating_old_to_new"
+                    android:textColor="@color/blue_gray_900"
+                    android:textSize="12sp" />
+
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/searchButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="@string/search"
+                android:textColor="@color/gray_050"
+                app:backgroundTint="@color/sky_800" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
+</layout>

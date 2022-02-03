@@ -17,25 +17,21 @@ import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentSuggestionBinding
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.doAfterTextChanged
-import androidx.navigation.fragment.findNavController
+import com.mabahmani.imdb_scraping.databinding.FragmentAdvancedSearchBinding
 import com.mabahmani.imdb_scraping.util.showKeyboard
 import timber.log.Timber
 
 
-class SuggestionFragment: Fragment() {
+class AdvancedSearchFragment: Fragment() {
 
-    lateinit var binding: FragmentSuggestionBinding
-
-    companion object{
-        var searchView : AppCompatEditText? = null
-    }
+    lateinit var binding: FragmentAdvancedSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSuggestionBinding.inflate(inflater, container, false)
+        binding = FragmentAdvancedSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,19 +44,13 @@ class SuggestionFragment: Fragment() {
 
     private fun setupAppBarr() {
 
-        binding.appBar.getActionView()?.setOnClickListener {
-            findNavController().navigate(R.id.advancedSearchFragment)
-        }
-
-        searchView = binding.appBar.getSearchView()
-
     }
 
     private fun setupViewPager() {
 
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter = SuggestionFragmentStateAdapter(this@SuggestionFragment)
+            adapter = AdvancedSearchFragmentStateAdapter(this@AdvancedSearchFragment)
         }
 
     }
@@ -69,9 +59,8 @@ class SuggestionFragment: Fragment() {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when(position){
-                0 -> tab.text = getString(R.string.all)
-                1 -> tab.text = getString(R.string.titles)
-                2 -> tab.text = getString(R.string.celebs)
+                0 -> tab.text = getString(R.string.advanced_title_search)
+                1 -> tab.text = getString(R.string.advanced_name_search)
             }
         }.attach()
 
@@ -101,12 +90,4 @@ class SuggestionFragment: Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        focusOnSearchViewAndOpenKeyboard()
-    }
-
-    private fun focusOnSearchViewAndOpenKeyboard() {
-       binding.appBar.getSearchView()?.showKeyboard()
-    }
 }

@@ -111,6 +111,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/videoParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -122,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="4dp"
+                app:cardBackgroundColor="@color/white"
                 >
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -194,7 +196,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:visibility="@{TextUtils.isEmpty(videoCover2) ? View.GONE:View.VISIBLE}"
+                        android:visibility="@{TextUtils.isEmpty(videoCover2) ? View.INVISIBLE:View.VISIBLE}"
                         >
 
                         <com.google.android.material.imageview.ShapeableImageView
