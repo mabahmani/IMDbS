@@ -98,13 +98,13 @@
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="@id/videoImage1"
                         app:layout_constraintLeft_toLeftOf="@id/videoImage1"
-                        android:layout_margin="8dp"
+                        android:layout_margin="4dp"
                         android:gravity="center_vertical"
                         >
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             app:srcCompat="@drawable/ic_bx_play_circle"
                             app:tint="@color/blue_gray_050"
                             />
@@ -113,8 +113,9 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:textColor="@color/blue_gray_050"
-                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginHorizontal="4dp"
                             android:background="@color/gray_300"
+                            android:textSize="12sp"
                             />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -156,13 +157,13 @@
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="@id/videoImage2"
                         app:layout_constraintLeft_toLeftOf="@id/videoImage2"
-                        android:layout_margin="8dp"
+                        android:layout_margin="4dp"
                         android:gravity="center_vertical"
                         >
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             app:srcCompat="@drawable/ic_bx_play_circle"
                             app:tint="@color/blue_gray_050"
                             />
@@ -171,8 +172,9 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:textColor="@color/blue_gray_050"
-                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginHorizontal="4dp"
                             android:background="@color/gray_300"
+                            android:textSize="12sp"
                             />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>

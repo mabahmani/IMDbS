@@ -52,7 +52,8 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_suggestion.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_suggestion_result.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_titles.xml" value="0.2222222222222222" />
-        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_trailers.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_trailers.xml" value="0.2" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/fragment_trailers_result.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_born_today.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_calender.xml" value="0.268" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_calender_title.xml" value="0.25052083333333336" />
@@ -70,6 +71,7 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_news.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_suggest.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_title.xml" value="0.4" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/item_trailer.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_calender.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_celeb.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_chart_boxoffice.xml" value="0.25052083333333336" />
@@ -87,6 +89,7 @@
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_sguggest.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_suggest.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_title.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/layout/shimmer_trailer.xml" value="0.2" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/mabahmani/StudioProjects/IMDbScraping/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26666666666666666" />
       </map>

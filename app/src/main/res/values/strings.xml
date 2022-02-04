@@ -217,4 +217,7 @@
     <string name="weekend">Weekend:</string>
     <string name="groos">Groos:</string>
     <string name="weeks">Weeks:</string>
+    <string name="trending">Trending</string>
+    <string name="anticipated">Anticipated</string>
+    <string name="recent">Recent</string>
 </resources>
