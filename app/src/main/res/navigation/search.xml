@@ -35,5 +35,11 @@
         android:label="SearchTitlesByKeywordFragment"
         tools:layout="@layout/fragment_search_titles_by_keyword"
         />
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.event.EventDetailsFragment"
+        android:label="EventDetailsFragment"
+        tools:layout="@layout/fragment_event_details"
+        />
 
 </navigation>

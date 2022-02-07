@@ -45,6 +45,10 @@ class EventsAdapter(private val itemClickListener: (Event) -> Unit) :
 
             binding.event = model.name
 
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(model)
+            }
+
         }
     }
 

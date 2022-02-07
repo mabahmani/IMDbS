@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.common.Event
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentEventsBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.EventsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -86,7 +88,12 @@ class EventsFragment : Fragment() {
     private fun showEvents(events: List<Event>) {
 
         val adapter = EventsAdapter {
-
+            findNavController().navigate(R.id.eventDetailsFragment,
+                Bundle().apply {
+                    putString("eventId", it.eventId.value)
+                    putString("eventName", it.name)
+                }
+            )
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
@@ -97,7 +104,7 @@ class EventsFragment : Fragment() {
         hideLoading()
     }
 
-    private fun hideLoading(){
+    private fun hideLoading() {
         binding.shimmer.visibility = View.GONE
         binding.shimmer.stopShimmer()
     }

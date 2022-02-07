@@ -220,4 +220,6 @@
     <string name="trending">Trending</string>
     <string name="anticipated">Anticipated</string>
     <string name="recent">Recent</string>
+    <string name="winner">WINNER</string>
+    <string name="year">Year</string>
 </resources>
