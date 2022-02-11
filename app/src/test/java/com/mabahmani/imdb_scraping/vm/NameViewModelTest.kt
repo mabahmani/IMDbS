@@ -1,11 +1,14 @@
 package com.mabahmani.imdb_scraping.vm
 
+import com.mabahmani.domain.interactor.GetNameAwardsUseCase
 import com.mabahmani.domain.interactor.GetNameBioUseCase
 import com.mabahmani.domain.interactor.GetNameDetailsUseCase
+import com.mabahmani.domain.vo.NameAwards
 import com.mabahmani.domain.vo.NameBio
 import com.mabahmani.domain.vo.NameDetails
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
 import io.mockk.*
@@ -30,6 +33,9 @@ class NameViewModelTest {
 
     @RelaxedMockK
     lateinit var getNameBioUseCase: GetNameBioUseCase
+
+    @RelaxedMockK
+    lateinit var getNameAwardsUseCase: GetNameAwardsUseCase
 
     @InjectMockKs
     private lateinit var viewModel: NameViewModel
@@ -167,6 +173,65 @@ class NameViewModelTest {
         assert(stateList[1] is NameBioUiState.Error)
 
         coVerify { getNameBioUseCase(NameId("nm000000")) }
+    }
+
+
+    @Test
+    fun `test get nameAwardsUseCase initial state`() = runTest{
+        val state = viewModel.nameAwardUiState.first()
+
+        assert(state == NameAwardUiState.Loading)
+    }
+
+    @Test
+    fun `test get nameAwardUiState success`() = runTest{
+        val nameAwards = mockk<NameAwards>()
+
+        every { nameAwards getProperty "name" } returns "celebName"
+        every { nameAwards getProperty "avatar" } returns Image("avatarImage")
+
+        coEvery { getNameAwardsUseCase(any()) } returns Result.success(nameAwards)
+
+        viewModel.launchGetNameAwardsUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameAwardUiState.take(2).toList()
+
+        assert(stateList[0] is NameAwardUiState.Loading)
+        assert(stateList[1] is NameAwardUiState.ShowNameAwards)
+        assert((stateList[1] as NameAwardUiState.ShowNameAwards).nameAwards.name == "celebName")
+        assert((stateList[1] as NameAwardUiState.ShowNameAwards).nameAwards.avatar.value == "avatarImage")
+
+        coVerify { getNameAwardsUseCase(NameId("nm000000")) }
+    }
+
+    @Test
+    fun `test get nameAwardsUseCase network failure`() = runTest{
+
+        coEvery { getNameAwardsUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetNameAwardsUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameAwardUiState.take(2).toList()
+
+        assert(stateList[0] is NameAwardUiState.Loading)
+        assert(stateList[1] is NameAwardUiState.NetworkError)
+
+        coVerify { getNameAwardsUseCase(NameId("nm000000")) }
+    }
+
+    @Test
+    fun `test get nameAwardsUseCase failure`() = runTest{
+
+        coEvery { getNameAwardsUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetNameAwardsUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameAwardUiState.take(2).toList()
+
+        assert(stateList[0] is NameAwardUiState.Loading)
+        assert(stateList[1] is NameAwardUiState.Error)
+
+        coVerify { getNameAwardsUseCase(NameId("nm000000")) }
     }
 
     @After

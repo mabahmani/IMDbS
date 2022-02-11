@@ -59,6 +59,14 @@ class NameDetailsFragment: Fragment() {
                 }
             )
         }
+
+        binding.seeAwards.setOnClickListener {
+            findNavController().navigate(R.id.nameAwardFragment,
+                Bundle().apply {
+                    putString("nameId", nameId)
+                }
+            )
+        }
     }
 
     private fun observeNameDetailsUiState() {

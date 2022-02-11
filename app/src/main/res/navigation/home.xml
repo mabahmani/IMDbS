@@ -24,4 +24,10 @@
         android:label="NameBiographyFragment"
         tools:layout="@layout/fragment_name_biography"
         />
+    <fragment
+        android:id="@+id/nameAwardFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameAwardFragment"
+        android:label="NameAwardFragment"
+        tools:layout="@layout/fragment_name_awards"
+        />
 </navigation>

@@ -2,9 +2,11 @@ package com.mabahmani.imdb_scraping.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mabahmani.domain.interactor.GetNameAwardsUseCase
 import com.mabahmani.domain.interactor.GetNameBioUseCase
 import com.mabahmani.domain.interactor.GetNameDetailsUseCase
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 class NameViewModel @Inject constructor(
     private val getNameDetailsUseCase: GetNameDetailsUseCase,
     private val getNameBioUseCase: GetNameBioUseCase,
+    private val getNameAwardsUseCase: GetNameAwardsUseCase,
 ): ViewModel() {
 
     private val _nameDetailsUiState = MutableStateFlow<NameDetailUiState>(NameDetailUiState.Loading)
@@ -25,6 +28,9 @@ class NameViewModel @Inject constructor(
 
     private val _nameBioUiState = MutableStateFlow<NameBioUiState>(NameBioUiState.Loading)
     val nameBioUiState: StateFlow<NameBioUiState> = _nameBioUiState
+
+    private val _nameAwardUiState = MutableStateFlow<NameAwardUiState>(NameAwardUiState.Loading)
+    val nameAwardUiState: StateFlow<NameAwardUiState> = _nameAwardUiState
 
     fun launchGetNameDetailsUseCase(nameId: NameId){
         if (_nameDetailsUiState.value !is NameDetailUiState.ShowNameDetails){
@@ -83,6 +89,40 @@ class NameViewModel @Inject constructor(
 
                             else ->{
                                 _nameBioUiState.emit(NameBioUiState.Error(it.message.toString()))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun launchGetNameAwardsUseCase(nameId: NameId){
+
+        if (_nameAwardUiState.value !is NameAwardUiState.ShowNameAwards){
+
+            viewModelScope.launch {
+
+                _nameAwardUiState.emit(NameAwardUiState.Loading)
+
+                val nameAward = getNameAwardsUseCase(nameId)
+
+                if (nameAward.isSuccess){
+                    nameAward.getOrNull()?.let{
+                        _nameAwardUiState.emit(NameAwardUiState.ShowNameAwards(it))
+                    }
+                }
+
+                else{
+                    nameAward.exceptionOrNull()?.let{
+                        when(it){
+                            is UnknownHostException ->{
+                                _nameAwardUiState.emit(NameAwardUiState.NetworkError)
+                            }
+
+                            else ->{
+                                _nameAwardUiState.emit(NameAwardUiState.Error(it.message.toString()))
                             }
                         }
                     }

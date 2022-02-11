@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="titleName"
+            type="String" />
+
+        <variable
+            name="titleYear"
+            type="String" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{titleName}"
+            android:textSize="12sp"
+            android:textColor="@color/gray_900"
+            fontPath="@string/font_bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{titleYear}"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/gray_900"
+            fontPath="@string/font_light"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

@@ -74,6 +74,10 @@ class TitleWidget @JvmOverloads constructor(
         findViewById<AppCompatTextView>(R.id.title).text = title
     }
 
+    fun setTitleSize(size: Float){
+        findViewById<AppCompatTextView>(R.id.title).textSize = size
+    }
+
     fun setSubtitle(subtitle: String){
         val subtitleView = findViewById<AppCompatTextView>(R.id.subtitle)
         subtitleView.text = subtitle

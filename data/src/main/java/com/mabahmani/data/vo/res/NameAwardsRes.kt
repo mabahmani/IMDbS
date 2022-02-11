@@ -7,35 +7,35 @@ import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.domain.vo.common.TitleLink
 
 data class NameAwardsRes(
-    val avatar: String,
-    val events: List<Event>,
-    val name: String
+    val avatar: String?,
+    val events: List<Event>?,
+    val name: String?
 ) {
     data class Event(
-        val awards: List<Award>,
-        val title: String,
+        val awards: List<Award>?,
+        val title: String?,
     ) {
         data class Award(
-            val year: Year,
-            val awardOutcomes: List<AwardOutcome>
+            val year: Year?,
+            val awardOutcomes: List<AwardOutcome>?
         ) {
 
-            data class Year(val id: String, val year: String)
+            data class Year(val id: String?, val year: String?)
 
             data class AwardOutcome(
-                val title: String,
-                val subtitle: String,
-                val awardDescriptions: List<AwardDescription>
+                val title: String?,
+                val subtitle: String?,
+                val awardDescriptions: List<AwardDescription>?
             ) {
 
                 data class AwardDescription(
-                    val description: String,
-                    val titles: List<AwardItem>
+                    val description: String?,
+                    val titles: List<AwardItem>?
                 ) {
                     data class AwardItem(
-                        val id: String,
-                        val title: String,
-                        val titleYear: String
+                        val id: String?,
+                        val title: String?,
+                        val titleYear: String?
                     )
                 }
             }
@@ -45,35 +45,35 @@ data class NameAwardsRes(
     }
 
     fun toNameAwards(): NameAwards {
-        return NameAwards(name, Image(avatar),
-            events.map {
+        return NameAwards(name.orEmpty(), Image(avatar.orEmpty()),
+            events?.map {
                 NameAwards.Event(
-                    it.title,
-                    it.awards.map {
+                    it.title.orEmpty(),
+                    it.awards?.map {
                         NameAwards.Event.Award(
-                            EventId(it.year.id),
-                            it.year.year,
-                            it.awardOutcomes.map {
+                            EventId(it.year?.id.orEmpty()),
+                            it.year?.year.orEmpty(),
+                            it.awardOutcomes?.map {
                                 NameAwards.Event.Award.AwardOutcome(
-                                    it.title,
-                                    it.subtitle,
-                                    it.awardDescriptions.map {
+                                    it.title.orEmpty(),
+                                    it.subtitle.orEmpty(),
+                                    it.awardDescriptions?.map {
                                         NameAwards.Event.Award.AwardOutcome.AwardDetail(
-                                            it.description,
-                                            it.titles.map {
+                                            it.description.orEmpty(),
+                                            it.titles?.map {
                                                 NameAwards.Event.Award.AwardOutcome.AwardDetail.AwardTitle(
-                                                    TitleLink(it.title, TitleId(it.id)),
-                                                    it.titleYear
+                                                    TitleLink(it.title.orEmpty(), TitleId(it.id.orEmpty())),
+                                                    it.titleYear.orEmpty()
                                                 )
-                                            }
+                                            }?: listOf()
                                         )
-                                    }
+                                    }?: listOf()
                                 )
-                            }
+                            }?: listOf()
                         )
-                    }
+                    }?: listOf()
                 )
-            }
+            }?: listOf()
         )
     }
 }
