@@ -18,4 +18,10 @@
         android:label="NameDetailsFragment"
         tools:layout="@layout/fragment_name_details"
         />
+    <fragment
+        android:id="@+id/nameBiographyFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameBiographyFragment"
+        android:label="NameBiographyFragment"
+        tools:layout="@layout/fragment_name_biography"
+        />
 </navigation>

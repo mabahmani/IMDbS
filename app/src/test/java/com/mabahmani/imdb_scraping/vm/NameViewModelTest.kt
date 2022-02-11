@@ -1,9 +1,12 @@
 package com.mabahmani.imdb_scraping.vm
 
+import com.mabahmani.domain.interactor.GetNameBioUseCase
 import com.mabahmani.domain.interactor.GetNameDetailsUseCase
+import com.mabahmani.domain.vo.NameBio
 import com.mabahmani.domain.vo.NameDetails
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -24,6 +27,9 @@ class NameViewModelTest {
 
     @RelaxedMockK
     lateinit var getNameDetailsUseCase: GetNameDetailsUseCase
+
+    @RelaxedMockK
+    lateinit var getNameBioUseCase: GetNameBioUseCase
 
     @InjectMockKs
     private lateinit var viewModel: NameViewModel
@@ -100,6 +106,67 @@ class NameViewModelTest {
         assert(stateList[1] is NameDetailUiState.Error)
 
         coVerify { getNameDetailsUseCase(NameId("nm000000")) }
+    }
+
+
+    @Test
+    fun `test get nameBioUseCase initial state`() = runTest{
+        val state = viewModel.nameBioUiState.first()
+
+        assert(state == NameBioUiState.Loading)
+    }
+
+    @Test
+    fun `test get nameBioUseCase success`() = runTest{
+        val nameBio = mockk<NameBio>()
+
+        every { nameBio getProperty "miniBio" } returns "miniBio"
+        every { nameBio getProperty "name" } returns "celebName"
+        every { nameBio getProperty "avatar" } returns Image("avatarImage")
+
+        coEvery { getNameBioUseCase(any()) } returns Result.success(nameBio)
+
+        viewModel.launchGetNameBioUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameBioUiState.take(2).toList()
+
+        assert(stateList[0] is NameBioUiState.Loading)
+        assert(stateList[1] is NameBioUiState.ShowNameBio)
+        assert((stateList[1] as NameBioUiState.ShowNameBio).nameBio.miniBio == "miniBio")
+        assert((stateList[1] as NameBioUiState.ShowNameBio).nameBio.name == "celebName")
+        assert((stateList[1] as NameBioUiState.ShowNameBio).nameBio.avatar.value == "avatarImage")
+
+        coVerify { getNameBioUseCase(NameId("nm000000")) }
+    }
+
+    @Test
+    fun `test get nameBioUseCase network failure`() = runTest{
+
+        coEvery { getNameBioUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetNameBioUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameBioUiState.take(2).toList()
+
+        assert(stateList[0] is NameBioUiState.Loading)
+        assert(stateList[1] is NameBioUiState.NetworkError)
+
+        coVerify { getNameBioUseCase(NameId("nm000000")) }
+    }
+
+    @Test
+    fun `test get nameBioUseCase failure`() = runTest{
+
+        coEvery { getNameBioUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetNameBioUseCase(NameId("nm000000"))
+
+        val stateList = viewModel.nameBioUiState.take(2).toList()
+
+        assert(stateList[0] is NameBioUiState.Loading)
+        assert(stateList[1] is NameBioUiState.Error)
+
+        coVerify { getNameBioUseCase(NameId("nm000000")) }
     }
 
     @After

@@ -119,6 +119,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:id="@+id/bioTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -255,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
-                        app:TW_ShowSeeMore="true"
+                        app:TW_ShowSeeMore="false"
                         app:TW_Title="@string/personal_details" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.RecyclerView

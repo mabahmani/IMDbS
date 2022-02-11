@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="subtitle"
+            type="String" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@{title}"
+                android:textColor="@color/gray_900"
+                android:textSize="12sp"
+                android:maxLength="24"
+                android:ellipsize="end"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="@string/font_light"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:text="@{subtitle}"
+                android:textColor="@color/gray_900"
+                android:textSize="12sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_100" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

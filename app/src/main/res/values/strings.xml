@@ -232,4 +232,9 @@
     <string name="related_videos">Related Videos</string>
     <string name="personal_details">Personal Details</string>
     <string name="invalid_name_id">Invalid NameId</string>
+    <string name="overview">Overview</string>
+    <string name="mini_bio">Mini Bio</string>
+    <string name="salary">Salary</string>
+    <string name="trivia">Trivia</string>
+    <string name="trade_mark">Trade Mark</string>
 </resources>

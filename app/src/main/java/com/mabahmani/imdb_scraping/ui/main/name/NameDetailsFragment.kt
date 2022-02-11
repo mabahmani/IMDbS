@@ -9,14 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.NameDetails
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentNameDetailsBinding
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.NameViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,6 +48,17 @@ class NameDetailsFragment: Fragment() {
         checkArguments()
         setupAppBar()
         observeNameDetailsUiState()
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        binding.bioTitle.setOnClickListener {
+            findNavController().navigate(R.id.nameBiographyFragment,
+                Bundle().apply {
+                    putString("nameId", nameId)
+                }
+            )
+        }
     }
 
     private fun observeNameDetailsUiState() {
