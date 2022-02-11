@@ -11,4 +11,11 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"
         />
+
+    <fragment
+        android:id="@+id/nameDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameDetailsFragment"
+        android:label="NameDetailsFragment"
+        tools:layout="@layout/fragment_name_details"
+        />
 </navigation>

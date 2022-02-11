@@ -35,4 +35,9 @@ abstract class RepositoryModule {
     abstract fun bindEventRepository(
         eventRepositoryImpl: EventRepositoryImpl
     ): EventRepository
+
+    @Binds
+    abstract fun bindNameRepository(
+        nameRepositoryImpl: NameRepositoryImpl
+    ): NameRepository
 }

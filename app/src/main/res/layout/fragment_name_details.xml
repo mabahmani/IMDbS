@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="nameSkills"
+            type="String" />
+
+        <variable
+            name="avatarUrl"
+            type="String" />
+
+        <variable
+            name="trailerCoverUrl"
+            type="String" />
+
+        <variable
+            name="trailerInfo"
+            type="String" />
+
+        <variable
+            name="bio"
+            type="String" />
+
+        <variable
+            name="bornInfo"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_050"
+        >
+
+        <com.mabahmani.imdb_scraping.ui.custom.ActionBarWidget
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.mabahmani.imdb_scraping.ui.custom.NestedScrollView
+            android:id="@+id/nestedParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/appBar"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/mainView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@{nameSkills}"
+                        android:textColor="@color/sky_900" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="136dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                            bind:imageUrl="@{avatarUrl}" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="2.5">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/trailerCover"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                                bind:imageUrl="@{trailerCoverUrl}" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="@id/trailerCover"
+                                app:layout_constraintLeft_toLeftOf="@id/trailerCover"
+                                app:layout_constraintRight_toRightOf="@id/trailerCover"
+                                app:layout_constraintTop_toTopOf="@id/trailerCover"
+                                app:srcCompat="@drawable/ic_play_circle"
+                                app:tint="@color/blue_gray_050" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:text="@{trailerInfo}"
+                                android:textColor="@color/blue_gray_050"
+                                app:layout_constraintBottom_toBottomOf="@id/trailerCover"
+                                app:layout_constraintLeft_toLeftOf="@id/trailerCover" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/bio" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:justificationMode="inter_word"
+                        android:text="@{bio}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/born"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:text="@{bornInfo}"
+                            android:textColor="@color/gray_900"
+                            android:textSize="12sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="10dp"
+                        bind:rectangleBackgroundColor="@{@color/yellow_050}"
+                        bind:rectangleBackgroundRadius="@{8}">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_bx_award"
+                            app:tint="@color/yellow_500" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="@string/see_awards"
+                            android:textColor="@color/yellow_500" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/photos" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/photoList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="12dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="false"
+                        app:TW_Title="@string/known_for" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/knownForList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="false"
+                        app:TW_Title="@string/filmography" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/filmographyList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="16dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/related_videos" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/relatedVideoList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/personal_details" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/personalDetailsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="16dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/gray_100"
+                    >
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <include
+                            layout="@layout/shimmer_name_details_overview"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_name_details_photo"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_name_details_known_for"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_name_details_filmography"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_name_details_related_videos"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_name_details_personal_details"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+        </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
+
+    </RelativeLayout>
+</layout>

@@ -18,6 +18,7 @@
         <attr name="TW_TitleColor" format="color" />
         <attr name="TW_SubtitleColor" format="color" />
         <attr name="TW_DividerColor" format="color" />
+        <attr name="TW_ShowSeeMore" format="boolean" />
     </declare-styleable>
 
 </resources>

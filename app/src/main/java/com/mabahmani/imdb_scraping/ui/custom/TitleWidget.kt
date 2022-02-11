@@ -31,10 +31,12 @@ class TitleWidget @JvmOverloads constructor(
                 val titleColor = getColor(R.styleable.TitleWidget_TW_TitleColor,ContextCompat.getColor(context, R.color.blue_gray_900))
                 val subtitleColor = getColor(R.styleable.TitleWidget_TW_SubtitleColor,ContextCompat.getColor(context, R.color.blue_gray_500))
                 val dividerColor = getColor(R.styleable.TitleWidget_TW_DividerColor,ContextCompat.getColor(context, R.color.yellow_500))
+                val showSeeMore = getBoolean(R.styleable.TitleWidget_TW_ShowSeeMore, false)
 
                 val title = findViewById<AppCompatTextView>(R.id.title)
                 val subtitle = findViewById<AppCompatTextView>(R.id.subtitle)
                 val divider = findViewById<View>(R.id.divider)
+                val seeMoreParent = findViewById<View>(R.id.seeMoreParent)
 
                 title.text = titleText
                 title.setTextColor(titleColor)
@@ -56,6 +58,12 @@ class TitleWidget @JvmOverloads constructor(
                     2f.dp()
                 )
 
+                if (showSeeMore){
+                    seeMoreParent.visibility = VISIBLE
+                }
+                else{
+                    seeMoreParent.visibility = GONE
+                }
             } finally {
                 recycle()
             }

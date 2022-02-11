@@ -28,17 +28,19 @@ import timber.log.Timber
 import android.graphics.Typeface
 
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.HomeMediaType
 import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
@@ -63,10 +65,9 @@ class HomeFragment: Fragment() {
     private fun observeScroll() {
         binding.appBar.setBackgroundAlpha(0)
         binding.nestedParent.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-            if (scrollY <= 255){
+            if (scrollY <= 255) {
                 binding.appBar.setBackgroundAlpha(scrollY)
-            }
-            else{
+            } else {
                 binding.appBar.setBackgroundAlpha(255)
             }
         })
@@ -74,8 +75,8 @@ class HomeFragment: Fragment() {
 
     private fun initHomeStateObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED){
-                viewModel.homeUiState.collect{
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.homeUiState.collect {
                     handleHomeStates(it)
                 }
             }
@@ -84,8 +85,8 @@ class HomeFragment: Fragment() {
 
     private fun initHomeExtraStateObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED){
-                viewModel.homeExtraUiState.collect{
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.homeExtraUiState.collect {
                     handleHomeExtraStates(it)
                 }
             }
@@ -94,11 +95,11 @@ class HomeFragment: Fragment() {
 
     private fun handleHomeStates(state: HomeUiState) {
 
-        when(state){
-            is HomeUiState.Loading ->{
+        when (state) {
+            is HomeUiState.Loading -> {
                 showHomeLoading()
             }
-            is HomeUiState.ShowHomeData ->{
+            is HomeUiState.ShowHomeData -> {
                 showTrailers(state.home.trailers)
                 showFeaturedToday(state.home.featuredToday)
                 showImdbOriginals(state.home.imdbOriginals)
@@ -106,10 +107,10 @@ class HomeFragment: Fragment() {
                 showBoxOffice(state.home.boxOffice)
                 showNews(state.home.news)
             }
-            is HomeUiState.Error ->{
+            is HomeUiState.Error -> {
                 showHomeError(state.message)
             }
-            is HomeUiState.NetworkError ->{
+            is HomeUiState.NetworkError -> {
                 showHomeNetworkError()
             }
         }
@@ -117,21 +118,21 @@ class HomeFragment: Fragment() {
 
     private fun handleHomeExtraStates(state: HomeExtraUiState) {
 
-        when(state){
-            is HomeExtraUiState.Loading ->{
+        when (state) {
+            is HomeExtraUiState.Loading -> {
                 showHomeExtraLoading()
             }
-            is HomeExtraUiState.ShowHomeExtraData ->{
+            is HomeExtraUiState.ShowHomeExtraData -> {
                 showFanFavorites(state.homeExtra.fanPicksTitles)
                 showStreamProviders(state.homeExtra.streamingTitles)
                 showInTheaters(state.homeExtra.showTimesTitles)
                 showComingSoon(state.homeExtra.comingSoonTitles)
                 showBornToday(state.homeExtra.bornTodayList)
             }
-            is HomeExtraUiState.Error ->{
+            is HomeExtraUiState.Error -> {
                 showHomeExtraError(state.message)
             }
-            is HomeExtraUiState.NetworkError ->{
+            is HomeExtraUiState.NetworkError -> {
                 showHomeExtraNetworkError()
             }
         }
@@ -139,15 +140,35 @@ class HomeFragment: Fragment() {
 
     private fun showBornToday(bornTodayList: List<HomeExtra.BornToday>) {
 
-        binding.bornTodayTitleWidget.setSubtitle(String.format(resources.getString(R.string.born_today_subtitle), SimpleDateFormat("MMMM dd", Locale.US).format(
-            Date()
-        )))
+        binding.bornTodayTitleWidget.setSubtitle(
+            String.format(
+                resources.getString(R.string.born_today_subtitle),
+                SimpleDateFormat("MMMM dd", Locale.US).format(
+                    Date()
+                )
+            )
+        )
 
-        val adapter = HomeBornTodayAdapter{
+        val adapter = HomeBornTodayAdapter {
+            when (it.nameId.validate()){
+                is Either.Right -> {
+                    findNavController().navigate(R.id.nameDetailsFragment,
+                        Bundle().apply {
+                            putString("nameId", it.nameId.value)
+                            putString("name", it.name)
+                        }
+                    )
+                }
+
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_name_id))
+                }
+            }
 
         }
 
-        binding.bornTodayList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.bornTodayList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.bornTodayList.adapter = adapter
         adapter.submitList(bornTodayList)
 
@@ -160,11 +181,12 @@ class HomeFragment: Fragment() {
 
     private fun showNews(news: List<News>) {
 
-        val adapter = HomeNewsAdapter{
+        val adapter = HomeNewsAdapter {
 
         }
 
-        binding.newsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.newsList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.newsList.adapter = adapter
         adapter.submitList(news)
 
@@ -180,11 +202,12 @@ class HomeFragment: Fragment() {
         val targetFormat = SimpleDateFormat("MMM dd", Locale.US)
 
 
-        val adapter = HomeMediaAdapter{
+        val adapter = HomeMediaAdapter {
 
         }
 
-        binding.comingSoonList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.comingSoonList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.comingSoonList.adapter = adapter
 
         adapter.submitList(comingSoonTitles.map {
@@ -192,8 +215,17 @@ class HomeFragment: Fragment() {
             var releaseDate: String? = null
 
             try {
-                releaseDate = targetFormat.format(sourceFormat.parse(String.format("%s-%s-%s",it.releaseYear, it.releaseMonth, it.releaseDay)))
-            }catch (ex: Exception){
+                releaseDate = targetFormat.format(
+                    sourceFormat.parse(
+                        String.format(
+                            "%s-%s-%s",
+                            it.releaseYear,
+                            it.releaseMonth,
+                            it.releaseDay
+                        )
+                    )
+                )
+            } catch (ex: Exception) {
                 ex.printStackTrace()
             }
 
@@ -201,7 +233,7 @@ class HomeFragment: Fragment() {
                 it.title.orEmpty(),
                 it.videoRuntime.orEmpty(),
                 HomeMediaType.VIDEO,
-                it.videoPreview?: Image(""),
+                it.videoPreview ?: Image(""),
                 it.videoId?.value.orEmpty(),
                 releaseDate
             )
@@ -214,11 +246,12 @@ class HomeFragment: Fragment() {
     }
 
     private fun showFanFavorites(fanPicksTitles: List<Title>) {
-        val adapter = HomeMovieAdapter{
+        val adapter = HomeMovieAdapter {
 
         }
 
-        binding.fanFavoritesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.fanFavoritesList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.fanFavoritesList.adapter = adapter
         adapter.submitList(fanPicksTitles)
 
@@ -229,11 +262,12 @@ class HomeFragment: Fragment() {
     }
 
     private fun showInTheaters(inTheaters: List<Title>) {
-        val adapter = HomeMovieAdapter{
+        val adapter = HomeMovieAdapter {
 
         }
 
-        binding.inTheatersList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.inTheatersList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.inTheatersList.adapter = adapter
         adapter.submitList(inTheaters)
 
@@ -254,7 +288,10 @@ class HomeFragment: Fragment() {
         binding.streamProvidersViewPager.adapter = streamProviderAdapter
 
 
-        TabLayoutMediator(binding.streamProvidersTabLayout, binding.streamProvidersViewPager) { tab, position ->
+        TabLayoutMediator(
+            binding.streamProvidersTabLayout,
+            binding.streamProvidersViewPager
+        ) { tab, position ->
             tab.text = streamProviders[position].name
         }.attach()
 
@@ -267,8 +304,13 @@ class HomeFragment: Fragment() {
             for (i in 0 until tabChildsCount) {
                 val tabViewChild = vgTab.getChildAt(i)
                 if (tabViewChild is TextView) {
-                    tabViewChild.setTypeface(Typeface.createFromAsset(resources.assets,resources.getString(
-                        R.string.font_medium)), Typeface.NORMAL)
+                    tabViewChild.setTypeface(
+                        Typeface.createFromAsset(
+                            resources.assets, resources.getString(
+                                R.string.font_medium
+                            )
+                        ), Typeface.NORMAL
+                    )
                 }
             }
         }
@@ -280,14 +322,14 @@ class HomeFragment: Fragment() {
 
     private fun showHomeNetworkError() {
 
-        requireContext().showNetworkConnectionError{
+        requireContext().showNetworkConnectionError {
             viewModel.launchHomeUseCase()
         }
     }
 
     private fun showHomeExtraNetworkError() {
 
-        requireContext().showNetworkConnectionError{
+        requireContext().showNetworkConnectionError {
             viewModel.launchHomeExtraUseCase()
         }
     }
@@ -303,12 +345,13 @@ class HomeFragment: Fragment() {
     }
 
     private fun showTrailers(trailers: List<Trailer>) {
-        val adapter = HomeTrailerAdapter{
+        val adapter = HomeTrailerAdapter {
 
         }
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.trailersList)
-        binding.trailersList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.trailersList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.trailersList.addItemDecoration(RoundedPagerIndicatorDecoration())
         binding.trailersList.adapter = adapter
 
@@ -320,11 +363,12 @@ class HomeFragment: Fragment() {
     }
 
     private fun showFeaturedToday(medias: List<Home.Media>) {
-        val adapter = HomeMediaAdapter{
+        val adapter = HomeMediaAdapter {
 
         }
 
-        binding.featuredTodayList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.featuredTodayList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.featuredTodayList.adapter = adapter
         adapter.submitList(medias)
 
@@ -334,11 +378,12 @@ class HomeFragment: Fragment() {
     }
 
     private fun showImdbOriginals(medias: List<Home.Media>) {
-        val adapter = HomeMediaAdapter{
+        val adapter = HomeMediaAdapter {
 
         }
 
-        binding.imdbOriginalsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.imdbOriginalsList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.imdbOriginalsList.adapter = adapter
         adapter.submitList(medias)
 
@@ -348,11 +393,12 @@ class HomeFragment: Fragment() {
     }
 
     private fun showEditorPicks(medias: List<Home.Media>) {
-        val adapter = HomeMediaAdapter{
+        val adapter = HomeMediaAdapter {
 
         }
 
-        binding.editorPicksList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.editorPicksList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.editorPicksList.adapter = adapter
         adapter.submitList(medias)
 
@@ -364,21 +410,24 @@ class HomeFragment: Fragment() {
     private fun showBoxOffice(boxOffice: BoxOffice) {
         try {
             val sourceFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-            val startDate = sourceFormat.parse( boxOffice.startDate)
-            val endDate = sourceFormat.parse( boxOffice.endDate)
+            val startDate = sourceFormat.parse(boxOffice.startDate)
+            val endDate = sourceFormat.parse(boxOffice.endDate)
             val targetFormat = SimpleDateFormat("MMMM-dd", Locale.US)
 
             binding.boxOfficeTitleWidget.setSubtitle(
-                String.format(resources.getString(R.string.top_box_office_subtitle, targetFormat.format(startDate) + ", " + targetFormat.format(endDate)))
+                String.format(
+                    resources.getString(
+                        R.string.top_box_office_subtitle,
+                        targetFormat.format(startDate) + ", " + targetFormat.format(endDate)
+                    )
+                )
             )
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             ex.printStackTrace()
         }
 
 
-
-
-        val adapter = HomeBoxOfficeAdapter{
+        val adapter = HomeBoxOfficeAdapter {
 
         }
 

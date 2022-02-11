@@ -222,4 +222,14 @@
     <string name="recent">Recent</string>
     <string name="winner">WINNER</string>
     <string name="year">Year</string>
+    <string name="see_more">See More</string>
+    <string name="bio">Bio</string>
+    <string name="born">Born:</string>
+    <string name="see_awards">See Awards</string>
+    <string name="photos">Photos</string>
+    <string name="known_for">Known For</string>
+    <string name="filmography">Filmography</string>
+    <string name="related_videos">Related Videos</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="invalid_name_id">Invalid NameId</string>
 </resources>
