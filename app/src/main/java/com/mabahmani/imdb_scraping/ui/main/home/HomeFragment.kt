@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
         )
 
         val adapter = HomeBornTodayAdapter {
-            when (it.nameId.validate()){
+            when (it.nameId.validate()) {
                 is Either.Right -> {
                     findNavController().navigate(R.id.nameDetailsFragment,
                         Bundle().apply {
@@ -182,7 +182,11 @@ class HomeFragment : Fragment() {
     private fun showNews(news: List<News>) {
 
         val adapter = HomeNewsAdapter {
-
+            findNavController().navigate(R.id.newsDetailsFragment,
+                Bundle().apply {
+                    putString("newsId", it.newsId.value)
+                }
+            )
         }
 
         binding.newsList.layoutManager =

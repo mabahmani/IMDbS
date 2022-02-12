@@ -30,4 +30,10 @@
         android:label="NameAwardFragment"
         tools:layout="@layout/fragment_name_awards"
         />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.news.NewsDetailsFragment"
+        android:label="NewsDetailsFragment"
+        tools:layout="@layout/fragment_news_details"
+        />
 </navigation>
