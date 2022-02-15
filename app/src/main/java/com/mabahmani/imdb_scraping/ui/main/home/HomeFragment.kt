@@ -251,7 +251,20 @@ class HomeFragment : Fragment() {
 
     private fun showFanFavorites(fanPicksTitles: List<Title>) {
         val adapter = HomeMovieAdapter {
+            when (it.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId?.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.fanFavoritesList.layoutManager =

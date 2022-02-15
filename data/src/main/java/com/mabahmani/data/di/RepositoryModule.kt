@@ -45,4 +45,9 @@ abstract class RepositoryModule {
     abstract fun bindNewsRepository(
         newsRepositoryImpl: NewsRepositoryImpl
     ): NewsRepository
+
+    @Binds
+    abstract fun bindTitleRepository(
+        titleRepositoryImpl: TitleRepositoryImpl
+    ): TitleRepository
 }

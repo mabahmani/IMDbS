@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+        android:layout_marginHorizontal="8dp"
+        android:scaleType="centerCrop"
+        bind:imageUrl="@{imageUrl}"
+        />
+</layout>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="genre"
+            type="String" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="12dp"
+        bind:rectangleBackgroundColor="@{@color/gray_100}"
+        bind:rectangleBackgroundRadius="@{100}"
+        android:text="@{genre}"
+        android:textColor="@color/gray_900"
+        android:layout_marginHorizontal="4dp"
+        />
+</layout>
+

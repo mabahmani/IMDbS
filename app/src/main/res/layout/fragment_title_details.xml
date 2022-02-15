@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+
+        <variable
+            name="baseInfo"
+            type="String" />
+
+        <variable
+            name="rate"
+            type="String" />
+
+        <variable
+            name="voteCount"
+            type="String" />
+
+        <variable
+            name="coverUrl"
+            type="String" />
+
+        <variable
+            name="trailerCoverUrl"
+            type="String" />
+
+        <variable
+            name="trailerInfo"
+            type="String" />
+
+        <variable
+            name="plot"
+            type="String" />
+
+        <variable
+            name="directors"
+            type="String" />
+
+        <variable
+            name="writers"
+            type="String" />
+
+        <variable
+            name="stars"
+            type="String" />
+
+        <variable
+            name="story"
+            type="String" />
+
+        <variable
+            name="tagline"
+            type="String" />
+
+        <variable
+            name="genres"
+            type="String" />
+
+        <variable
+            name="motionPictureRating"
+            type="String" />
+
+        <variable
+            name="reviewTitle"
+            type="String" />
+
+        <variable
+            name="review"
+            type="String" />
+
+        <variable
+            name="reviewDate"
+            type="String" />
+
+        <variable
+            name="reviewRate"
+            type="String" />
+
+        <variable
+            name="reviewUsername"
+            type="String" />
+
+        <variable
+            name="releaseDate"
+            type="String" />
+
+        <variable
+            name="releaseDateDetails"
+            type="String" />
+
+        <variable
+            name="countryOfOrigins"
+            type="String" />
+
+        <variable
+            name="officialSites"
+            type="String" />
+
+        <variable
+            name="languages"
+            type="String" />
+
+        <variable
+            name="filmingLocations"
+            type="String" />
+
+        <variable
+            name="productionCompanies"
+            type="String" />
+
+        <variable
+            name="budget"
+            type="String" />
+
+        <variable
+            name="grossUsAndCanada"
+            type="String" />
+
+        <variable
+            name="openingWeekendUsAndCanada"
+            type="String" />
+
+        <variable
+            name="grossWorldwide"
+            type="String" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_050">
+
+        <com.mabahmani.imdb_scraping.ui.custom.ActionBarWidget
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.mabahmani.imdb_scraping.ui.custom.NestedScrollView
+            android:id="@+id/nestedParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/appBar"
+            android:scrollbars="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/mainView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{baseInfo}"
+                            android:textColor="@color/gray_900"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            bind:text="1994 . R . 2h 22m" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginHorizontal="4dp"
+                                app:srcCompat="@drawable/ic_bxs_star"
+                                app:tint="@color/yellow_500" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{rate}"
+                                android:textColor="@color/gray_900"
+                                bind:text="9.3" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_10"
+                                android:textColor="@color/gray_900" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:text="@{voteCount}"
+                                android:textColor="@color/gray_900"
+                                bind:text="| 2.5M" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                            bind:background="@tools:sample/backgrounds/scenic"
+                            bind:imageUrl="@{coverUrl}" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="2.2">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/trailerCover"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                                bind:background="@tools:sample/backgrounds/scenic"
+                                bind:imageUrl="@{trailerCoverUrl}" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="@id/trailerCover"
+                                app:layout_constraintLeft_toLeftOf="@id/trailerCover"
+                                app:layout_constraintRight_toRightOf="@id/trailerCover"
+                                app:layout_constraintTop_toTopOf="@id/trailerCover"
+                                app:srcCompat="@drawable/ic_play_circle"
+                                app:tint="@color/blue_gray_050" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_light"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:text="@{trailerInfo}"
+                                android:textColor="@color/blue_gray_050"
+                                app:layout_constraintBottom_toBottomOf="@id/trailerCover"
+                                app:layout_constraintLeft_toLeftOf="@id/trailerCover"
+                                bind:text="@tools:sample/lorem" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/genresList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="12dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:justificationMode="inter_word"
+                        android:text="@{plot}"
+                        android:textColor="@color/gray_900"
+                        bind:text="@tools:sample/lorem" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:visibility="@{TextUtils.isEmpty(directors) ? View.GONE : View.VISIBLE}">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/director_with_colon"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="@{directors}"
+                            android:textColor="@color/sky_900"
+                            bind:text="@tools:sample/lorem" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:visibility="@{TextUtils.isEmpty(writers) ? View.GONE : View.VISIBLE}">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/writers_with_colon"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="@{writers}"
+                            android:textColor="@color/sky_900"
+                            bind:text="@tools:sample/lorem" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:visibility="@{TextUtils.isEmpty(stars) ? View.GONE : View.VISIBLE}">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/stars_with_colon"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="@{stars}"
+                            android:textColor="@color/sky_900"
+                            bind:text="@tools:sample/lorem" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/seeAwards"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="10dp"
+                        bind:rectangleBackgroundColor="@{@color/yellow_050}"
+                        bind:rectangleBackgroundRadius="@{8}">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_bx_award"
+                            app:tint="@color/yellow_500" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="@string/see_awards"
+                            android:textColor="@color/yellow_500" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/videos"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/videoList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp"
+                        android:paddingTop="8dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/photos"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/photoList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp"
+                        android:paddingTop="16dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/top_casts"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/topCastList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_Title="@string/more_like_this"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/moreLikeThisList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="8dp"
+                        android:paddingTop="8dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_Title="@string/storyline"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:justificationMode="inter_word"
+                        android:text="@{story}"
+                        android:textColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/keywordList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/taglines"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="@{tagline}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/genres"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="@{genres}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/motion_picture_rating_mpaa"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="@{motionPictureRating}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:paddingVertical="12dp"
+                        android:text="@string/parents_guide"
+                        android:textColor="@color/sky_900"
+                        bind:rectangleBackgroundColor="@{@color/sky_050}"
+                        bind:rectangleBackgroundRadius="@{8}" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_Title="@string/user_reviews"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="22dp"
+                            android:paddingVertical="6dp"
+                            android:text="@string/top_review"
+                            android:textColor="@color/gray_900"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            bind:rectangleBackgroundColor="@{@color/yellow_500}"
+                            bind:rectangleBackgroundRadius="@{8}" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginHorizontal="8dp"
+                                app:srcCompat="@drawable/ic_bxs_star"
+                                app:tint="@color/yellow_500" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{reviewRate}"
+                                android:textColor="@color/gray_900"
+                                bind:text="9.3" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{reviewTitle}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:justificationMode="inter_word"
+                        android:text="@{review}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{reviewUsername}"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="@{reviewDate}"
+                            android:textColor="@color/gray_900" />
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_Title="@string/details"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/release_date"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{releaseDateDetails}"
+                        android:textColor="@color/gray_900" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/country_of_origin"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{countryOfOrigins}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/official_sites"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{officialSites}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/languages"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{languages}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/filming_locations"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{filmingLocations}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/production_companies"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{productionCompanies}"
+                        android:textColor="@color/gray_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_Title="@string/box_office"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/budget"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{budget}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/gross_us_and_canada"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{grossUsAndCanada}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/opening_weekend_us_and_canada"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{openingWeekendUsAndCanada}"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/gross_world_wide"
+                        android:textColor="@color/gray_900" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@{grossWorldwide}"
+                        android:textColor="@color/gray_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="32dp"
+                        app:TW_ShowSeeMore="true"
+                        app:TW_Title="@string/technical_specs"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/technicalSpecsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:paddingBottom="16dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <include
+                            layout="@layout/shimmer_title_details_overview"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_video"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_photo"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_top_casts"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_related_movie"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_info"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_info"
+                            />
+
+                        <include
+                            layout="@layout/shimmer_title_details_info"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+        </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
+    </RelativeLayout>
+</layout>
