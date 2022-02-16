@@ -42,4 +42,10 @@
         android:label="TitleDetailsFragment"
         tools:layout="@layout/fragment_title_details"
         />
+    <fragment
+        android:id="@+id/titleAwardFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleAwardFragment"
+        android:label="TitleAwardFragment"
+        tools:layout="@layout/fragment_title_awards"
+        />
 </navigation>

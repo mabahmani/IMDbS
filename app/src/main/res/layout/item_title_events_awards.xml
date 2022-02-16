@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="year"
+            type="String" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            bind:rectangleBackgroundColor="@{@color/blue_gray_100}"
+            bind:rectangleBackgroundRadius="@{8}"
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="24dp"
+            android:text="@{year}"
+            android:textColor="@color/gray_900"
+            android:layout_marginVertical="8dp"
+            fontPath="@string/font_medium"
+            />
+
+        <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

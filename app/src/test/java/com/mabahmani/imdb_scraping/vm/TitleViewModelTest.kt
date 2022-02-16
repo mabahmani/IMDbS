@@ -1,9 +1,12 @@
 package com.mabahmani.imdb_scraping.vm
 
+import com.mabahmani.domain.interactor.GetTitleAwardsUseCase
 import com.mabahmani.domain.interactor.GetTitleDetailsUseCase
+import com.mabahmani.domain.vo.TitleAwards
 import com.mabahmani.domain.vo.TitleDetails
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -26,6 +29,9 @@ class TitleViewModelTest {
 
     @RelaxedMockK
     lateinit var getTitleDetailsUseCase: GetTitleDetailsUseCase
+
+    @RelaxedMockK
+    lateinit var getTitleAwardsUseCase: GetTitleAwardsUseCase
 
     @InjectMockKs
     private lateinit var viewModel: TitleViewModel
@@ -99,5 +105,63 @@ class TitleViewModelTest {
         assert(stateList[1] is TitleDetailUiState.Error)
 
         coVerify { getTitleDetailsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleAwardsUseCase initial state`() = runTest {
+        val state = viewModel.titleAwardsUiState.first()
+
+        assert(state == TitleAwardsUiState.Loading)
+    }
+
+    @Test
+    fun `test getTitleAwardsUseCase success`() = runTest {
+        val titleAwards = mockk<TitleAwards>()
+
+        every { titleAwards getProperty "name" } returns "titleName"
+        every { titleAwards getProperty "cover" } returns Image("coverImage")
+
+        coEvery { getTitleAwardsUseCase(any()) } returns Result.success(titleAwards)
+
+        viewModel.launchGetTitleAwardsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleAwardsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleAwardsUiState.Loading)
+        assert(stateList[1] is TitleAwardsUiState.ShowTitleAwards)
+        assert((stateList[1] as TitleAwardsUiState.ShowTitleAwards).titleAwards.name == "titleName")
+        assert((stateList[1] as TitleAwardsUiState.ShowTitleAwards).titleAwards.cover.value == "coverImage")
+
+
+        coVerify { getTitleAwardsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleAwardsUseCase network failure`() = runTest {
+        coEvery { getTitleAwardsUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetTitleAwardsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleAwardsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleAwardsUiState.Loading)
+        assert(stateList[1] is TitleAwardsUiState.NetworkError)
+
+        coVerify { getTitleAwardsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleAwardsUseCase failure`() = runTest {
+
+        coEvery { getTitleAwardsUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetTitleAwardsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleAwardsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleAwardsUiState.Loading)
+        assert(stateList[1] is TitleAwardsUiState.Error)
+
+        coVerify { getTitleAwardsUseCase(TitleId("tt000000")) }
     }
 }

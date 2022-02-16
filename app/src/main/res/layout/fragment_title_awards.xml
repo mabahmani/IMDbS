@@ -6,11 +6,11 @@
     <data>
 
         <variable
-            name="avatarUrl"
+            name="titleCoverUrl"
             type="String" />
 
         <variable
-            name="name"
+            name="title"
             type="String" />
 
     </data>
@@ -42,17 +42,16 @@
                     android:id="@+id/mainView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="180dp"
-                        android:layout_height="180dp"
+                        android:layout_height="220dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="16dp"
                         android:scaleType="centerCrop"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
-                        bind:imageUrl="@{avatarUrl}" />
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                        bind:imageUrl="@{titleCoverUrl}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -61,7 +60,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:gravity="center"
-                        android:text="@{name}"
+                        android:text="@{title}"
                         android:textColor="@color/gray_900"
                         android:textSize="20sp" />
 
@@ -69,8 +68,7 @@
                         android:id="@+id/list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
-                        />
+                        android:paddingHorizontal="16dp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -79,6 +77,7 @@
                     android:id="@+id/shimmer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="visible"
                     >
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -89,11 +88,11 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="180dp"
-                            android:layout_height="180dp"
+                            android:layout_height="220dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="16dp"
                             android:scaleType="centerCrop"
-                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayCircle"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
                             android:background="@color/gray_200"
                             />
 

@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.TitleDetails
 import com.mabahmani.domain.vo.common.Text
 import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentTitleDetailsBinding
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -29,7 +31,7 @@ class TitleDetailsFragment : Fragment() {
     lateinit var titleId: String
     lateinit var title: String
 
-    private val viewModel : TitleViewModel by viewModels()
+    private val viewModel: TitleViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +47,16 @@ class TitleDetailsFragment : Fragment() {
         checkArguments()
         setupAppBar()
         observeTitleDetailsUiState()
+        setOnClickListeners()
+    }
 
+    private fun setOnClickListeners() {
+        binding.seeAwards.setOnClickListener {
+            findNavController().navigate(R.id.titleAwardFragment, Bundle().apply {
+                putString("titleId", titleId)
+            }
+            )
+        }
     }
 
     private fun observeTitleDetailsUiState() {
@@ -90,12 +101,12 @@ class TitleDetailsFragment : Fragment() {
 
     private fun showTechnicalSpecs(titleDetails: TitleDetails) {
 
-        val result : MutableList<Text> = mutableListOf()
+        val result: MutableList<Text> = mutableListOf()
 
-            titleDetails.technicalSpecs.forEach() {
-                if (it.subtitle.isNotEmpty())
-                    result.add(it)
-            }
+        titleDetails.technicalSpecs.forEach() {
+            if (it.subtitle.isNotEmpty())
+                result.add(it)
+        }
 
         val adapter = TitleDetailsTechnicalSpecsAdapter()
 
@@ -137,18 +148,19 @@ class TitleDetailsFragment : Fragment() {
     }
 
     private fun showMoreLikeThis(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsRelatedMoviesAdapter{
+        val adapter = TitleDetailsRelatedMoviesAdapter {
 
         }
 
-        binding.moreLikeThisList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.moreLikeThisList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.moreLikeThisList.adapter = adapter
 
         adapter.submitList(titleDetails.relatedTitles)
     }
 
     private fun showCasts(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsCastsAdapter{
+        val adapter = TitleDetailsCastsAdapter {
 
         }
 
@@ -159,31 +171,34 @@ class TitleDetailsFragment : Fragment() {
     }
 
     private fun showPhotos(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsPhotosAdapter{
+        val adapter = TitleDetailsPhotosAdapter {
 
         }
 
-        binding.photoList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.photoList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.photoList.adapter = adapter
 
         adapter.submitList(titleDetails.photos)
     }
 
     private fun showVideos(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsVideosAdapter{
+        val adapter = TitleDetailsVideosAdapter {
 
         }
 
-        binding.videoList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.videoList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.videoList.adapter = adapter
 
         adapter.submitList(titleDetails.videos)
     }
 
     private fun showTitleOverview(titleDetails: TitleDetails) {
-        binding.baseInfo = titleDetails.releaseYear + " • " + titleDetails.certificate + " • " + titleDetails.runtime
+        binding.baseInfo =
+            titleDetails.releaseYear + " • " + titleDetails.certificate + " • " + titleDetails.runtime
         binding.rate = titleDetails.imdbRating
-        binding.voteCount =  "| " +  titleDetails.numberOfVotes
+        binding.voteCount = "| " + titleDetails.numberOfVotes
         binding.coverUrl = titleDetails.cover.getCustomImageWidthUrl(512)
         binding.trailerCoverUrl = titleDetails.trailer.preview.getCustomImageWidthUrl(512)
         binding.trailerInfo = titleDetails.trailer.runtime
@@ -192,11 +207,12 @@ class TitleDetailsFragment : Fragment() {
         binding.writers = titleDetails.directors.joinToString { it.name }
         binding.stars = titleDetails.stars.joinToString { it.name }
 
-        val adapter = TitleDetailsGenresAdapter{
+        val adapter = TitleDetailsGenresAdapter {
 
         }
 
-        binding.genresList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.genresList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.genresList.adapter = adapter
 
         adapter.submitList(titleDetails.genres)
