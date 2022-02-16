@@ -2,12 +2,15 @@ package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.GetTitleAwardsUseCase
 import com.mabahmani.domain.interactor.GetTitleDetailsUseCase
+import com.mabahmani.domain.interactor.GetTitleFullCastsUseCase
 import com.mabahmani.domain.vo.TitleAwards
 import com.mabahmani.domain.vo.TitleDetails
+import com.mabahmani.domain.vo.TitleFullCasts
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
+import com.mabahmani.imdb_scraping.ui.main.title.state.TitleFullCastsUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -32,6 +35,9 @@ class TitleViewModelTest {
 
     @RelaxedMockK
     lateinit var getTitleAwardsUseCase: GetTitleAwardsUseCase
+
+    @RelaxedMockK
+    lateinit var getTitleFullCastsUseCase: GetTitleFullCastsUseCase
 
     @InjectMockKs
     private lateinit var viewModel: TitleViewModel
@@ -163,5 +169,66 @@ class TitleViewModelTest {
         assert(stateList[1] is TitleAwardsUiState.Error)
 
         coVerify { getTitleAwardsUseCase(TitleId("tt000000")) }
+    }
+
+
+    @Test
+    fun `test getTitleFullCastsUseCase initial state`() = runTest {
+        val state = viewModel.titleFullCastsUiState.first()
+
+        assert(state == TitleFullCastsUiState.Loading)
+    }
+
+    @Test
+    fun `test getTitleFullCastsUseCase success`() = runTest {
+        val titleFullCasts = mockk<TitleFullCasts>()
+
+        every { titleFullCasts getProperty "name" } returns "titleName"
+        every { titleFullCasts getProperty "year" } returns "titleYear"
+        every { titleFullCasts getProperty "cover" } returns Image("coverImage")
+
+        coEvery { getTitleFullCastsUseCase(any()) } returns Result.success(titleFullCasts)
+
+        viewModel.launchGetTitleFullCastsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleFullCastsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleFullCastsUiState.Loading)
+        assert(stateList[1] is TitleFullCastsUiState.ShowTitleFullCasts)
+        assert((stateList[1] as TitleFullCastsUiState.ShowTitleFullCasts).titleFullCasts.name == "titleName")
+        assert((stateList[1] as TitleFullCastsUiState.ShowTitleFullCasts).titleFullCasts.year == "titleYear")
+        assert((stateList[1] as TitleFullCastsUiState.ShowTitleFullCasts).titleFullCasts.cover.value == "coverImage")
+
+
+        coVerify { getTitleFullCastsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleFullCastsUseCase network failure`() = runTest {
+        coEvery { getTitleFullCastsUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetTitleFullCastsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleFullCastsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleFullCastsUiState.Loading)
+        assert(stateList[1] is TitleFullCastsUiState.NetworkError)
+
+        coVerify { getTitleFullCastsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleFullCastsUseCase failure`() = runTest {
+
+        coEvery { getTitleFullCastsUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetTitleFullCastsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleFullCastsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleFullCastsUiState.Loading)
+        assert(stateList[1] is TitleFullCastsUiState.Error)
+
+        coVerify { getTitleFullCastsUseCase(TitleId("tt000000")) }
     }
 }

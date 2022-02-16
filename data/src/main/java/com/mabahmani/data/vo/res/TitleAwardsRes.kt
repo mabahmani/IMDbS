@@ -7,30 +7,30 @@ import com.mabahmani.domain.vo.common.NameId
 import com.mabahmani.domain.vo.common.NameLink
 
 data class TitleAwardsRes(
-    val cover: String,
-    val events: List<Event>,
-    val title: String,
-    val year: String
+    val cover: String?,
+    val events: List<Event>?,
+    val title: String?,
+    val year: String?
 ) {
     data class Event(
-        val awards: List<Award>,
-        val eventId: String,
-        val title: String,
-        val year: String
+        val awards: List<Award>?,
+        val eventId: String?,
+        val title: String?,
+        val year: String?
     ) {
         data class Award(
-            val awardCategory: String,
-            val awardDescriptions: List<AwardDescription>,
-            val awardOutcome: String
+            val awardCategory: String?,
+            val awardDescriptions: List<AwardDescription>?,
+            val awardOutcome: String?
         ) {
             data class AwardDescription(
-                val awardItems: List<AwardItem>,
-                val note: String,
-                val title: String
+                val awardItems: List<AwardItem>?,
+                val note: String?,
+                val title: String?
             ) {
                 data class AwardItem(
-                    val id: String,
-                    val title: String
+                    val id: String?,
+                    val title: String?
                 )
             }
         }
@@ -38,35 +38,35 @@ data class TitleAwardsRes(
 
     fun toTitleAward(): TitleAwards {
         return TitleAwards(
-            title,
-            Image(cover),
-            events.map {
+            title.orEmpty(),
+            Image(cover.orEmpty()),
+            events?.map {
                 TitleAwards.Event(
-                    it.title,
-                    it.awards.map { award ->
+                    it.title.orEmpty(),
+                    it.awards?.map { award ->
                         TitleAwards.Event.Award(
-                            EventId(it.eventId),
-                            it.year,
-                            award.awardDescriptions.map { awardDescription ->
+                            EventId(it.eventId.orEmpty()),
+                            it.year.orEmpty(),
+                            award.awardDescriptions?.map { awardDescription ->
                                 TitleAwards.Event.Award.AwardOutcome(
-                                    award.awardCategory,
-                                    award.awardOutcome,
-                                    awardDescription.awardItems.map {
+                                    award.awardCategory.orEmpty(),
+                                    award.awardOutcome.orEmpty(),
+                                    awardDescription.awardItems?.map {
                                         TitleAwards.Event.Award.AwardOutcome.AwardDetail(
-                                            awardDescription.title,
-                                            awardDescription.awardItems.map {
-                                                NameLink(it.title, NameId(it.id))
-                                            }
+                                            awardDescription.title.orEmpty(),
+                                            awardDescription.awardItems?.map {
+                                                NameLink(it.title.orEmpty(), NameId(it.id.orEmpty()))
+                                            }?: listOf()
 
                                         )
-                                    }
+                                    }?: listOf()
                                 )
-                            }
+                            }?: listOf()
 
                         )
-                    }
+                    }?: listOf()
                 )
-            }
+            }?: listOf()
         )
     }
 }

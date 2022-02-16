@@ -52,10 +52,11 @@ class TitleDetailsFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.seeAwards.setOnClickListener {
-            findNavController().navigate(R.id.titleAwardFragment, Bundle().apply {
-                putString("titleId", titleId)
-            }
-            )
+            findNavController().navigate(R.id.titleAwardFragment, Bundle().apply { putString("titleId", titleId) })
+        }
+
+        binding.fullCasts.setOnClickListener {
+            findNavController().navigate(R.id.titleFullCastsFragment, Bundle().apply { putString("titleId", titleId) })
         }
     }
 

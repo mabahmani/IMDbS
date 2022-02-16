@@ -48,4 +48,10 @@
         android:label="TitleAwardFragment"
         tools:layout="@layout/fragment_title_awards"
         />
+    <fragment
+        android:id="@+id/titleFullCastsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleFullCastsFragment"
+        android:label="TitleFullCastsFragment"
+        tools:layout="@layout/fragment_title_fullcast"
+        />
 </navigation>
