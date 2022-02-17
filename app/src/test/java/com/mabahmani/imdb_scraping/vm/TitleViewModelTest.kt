@@ -1,19 +1,10 @@
 package com.mabahmani.imdb_scraping.vm
 
-import com.mabahmani.domain.interactor.GetTitleAwardsUseCase
-import com.mabahmani.domain.interactor.GetTitleDetailsUseCase
-import com.mabahmani.domain.interactor.GetTitleFullCastsUseCase
-import com.mabahmani.domain.interactor.GetTitleParentsGuideUseCase
-import com.mabahmani.domain.vo.TitleAwards
-import com.mabahmani.domain.vo.TitleDetails
-import com.mabahmani.domain.vo.TitleFullCasts
-import com.mabahmani.domain.vo.TitleParentsGuide
+import com.mabahmani.domain.interactor.*
+import com.mabahmani.domain.vo.*
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.TitleId
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleFullCastsUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleParentsGuideUiState
+import com.mabahmani.imdb_scraping.ui.main.title.state.*
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -44,6 +35,9 @@ class TitleViewModelTest {
 
     @RelaxedMockK
     lateinit var getTitleParentsGuideUseCase: GetTitleParentsGuideUseCase
+
+    @RelaxedMockK
+    lateinit var getTitleTechnicalSpecsUseCase: GetTitleTechnicalSpecsUseCase
 
     @InjectMockKs
     private lateinit var viewModel: TitleViewModel
@@ -296,5 +290,66 @@ class TitleViewModelTest {
         assert(stateList[1] is TitleParentsGuideUiState.Error)
 
         coVerify { getTitleParentsGuideUseCase(TitleId("tt000000")) }
+    }
+
+
+    @Test
+    fun `test getTitleTechnicalSpecsUseCase initial state`() = runTest {
+        val state = viewModel.titleTechnicalSpecsUiState.first()
+
+        assert(state == TitleTechnicalSpecsUiState.Loading)
+    }
+
+    @Test
+    fun `test getTitleTechnicalSpecsUseCase success`() = runTest {
+        val titleTechnicalSpecs = mockk<TitleTechnicalSpecs>()
+
+        every { titleTechnicalSpecs getProperty "name" } returns "titleName"
+        every { titleTechnicalSpecs getProperty "year" } returns "titleYear"
+        every { titleTechnicalSpecs getProperty "cover" } returns Image("coverImage")
+
+        coEvery { getTitleTechnicalSpecsUseCase(any()) } returns Result.success(titleTechnicalSpecs)
+
+        viewModel.launchGetTitleTechnicalSpecsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleTechnicalSpecsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleTechnicalSpecsUiState.Loading)
+        assert(stateList[1] is TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs)
+        assert((stateList[1] as TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs).titleTechnicalSpecs.name == "titleName")
+        assert((stateList[1] as TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs).titleTechnicalSpecs.year == "titleYear")
+        assert((stateList[1] as TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs).titleTechnicalSpecs.cover.value == "coverImage")
+
+
+        coVerify { getTitleTechnicalSpecsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleTechnicalSpecsUseCase network failure`() = runTest {
+        coEvery { getTitleTechnicalSpecsUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetTitleTechnicalSpecsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleTechnicalSpecsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleTechnicalSpecsUiState.Loading)
+        assert(stateList[1] is TitleTechnicalSpecsUiState.NetworkError)
+
+        coVerify { getTitleTechnicalSpecsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleTechnicalSpecsUseCase failure`() = runTest {
+
+        coEvery { getTitleTechnicalSpecsUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetTitleTechnicalSpecsUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleTechnicalSpecsUiState.take(2).toList()
+
+        assert(stateList[0] is TitleTechnicalSpecsUiState.Loading)
+        assert(stateList[1] is TitleTechnicalSpecsUiState.Error)
+
+        coVerify { getTitleTechnicalSpecsUseCase(TitleId("tt000000")) }
     }
 }

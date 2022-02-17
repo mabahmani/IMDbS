@@ -78,7 +78,7 @@ class TitleParentsGuideFragment: Fragment() {
     private fun showTitleParentsGuide(titleParentsGuide: TitleParentsGuide) {
 
         binding.titleCoverUrl = titleParentsGuide.cover.getCustomImageWidthUrl(512)
-        binding.title = titleParentsGuide.name + titleParentsGuide.year
+        binding.title = titleParentsGuide.name + " " + titleParentsGuide.year
 
         setupCertificates(titleParentsGuide)
         setupGuides(titleParentsGuide)

@@ -10,10 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mabahmani.domain.vo.TitleFullCasts
+import com.mabahmani.domain.vo.TitleTechnicalSpecs
 import com.mabahmani.domain.vo.common.TitleId
-import com.mabahmani.imdb_scraping.databinding.FragmentTitleFullcastBinding
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleFullCastsUiState
+import com.mabahmani.imdb_scraping.databinding.FragmentTitleTechnicalSpecsBinding
+import com.mabahmani.imdb_scraping.ui.main.title.state.TitleTechnicalSpecsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.TitleViewModel
@@ -21,9 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TitleFullCastsFragment: Fragment() {
+class TitleTechnicalSpecsFragment: Fragment() {
 
-    lateinit var binding: FragmentTitleFullcastBinding
+    lateinit var binding: FragmentTitleTechnicalSpecsBinding
     private val viewModel: TitleViewModel by viewModels()
     lateinit var titleId: String
 
@@ -32,60 +32,58 @@ class TitleFullCastsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTitleFullcastBinding.inflate(inflater, container, false)
+        binding = FragmentTitleTechnicalSpecsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkArguments()
-        observeTitleFullCastsUiState()
+        observeTitleTechnicalSpecsUiState()
     }
 
-    private fun observeTitleFullCastsUiState() {
+    private fun observeTitleTechnicalSpecsUiState() {
 
-        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
+        viewModel.launchGetTitleTechnicalSpecsUseCase(TitleId(titleId))
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.titleFullCastsUiState.collect {
-                    handleTitleFullCastsStates(it)
+                viewModel.titleTechnicalSpecsUiState.collect {
+                    handleTitleTechnicalSpecsStates(it)
                 }
             }
         }
     }
 
-    private fun handleTitleFullCastsStates(state: TitleFullCastsUiState) {
+    private fun handleTitleTechnicalSpecsStates(state: TitleTechnicalSpecsUiState) {
         when (state) {
-            is TitleFullCastsUiState.Loading -> {
+            is TitleTechnicalSpecsUiState.Loading -> {
                 showLoading()
             }
-            is TitleFullCastsUiState.ShowTitleFullCasts -> {
-                showFullCasts(state.titleFullCasts)
+            is TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs -> {
+                showTechnicalSpecs(state.titleTechnicalSpecs)
                 hideLoading()
             }
-            is TitleFullCastsUiState.Error -> {
+            is TitleTechnicalSpecsUiState.Error -> {
                 showError(state.message)
             }
-            is TitleFullCastsUiState.NetworkError -> {
+            is TitleTechnicalSpecsUiState.NetworkError -> {
                 showNetworkError()
             }
         }
     }
 
-    private fun showFullCasts(titleAwards: TitleFullCasts) {
+    private fun showTechnicalSpecs(titleTechnicalSpecs: TitleTechnicalSpecs) {
 
-        binding.titleCoverUrl = titleAwards.cover.getCustomImageWidthUrl(512)
-        binding.title = titleAwards.name  + " "  + titleAwards.year
+        binding.titleCoverUrl = titleTechnicalSpecs.cover.getCustomImageWidthUrl(512)
+        binding.title = titleTechnicalSpecs.name  + " "  + titleTechnicalSpecs.year
 
-        val adapter = TitleFullCastAdapter{
-
-        }
+        val adapter = TitleDetailsTechnicalSpecsAdapter()
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter
 
-        adapter.submitList(titleAwards.casts)
+        adapter.submitList(titleTechnicalSpecs.items)
     }
 
     private fun showError(message: String) {

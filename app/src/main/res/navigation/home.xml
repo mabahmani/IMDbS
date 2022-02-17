@@ -60,4 +60,10 @@
         android:label="TitleParentsGuideFragment"
         tools:layout="@layout/shimmer_title_parents_guide"
         />
+    <fragment
+        android:id="@+id/titleTechnicalSpecsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleTechnicalSpecsFragment"
+        android:label="TitleTechnicalSpecsFragment"
+        tools:layout="@layout/fragment_title_technical_specs"
+        />
 </navigation>

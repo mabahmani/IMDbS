@@ -2,15 +2,9 @@ package com.mabahmani.imdb_scraping.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mabahmani.domain.interactor.GetTitleAwardsUseCase
-import com.mabahmani.domain.interactor.GetTitleDetailsUseCase
-import com.mabahmani.domain.interactor.GetTitleFullCastsUseCase
-import com.mabahmani.domain.interactor.GetTitleParentsGuideUseCase
+import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.TitleId
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleFullCastsUiState
-import com.mabahmani.imdb_scraping.ui.main.title.state.TitleParentsGuideUiState
+import com.mabahmani.imdb_scraping.ui.main.title.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,6 +18,7 @@ class TitleViewModel @Inject constructor(
     private val getTitleAwardsUseCase: GetTitleAwardsUseCase,
     private val getTitleFullCastsUseCase: GetTitleFullCastsUseCase,
     private val getTitleParentsGuideUseCase: GetTitleParentsGuideUseCase,
+    private val getTitleTechnicalSpecsUseCase: GetTitleTechnicalSpecsUseCase,
 ) : ViewModel() {
 
     private val _titleDetailsUiState = MutableStateFlow<TitleDetailUiState>(TitleDetailUiState.Loading)
@@ -37,6 +32,9 @@ class TitleViewModel @Inject constructor(
 
     private val _titleParentsGuideUiState = MutableStateFlow<TitleParentsGuideUiState>(TitleParentsGuideUiState.Loading)
     val titleParentsGuideUiState: StateFlow<TitleParentsGuideUiState> = _titleParentsGuideUiState
+
+    private val _titleTechnicalSpecsUiState = MutableStateFlow<TitleTechnicalSpecsUiState>(TitleTechnicalSpecsUiState.Loading)
+    val titleTechnicalSpecsUiState: StateFlow<TitleTechnicalSpecsUiState> = _titleTechnicalSpecsUiState
 
     fun launchGetTitleDetailsUseCase(titleId: TitleId) {
         if (_titleDetailsUiState.value !is TitleDetailUiState.ShowTitleDetails) {
@@ -153,6 +151,37 @@ class TitleViewModel @Inject constructor(
 
                             else -> {
                                 _titleParentsGuideUiState.emit(TitleParentsGuideUiState.Error(it.message.toString()))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun launchGetTitleTechnicalSpecsUseCase(titleId: TitleId) {
+        if (_titleTechnicalSpecsUiState.value !is TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs) {
+
+            viewModelScope.launch {
+
+                _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.Loading)
+
+                val titleTechnicalSpecs = getTitleTechnicalSpecsUseCase(titleId)
+
+                if (titleTechnicalSpecs.isSuccess) {
+                    titleTechnicalSpecs.getOrNull()?.let {
+                        _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.ShowTitleTechnicalSpecs(it))
+                    }
+                } else {
+                    titleTechnicalSpecs.exceptionOrNull()?.let {
+                        when (it) {
+                            is UnknownHostException -> {
+                                _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.NetworkError)
+                            }
+
+                            else -> {
+                                _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.Error(it.message.toString()))
                             }
                         }
                     }
