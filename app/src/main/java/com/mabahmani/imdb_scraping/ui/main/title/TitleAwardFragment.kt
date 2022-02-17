@@ -10,12 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mabahmani.domain.vo.NameAwards
 import com.mabahmani.domain.vo.TitleAwards
-import com.mabahmani.domain.vo.common.NameId
 import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.imdb_scraping.databinding.FragmentTitleAwardsBinding
-import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
@@ -42,10 +39,10 @@ class TitleAwardFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkArguments()
-        observeNameAwardUiState()
+        observeTitleAwardUiState()
     }
 
-    private fun observeNameAwardUiState() {
+    private fun observeTitleAwardUiState() {
 
         viewModel.launchGetTitleAwardsUseCase(TitleId(titleId))
 

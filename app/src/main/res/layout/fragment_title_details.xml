@@ -538,6 +538,7 @@
                         android:textColor="@color/gray_900" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/parentsGuideView"
                         fontPath="@string/font_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

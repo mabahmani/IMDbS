@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="text"
+            type="String" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{text}"
+        android:textColor="@color/gray_900"
+        android:textSize="12sp"
+        android:paddingVertical="4dp"
+        fontPath="@string/font_light"
+        />
+
+</layout>

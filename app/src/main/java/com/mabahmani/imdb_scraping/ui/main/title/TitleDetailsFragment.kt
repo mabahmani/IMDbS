@@ -58,6 +58,10 @@ class TitleDetailsFragment : Fragment() {
         binding.fullCasts.setOnClickListener {
             findNavController().navigate(R.id.titleFullCastsFragment, Bundle().apply { putString("titleId", titleId) })
         }
+
+        binding.parentsGuideView.setOnClickListener {
+            findNavController().navigate(R.id.titleParentsGuideFragment, Bundle().apply { putString("titleId", titleId) })
+        }
     }
 
     private fun observeTitleDetailsUiState() {

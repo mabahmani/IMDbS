@@ -261,4 +261,6 @@
     <string name="gross_world_wide">Gross World Wide</string>
     <string name="technical_specs">Technical specs</string>
     <string name="full_cast_crew"><![CDATA[Full Cast & Crew]]></string>
+    <string name="certification">Certification</string>
+    <string name="spoilers">Spoilers</string>
 </resources>

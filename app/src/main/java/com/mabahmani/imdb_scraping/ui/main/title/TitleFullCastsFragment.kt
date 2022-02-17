@@ -39,10 +39,10 @@ class TitleFullCastsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkArguments()
-        observeNameAwardUiState()
+        observeTitleFullCastsUiState()
     }
 
-    private fun observeNameAwardUiState() {
+    private fun observeTitleFullCastsUiState() {
 
         viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
 
@@ -76,7 +76,7 @@ class TitleFullCastsFragment: Fragment() {
     private fun showFullCasts(titleAwards: TitleFullCasts) {
 
         binding.titleCoverUrl = titleAwards.cover.getCustomImageWidthUrl(512)
-        binding.title = titleAwards.name
+        binding.title = titleAwards.name + titleAwards.year
 
         val adapter = TitleFullCastAdapter{
 

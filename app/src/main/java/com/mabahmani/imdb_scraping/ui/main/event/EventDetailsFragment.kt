@@ -107,12 +107,12 @@ class EventDetailsFragment: Fragment() {
         adapter.submitList(eventDetails.awards)
 
         if (eventDetails.eventCaption.isNotEmpty()){
-            binding.subtitle.visibility = View.VISIBLE
-            binding.subtitle.text = eventDetails.eventCaption
+            binding.subtitleView.visibility = View.VISIBLE
+            binding.subtitleView.text = eventDetails.eventCaption
         }
 
         else{
-            binding.subtitle.visibility = View.GONE
+            binding.subtitleView.visibility = View.GONE
         }
 
         hideLoading()

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="titleCoverUrl"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_050"
+        >
+
+        <com.mabahmani.imdb_scraping.ui.custom.ActionBarWidget
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ABW_Title="@string/parents_guide" />
+
+        <com.mabahmani.imdb_scraping.ui.custom.NestedScrollView
+            android:id="@+id/nestedParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/appBar"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/mainView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="180dp"
+                        android:layout_height="220dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                        bind:imageUrl="@{titleCoverUrl}" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="@{title}"
+                        android:textColor="@color/gray_900"
+                        android:textSize="20sp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:TW_Title="@string/certification"
+                        app:TW_TitleColor="@color/sky_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/certificationList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:paddingHorizontal="16dp" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/guideList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:paddingHorizontal="16dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/spoilerBanner"
+                        fontPath="@string/font_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/yellow_300"
+                        android:gravity="center"
+                        android:paddingVertical="8dp"
+                        android:text="@string/spoilers"
+                        android:textColor="@color/gray_900" />
+
+                    <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                        android:id="@+id/spoilerGuideList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    >
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="180dp"
+                            android:layout_height="220dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="16dp"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                            android:background="@color/gray_200"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center"
+                            android:background="@color/gray_300"
+                            android:textSize="20sp" />
+
+
+                        <include
+                            layout="@layout/shimmer_title_parents_guide"
+                            />
+
+
+                        <include
+                            layout="@layout/shimmer_title_parents_guide"
+                            />
+
+
+                        <include
+                            layout="@layout/shimmer_title_parents_guide"
+                            />
+
+
+                        <include
+                            layout="@layout/shimmer_title_parents_guide"
+                            />
+
+
+                        <include
+                            layout="@layout/shimmer_title_parents_guide"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+        </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
+
+    </RelativeLayout>
+</layout>

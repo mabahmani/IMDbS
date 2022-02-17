@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="guideRateType"
+            type="String" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+            android:id="@+id/titleWidget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:TW_TitleColor="@color/sky_900" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            fontPath="@string/font_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="7dp"
+            android:textSize="12sp"
+            android:text="@{guideRateType}"
+            android:textColor="@color/gray_900"
+            android:visibility="@{TextUtils.isEmpty(guideRateType) ? View.GONE : View.VISIBLE}"
+            bind:rectangleBackgroundColor="@{TextUtils.equals(guideRateType,`MILD`) ?  @color/emerald_100 : TextUtils.equals(guideRateType, `MODERATE`) ? @color/yellow_100 : @color/rose_200 }"
+            bind:rectangleBackgroundRadius="@{8}" />
+
+        <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

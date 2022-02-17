@@ -14,7 +14,7 @@ data class TitleParentsGuide(
 ){
     data class Guide(
         val title: String,
-        val guideRateType: GuideRateType,
+        val guideRateType: GuideRateType?,
         val guides: List<String>,
     )
 }

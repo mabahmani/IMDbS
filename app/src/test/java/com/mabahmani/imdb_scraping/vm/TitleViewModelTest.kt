@@ -3,14 +3,17 @@ package com.mabahmani.imdb_scraping.vm
 import com.mabahmani.domain.interactor.GetTitleAwardsUseCase
 import com.mabahmani.domain.interactor.GetTitleDetailsUseCase
 import com.mabahmani.domain.interactor.GetTitleFullCastsUseCase
+import com.mabahmani.domain.interactor.GetTitleParentsGuideUseCase
 import com.mabahmani.domain.vo.TitleAwards
 import com.mabahmani.domain.vo.TitleDetails
 import com.mabahmani.domain.vo.TitleFullCasts
+import com.mabahmani.domain.vo.TitleParentsGuide
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleFullCastsUiState
+import com.mabahmani.imdb_scraping.ui.main.title.state.TitleParentsGuideUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -38,6 +41,9 @@ class TitleViewModelTest {
 
     @RelaxedMockK
     lateinit var getTitleFullCastsUseCase: GetTitleFullCastsUseCase
+
+    @RelaxedMockK
+    lateinit var getTitleParentsGuideUseCase: GetTitleParentsGuideUseCase
 
     @InjectMockKs
     private lateinit var viewModel: TitleViewModel
@@ -230,5 +236,65 @@ class TitleViewModelTest {
         assert(stateList[1] is TitleFullCastsUiState.Error)
 
         coVerify { getTitleFullCastsUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleParentsGuideUseCase initial state`() = runTest {
+        val state = viewModel.titleParentsGuideUiState.first()
+
+        assert(state == TitleParentsGuideUiState.Loading)
+    }
+
+    @Test
+    fun `test getTitleParentsGuideUseCase success`() = runTest {
+        val titleParentsGuide = mockk<TitleParentsGuide>()
+
+        every { titleParentsGuide getProperty "name" } returns "titleName"
+        every { titleParentsGuide getProperty "year" } returns "titleYear"
+        every { titleParentsGuide getProperty "cover" } returns Image("coverImage")
+
+        coEvery { getTitleParentsGuideUseCase(any()) } returns Result.success(titleParentsGuide)
+
+        viewModel.launchGetTitleParentsGuideUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleParentsGuideUiState.take(2).toList()
+
+        assert(stateList[0] is TitleParentsGuideUiState.Loading)
+        assert(stateList[1] is TitleParentsGuideUiState.ShowTitleParentsGuide)
+        assert((stateList[1] as TitleParentsGuideUiState.ShowTitleParentsGuide).titleParentsGuide.name == "titleName")
+        assert((stateList[1] as TitleParentsGuideUiState.ShowTitleParentsGuide).titleParentsGuide.year == "titleYear")
+        assert((stateList[1] as TitleParentsGuideUiState.ShowTitleParentsGuide).titleParentsGuide.cover.value == "coverImage")
+
+
+        coVerify { getTitleParentsGuideUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleParentsGuideUseCase network failure`() = runTest {
+        coEvery { getTitleParentsGuideUseCase(any()) } returns Result.failure(UnknownHostException())
+
+        viewModel.launchGetTitleParentsGuideUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleParentsGuideUiState.take(2).toList()
+
+        assert(stateList[0] is TitleParentsGuideUiState.Loading)
+        assert(stateList[1] is TitleParentsGuideUiState.NetworkError)
+
+        coVerify { getTitleParentsGuideUseCase(TitleId("tt000000")) }
+    }
+
+    @Test
+    fun `test getTitleParentsGuideUseCase failure`() = runTest {
+
+        coEvery { getTitleParentsGuideUseCase(any()) } returns Result.failure(RuntimeException())
+
+        viewModel.launchGetTitleParentsGuideUseCase(TitleId("tt000000"))
+
+        val stateList = viewModel.titleParentsGuideUiState.take(2).toList()
+
+        assert(stateList[0] is TitleParentsGuideUiState.Loading)
+        assert(stateList[1] is TitleParentsGuideUiState.Error)
+
+        coVerify { getTitleParentsGuideUseCase(TitleId("tt000000")) }
     }
 }

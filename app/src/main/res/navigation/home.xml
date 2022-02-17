@@ -54,4 +54,10 @@
         android:label="TitleFullCastsFragment"
         tools:layout="@layout/fragment_title_fullcast"
         />
+    <fragment
+        android:id="@+id/titleParentsGuideFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleParentsGuideFragment"
+        android:label="TitleParentsGuideFragment"
+        tools:layout="@layout/shimmer_title_parents_guide"
+        />
 </navigation>
