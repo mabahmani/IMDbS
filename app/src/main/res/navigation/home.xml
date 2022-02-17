@@ -66,4 +66,10 @@
         android:label="TitleTechnicalSpecsFragment"
         tools:layout="@layout/fragment_title_technical_specs"
         />
+    <fragment
+        android:id="@+id/imagesFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.image.ImagesFragment"
+        android:label="ImagesFragment"
+        tools:layout="@layout/fragment_images"
+        />
 </navigation>

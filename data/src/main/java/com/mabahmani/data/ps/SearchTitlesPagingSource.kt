@@ -1,15 +1,10 @@
 package com.mabahmani.data.ps
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.vo.generic.ApiResponse
-import com.mabahmani.data.vo.res.SearchNameRes
-import com.mabahmani.domain.vo.common.Name
 import com.mabahmani.domain.vo.common.Title
-import java.lang.RuntimeException
-import javax.inject.Inject
 
 class SearchTitlesPagingSource(
     private val remoteDataSource: RemoteDataSource,

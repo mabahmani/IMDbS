@@ -5,5 +5,5 @@ import com.mabahmani.domain.vo.common.TitleId
 import javax.inject.Inject
 
 class GetTitleImagesUseCase @Inject constructor(private val imageRepository: ImageRepository){
-    suspend operator fun invoke(titleId: TitleId, page: String) = imageRepository.getTitleImages(titleId, page)
+    suspend operator fun invoke(titleId: TitleId) = imageRepository.getTitleImages(titleId)
 }

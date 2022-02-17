@@ -1,15 +1,16 @@
 package com.mabahmani.domain.repo
 
+import androidx.paging.Pager
 import com.mabahmani.domain.vo.ImageDetails
 import com.mabahmani.domain.vo.common.*
 
 interface ImageRepository {
 
-    suspend fun getTitleImages(titleId: TitleId, page: String) : Result<List<ImageLink>>
+    suspend fun getTitleImages(titleId: TitleId) : Pager<Int, ImageLink>
 
-    suspend fun getNameImages(nameId: NameId, page: String) : Result<List<ImageLink>>
+    suspend fun getNameImages(nameId: NameId) : Pager<Int, ImageLink>
 
-    suspend fun getListImages(listId: ListId) : Result<List<ImageLink>>
+    suspend fun getListImages(listId: ListId) : Pager<Int, ImageLink>
 
     suspend fun getTitleImagesWithDetails(
         afterCursor: String? = null,

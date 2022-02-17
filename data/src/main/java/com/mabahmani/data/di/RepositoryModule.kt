@@ -50,4 +50,9 @@ abstract class RepositoryModule {
     abstract fun bindTitleRepository(
         titleRepositoryImpl: TitleRepositoryImpl
     ): TitleRepository
+
+    @Binds
+    abstract fun bindImageRepository(
+        imageRepositoryImpl: ImageRepositoryImpl
+    ): ImageRepository
 }
