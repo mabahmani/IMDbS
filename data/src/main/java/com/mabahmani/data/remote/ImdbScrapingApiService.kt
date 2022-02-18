@@ -183,7 +183,7 @@ interface ImdbScrapingApiService {
         @Query("page") page: String,
     ): Response<ApiResponse<VideosRes>>
 
-    @GET("videos/name/{titleId}/videogallery")
+    @GET("videos/title/{titleId}/videogallery")
     suspend fun getTitleVideos(
         @Path("titleId") titleId: String,
         @Query("page") page: String,

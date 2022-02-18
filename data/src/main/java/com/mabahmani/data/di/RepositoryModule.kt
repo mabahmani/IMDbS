@@ -55,4 +55,9 @@ abstract class RepositoryModule {
     abstract fun bindImageRepository(
         imageRepositoryImpl: ImageRepositoryImpl
     ): ImageRepository
+
+    @Binds
+    abstract fun bindVideoRepository(
+        videoRepositoryImpl: VideoRepositoryImpl
+    ): VideoRepository
 }

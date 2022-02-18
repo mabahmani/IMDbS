@@ -1,4 +1,4 @@
-package com.mabahmani.imdb_scraping.ui.main.image
+package com.mabahmani.imdb_scraping.ui.main.video
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,16 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabahmani.domain.vo.common.*
-import com.mabahmani.imdb_scraping.R
-import com.mabahmani.imdb_scraping.databinding.FragmentImagesBinding
-import com.mabahmani.imdb_scraping.ui.main.image.state.ImagesUiState
+import com.mabahmani.imdb_scraping.databinding.FragmentVideosBinding
+import com.mabahmani.imdb_scraping.ui.main.video.state.VideosUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
-import com.mabahmani.imdb_scraping.vm.ImageViewModel
+import com.mabahmani.imdb_scraping.vm.VideoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -26,12 +24,12 @@ import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
 @AndroidEntryPoint
-class ImagesFragment : Fragment (){
+class VideosFragment : Fragment (){
 
-    lateinit var binding: FragmentImagesBinding
+    lateinit var binding: FragmentVideosBinding
 
-    private val viewModel: ImageViewModel by viewModels()
-    private lateinit var adapter: ImagesAdapter
+    private val viewModel: VideoViewModel by viewModels()
+    private lateinit var adapter: VideosAdapter
     lateinit var id: String
     lateinit var title: String
 
@@ -40,7 +38,7 @@ class ImagesFragment : Fragment (){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentImagesBinding.inflate(inflater, container, false)
+        binding = FragmentVideosBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -65,17 +63,11 @@ class ImagesFragment : Fragment (){
 
     private fun setupList() {
 
-        adapter = ImagesAdapter{
-            findNavController().navigate(R.id.imageDetailsFragment,
-                    Bundle().apply {
-                        putString("id", id)
-                        putString("imageId", it?.imageId?.value)
-                        putString("title", title)
-                    }
-                )
+        adapter = VideosAdapter{
+
         }
 
-        binding.list.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.list.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.list.adapter = adapter
     }
 
@@ -85,8 +77,8 @@ class ImagesFragment : Fragment (){
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.imagesUiState.collect {
-                    handleImagesStates(it)
+                viewModel.videosUiState.collect {
+                    handleVideosStates(it)
                 }
             }
         }
@@ -95,32 +87,29 @@ class ImagesFragment : Fragment (){
     private fun launchUseCase() {
         when {
             id.startsWith("tt") -> {
-                viewModel.launchGetTitleImagesUseCase(TitleId(id))
+                viewModel.launchGetTitleVideosUseCase(TitleId(id))
             }
             id.startsWith("nm") -> {
-                viewModel.launchGetNameImagesUseCase(NameId(id))
-            }
-            else -> {
-                viewModel.launchGetListImagesUseCase(ListId(id))
+                viewModel.launchGetNameVideosUseCase(NameId(id))
             }
         }
     }
 
-    private fun handleImagesStates(state: ImagesUiState) {
+    private fun handleVideosStates(state: VideosUiState) {
         when (state) {
-            is ImagesUiState.Loading -> {
+            is VideosUiState.Loading -> {
                 showLoading()
             }
-            is ImagesUiState.ShowImages -> {
-                showImages(state.pagingData)
+            is VideosUiState.ShowVideos -> {
+                showVideos(state.pagingData)
             }
         }
     }
 
-    private fun showImages(images: Flow<PagingData<ImageLink>>) {
+    private fun showVideos(videos: Flow<PagingData<Video>>) {
 
         viewLifecycleOwner.lifecycleScope.launch {
-            images.collectLatest {
+            videos.collectLatest {
                 adapter.submitData(it)
             }
         }

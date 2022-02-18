@@ -70,6 +70,10 @@ class TitleDetailsFragment : Fragment() {
         binding.photos.setOnClickListener {
             findNavController().navigate(R.id.imagesFragment, Bundle().apply { putString("id", titleId); putString("title", title) })
         }
+
+        binding.videos.setOnClickListener {
+            findNavController().navigate(R.id.videosFragment, Bundle().apply { putString("id", titleId); putString("title", title) })
+        }
     }
 
     private fun observeTitleDetailsUiState() {
