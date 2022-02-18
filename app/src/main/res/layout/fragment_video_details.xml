@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="caption"
+            type="String" />
+
+        <variable
+            name="titleCoverUrl"
+            type="String" />
+
+        <variable
+            name="titleName"
+            type="String" />
+
+        <variable
+            name="titleCategory"
+            type="String" />
+
+        <variable
+            name="titleDate"
+            type="String" />
+
+        <variable
+            name="titleRate"
+            type="String" />
+
+        <variable
+            name="videoPreviewImageUrl"
+            type="String" />
+    </data>
+
+
+    <com.mabahmani.imdb_scraping.ui.custom.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.mabahmani.imdb_scraping.ui.custom.ActionBarWidget
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/mainView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray_050"
+                android:orientation="vertical"
+                android:layout_below="@id/appBar"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.exoplayer2.ui.PlayerView
+                        android:id="@+id/playerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="H,1:0.7"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:use_controller="false"
+                        />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.25"
+                        />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75"
+                        />
+
+                    <View
+                        android:id="@+id/playerOverLayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="@id/playerView"
+                        app:layout_constraintBottom_toBottomOf="@id/playerView"
+                        />
+
+                    <View
+                        android:id="@+id/playerBackward"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/guide1"
+                        app:layout_constraintTop_toTopOf="@id/playerView"
+                        app:layout_constraintBottom_toBottomOf="@id/playerView"
+                        />
+
+                    <View
+                        android:id="@+id/playerForward"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/guide2"
+                        app:layout_constraintTop_toTopOf="@id/playerView"
+                        app:layout_constraintBottom_toBottomOf="@id/playerView"
+                        />
+
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/playerCover"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="H,1:0.7"
+                        app:layout_constraintTop_toTopOf="parent"
+                        bind:imageUrl="@{videoPreviewImageUrl}"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible"
+                        />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/playerIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:srcCompat="@drawable/ic_play_circle"
+                        />
+
+                    <ProgressBar
+                        android:id="@+id/playerLoading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:indeterminateTint="@color/blue_gray_050"
+                        android:visibility="gone"
+                        />
+
+                    <SeekBar
+                        android:id="@+id/playerSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{caption}"
+                    android:textColor="@color/gray_900" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:scaleType="fitXY"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay4DpRadius"
+                        bind:imageUrl="@{titleCoverUrl}" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_medium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{titleName}"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@{titleDate}"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="@string/font_medium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textSize="12sp"
+                            android:text="@{titleCategory}"
+                            android:textColor="@color/gray_900" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:tint="@color/yellow_500"
+                                app:srcCompat="@drawable/ic_bxs_star" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                fontPath="@string/font_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:text="@{titleRate}"
+                                android:textColor="@color/gray_900" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    app:TW_Title="@string/related_videos"
+                    app:TW_TitleColor="@color/sky_900" />
+
+                <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
+                    android:id="@+id/relatedVideosList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:clipToPadding="false"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/appBar"
+                >
+
+                <include
+                    layout="@layout/shimmer_video_details"
+                    />
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </RelativeLayout>
+
+    </com.mabahmani.imdb_scraping.ui.custom.NestedScrollView>
+
+
+</layout>

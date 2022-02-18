@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabahmani.domain.vo.common.*
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentVideosBinding
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideosUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -64,7 +66,12 @@ class VideosFragment : Fragment (){
     private fun setupList() {
 
         adapter = VideosAdapter{
-
+            findNavController().navigate(R.id.videoDetailsFragment,
+                    Bundle().apply {
+                        putString("videoId", it?.videoId?.value)
+                        putString("title", it?.title)
+                    }
+                )
         }
 
         binding.list.layoutManager = GridLayoutManager(requireContext(), 2)

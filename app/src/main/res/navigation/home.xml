@@ -84,4 +84,10 @@
         android:label="VideosFragment"
         tools:layout="@layout/fragment_videos"
         />
+    <fragment
+        android:id="@+id/videoDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.video.VideoDetailsFragment"
+        android:label="VideoDetailsFragment"
+        tools:layout="@layout/fragment_video_details"
+        />
 </navigation>
