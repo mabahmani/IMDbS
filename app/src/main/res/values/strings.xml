@@ -35,6 +35,7 @@
     <string name="genres">Genres</string>
     <string name="celebs">Celebs</string>
     <string name="titles">Titles</string>
+    <string name="titles_with_colon">Titles:</string>
     <string name="keywords">Keywords</string>
     <string name="events">Events</string>
     <string name="director_with_colon">Director:</string>
@@ -178,8 +179,10 @@
     <string name="colorized">Colorized</string>
     <string name="aces">ACES</string>
     <string name="countries">Countries</string>
+    <string name="countries_with_colon">Countries:</string>
     <string name="_2_letter_e_g_ir_us_ca_uk">2-Letter e.g. ir, us, ca, uk</string>
     <string name="languages">Languages</string>
+    <string name="languages_with_colon">Languages:</string>
     <string name="language_code_e_g_fa_en">Language code e.g. fa, en</string>
     <string name="keyword">Keyword</string>
     <string name="e_g_superhero">e.g. superhero</string>
@@ -263,4 +266,7 @@
     <string name="full_cast_crew"><![CDATA[Full Cast & Crew]]></string>
     <string name="certification">Certification</string>
     <string name="spoilers">Spoilers</string>
+    <string name="people">People:</string>
+    <string name="copyright">Copyright:</string>
+    <string name="created_by">Created by:</string>
 </resources>

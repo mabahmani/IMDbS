@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.common.*
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentImagesBinding
 import com.mabahmani.imdb_scraping.ui.main.image.state.ImagesUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -66,7 +68,13 @@ class ImagesFragment : Fragment (){
     private fun setupList() {
 
         adapter = ImagesAdapter{
-
+            findNavController().navigate(R.id.imageDetailsFragment,
+                    Bundle().apply {
+                        putString("id", id)
+                        putString("imageId", it?.imageId?.value)
+                        putString("title", title)
+                    }
+                )
         }
 
         binding.list.layoutManager = GridLayoutManager(requireContext(), 3)

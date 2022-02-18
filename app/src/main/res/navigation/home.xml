@@ -72,4 +72,10 @@
         android:label="ImagesFragment"
         tools:layout="@layout/fragment_images"
         />
+    <fragment
+        android:id="@+id/imageDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.image.ImageDetailsFragment"
+        android:label="ImageDetailsFragment"
+        tools:layout="@layout/fragment_image_details"
+        />
 </navigation>
