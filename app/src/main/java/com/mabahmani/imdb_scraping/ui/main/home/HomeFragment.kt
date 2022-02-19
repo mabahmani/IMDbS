@@ -60,6 +60,13 @@ class HomeFragment : Fragment() {
         observeScroll()
         initHomeStateObserver()
         initHomeExtraStateObserver()
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.appBar.getActionView()?.setOnClickListener {
+            HomeSettingBottomSheet().show(parentFragmentManager, null)
+        }
     }
 
     private fun observeScroll() {

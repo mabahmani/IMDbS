@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/theme"
+            fontPath="@string/font_bold"
+            android:textColor="@color/sky_900"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_050"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            >
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/day"
+                app:buttonTint="@color/sky_900"
+                fontPath="@string/font_medium"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioNight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/night"
+                app:buttonTint="@color/sky_900"
+                fontPath="@string/font_medium"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioNightAutoBattery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/night_auto_battery"
+                app:buttonTint="@color/sky_900"
+                fontPath="@string/font_medium"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioFollowSystem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/follow_system"
+                app:buttonTint="@color/sky_900"
+                fontPath="@string/font_medium"
+                />
+
+        </RadioGroup>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

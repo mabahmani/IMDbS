@@ -60,4 +60,9 @@ abstract class RepositoryModule {
     abstract fun bindVideoRepository(
         videoRepositoryImpl: VideoRepositoryImpl
     ): VideoRepository
+
+    @Binds
+    abstract fun bindSettingRepository(
+        settingRepositoryImpl: SettingRepositoryImpl
+    ): SettingRepository
 }

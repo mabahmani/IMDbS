@@ -6,6 +6,6 @@ object Constants {
 
     object Prefs{
         const val PREFS_NAME = "IMDB_SCRAPING_SHARED_PREFERENCES"
-        const val HOME = "HOME"
+        const val THEME_MODE = "THEME_MODE"
     }
 }

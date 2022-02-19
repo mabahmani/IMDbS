@@ -269,4 +269,9 @@
     <string name="people">People:</string>
     <string name="copyright">Copyright:</string>
     <string name="created_by">Created by:</string>
+    <string name="theme">Theme</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
+    <string name="follow_system">Follow System</string>
+    <string name="night_auto_battery">Night Auto Battery</string>
 </resources>

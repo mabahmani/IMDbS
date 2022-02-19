@@ -1,6 +1,12 @@
 package com.mabahmani.imdb_scraping
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.LifecycleCoroutineScope
+import com.mabahmani.data.util.Constants
+import com.mabahmani.domain.interactor.GetThemeModeUseCase
+import com.mabahmani.imdb_scraping.vm.SettingViewModel
 import dagger.hilt.android.HiltAndroidApp
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig
@@ -8,15 +14,27 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 
 import io.github.inflationx.viewpump.ViewPump
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 
 @HiltAndroidApp
 class MainApplication : Application() {
+
+    @Inject lateinit var getThemeModeUseCase: GetThemeModeUseCase
+
     override fun onCreate() {
         super.onCreate()
         initTimber()
         initCalligraphy()
+        initTheme()
+    }
+
+    private fun initTheme() {
+        AppCompatDelegate.setDefaultNightMode(getThemeModeUseCase())
     }
 
     private fun initTimber() {
