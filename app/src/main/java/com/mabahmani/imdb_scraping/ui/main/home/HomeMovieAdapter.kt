@@ -14,7 +14,7 @@ import com.mabahmani.imdb_scraping.databinding.ItemHomeMediaBinding
 import com.mabahmani.imdb_scraping.databinding.ItemHomeMovieBinding
 import com.mabahmani.imdb_scraping.databinding.ItemHomeTrailerBinding
 
-class HomeMovieAdapter(private val itemClickListener: (Title) -> Unit) : ListAdapter<Title, HomeMovieAdapter.ViewHolder>(DiffCallback) {
+class HomeMovieAdapter(private val itemClickListener: (Boolean, Title) -> Unit) : ListAdapter<Title, HomeMovieAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,7 +31,7 @@ class HomeMovieAdapter(private val itemClickListener: (Title) -> Unit) : ListAda
     }
 
 
-    class ViewHolder(itemView: ItemHomeMovieBinding, private val itemClickListener: (Title) -> Unit) :
+    class ViewHolder(itemView: ItemHomeMovieBinding, private val itemClickListener: (Boolean, Title) -> Unit) :
         RecyclerView.ViewHolder(itemView.root) {
             var binding: ItemHomeMovieBinding
             init {
@@ -44,7 +44,11 @@ class HomeMovieAdapter(private val itemClickListener: (Title) -> Unit) : ListAda
                 binding.rateText = model.rate
 
                 binding.root.setOnClickListener {
-                    itemClickListener.invoke(model)
+                    itemClickListener.invoke(false, model)
+                }
+
+                binding.trailerParent.setOnClickListener{
+                    itemClickListener.invoke(true, model)
                 }
             }
     }

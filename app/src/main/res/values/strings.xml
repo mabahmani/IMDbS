@@ -236,6 +236,7 @@
     <string name="personal_details">Personal Details</string>
     <string name="invalid_name_id">Invalid NameId</string>
     <string name="invalid_title_id">Invalid TitleId</string>
+    <string name="invalid_video_id">Invalid VideoId</string>
     <string name="overview">Overview</string>
     <string name="mini_bio">Mini Bio</string>
     <string name="salary">Salary</string>

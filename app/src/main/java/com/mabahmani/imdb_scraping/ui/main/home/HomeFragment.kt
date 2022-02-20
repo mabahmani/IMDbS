@@ -257,21 +257,40 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFanFavorites(fanPicksTitles: List<Title>) {
-        val adapter = HomeMovieAdapter {
-            when (it.titleId?.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(R.id.titleDetailsFragment,
-                        Bundle().apply {
-                            putString("titleId", it.titleId?.value)
-                            putString("title", it.title)
-                        }
-                    )
-                }
+        val adapter = HomeMovieAdapter { playTrailer, model ->
+            if (playTrailer){
+                when (model.videoId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.videoDetailsFragment,
+                            Bundle().apply {
+                                putString("videoId", model.videoId?.value)
+                                putString("title", model.title)
+                            }
+                        )
+                    }
 
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_title_id))
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_video_id))
+                    }
                 }
             }
+            else{
+                when (model.titleId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", model.titleId?.value)
+                                putString("title", model.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_title_id))
+                    }
+                }
+            }
+
         }
 
         binding.fanFavoritesList.layoutManager =
@@ -286,7 +305,39 @@ class HomeFragment : Fragment() {
     }
 
     private fun showInTheaters(inTheaters: List<Title>) {
-        val adapter = HomeMovieAdapter {
+        val adapter = HomeMovieAdapter {playTrailer, model ->
+            if (playTrailer){
+                when (model.videoId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.videoDetailsFragment,
+                            Bundle().apply {
+                                putString("videoId", model.videoId?.value)
+                                putString("title", model.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_video_id))
+                    }
+                }
+            }
+            else{
+                when (model.titleId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", model.titleId?.value)
+                                putString("title", model.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_title_id))
+                    }
+                }
+            }
 
         }
 
@@ -435,7 +486,34 @@ class HomeFragment : Fragment() {
 
     private fun showImdbOriginals(medias: List<Home.Media>) {
         val adapter = HomeMediaAdapter {
+            when(it.type){
+                HomeMediaType.GALLERY ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                HomeMediaType.LIST ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+
+                HomeMediaType.VIDEO ->{
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+            }
         }
 
         binding.imdbOriginalsList.layoutManager =
@@ -450,7 +528,34 @@ class HomeFragment : Fragment() {
 
     private fun showEditorPicks(medias: List<Home.Media>) {
         val adapter = HomeMediaAdapter {
+            when(it.type){
+                HomeMediaType.GALLERY ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                HomeMediaType.LIST ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+
+                HomeMediaType.VIDEO ->{
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+            }
         }
 
         binding.editorPicksList.layoutManager =
@@ -484,7 +589,20 @@ class HomeFragment : Fragment() {
 
 
         val adapter = HomeBoxOfficeAdapter {
+            when (it.titleId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.boxOfficeList.layoutManager = GridLayoutManager(requireContext(), 2)
