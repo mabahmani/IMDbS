@@ -58,6 +58,12 @@ interface ImdbScrapingApiService {
         @Query("imageId") imageId: String?,
     ): Response<ApiResponse<ImageDetailsRes>>
 
+    @GET("images/gallery/{galleryId}")
+    suspend fun getGalleryImages(
+        @Path("galleryId") galleryId: String,
+        @Query("page") page: String
+    ): Response<ApiResponse<ImagesRes>>
+
     @GET("images/names/{nameId}")
     suspend fun getNameImages(
         @Path("nameId") nameId: String,
@@ -67,6 +73,16 @@ interface ImdbScrapingApiService {
     @GET("images/names/{nameId}/slider")
     suspend fun getNameImagesWithDetails(
         @Path("nameId") nameId: String,
+        @Query("after") after: String?,
+        @Query("before") before: String?,
+        @Query("first") first: Int?,
+        @Query("last") last: Int?,
+        @Query("imageId") imageId: String?,
+    ): Response<ApiResponse<ImageDetailsRes>>
+
+    @GET("images/gallery/{galleryId}/slider")
+    suspend fun getGalleryImagesWithDetails(
+        @Path("galleryId") galleryId: String,
         @Query("after") after: String?,
         @Query("before") before: String?,
         @Query("first") first: Int?,

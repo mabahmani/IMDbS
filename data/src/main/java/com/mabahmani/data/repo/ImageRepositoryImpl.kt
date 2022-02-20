@@ -3,6 +3,7 @@ package com.mabahmani.data.repo
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.mabahmani.data.ds.RemoteDataSource
+import com.mabahmani.data.ps.GalleryImagesPagingSource
 import com.mabahmani.data.ps.ListImagesPagingSource
 import com.mabahmani.data.ps.NameImagesPagingSource
 import com.mabahmani.data.ps.TitleImagesPagingSource
@@ -28,6 +29,15 @@ class ImageRepositoryImpl @Inject constructor(private val remoteDataSource: Remo
             NameImagesPagingSource(
                 remoteDataSource,
                 nameId
+            )
+        }
+    }
+
+    override suspend fun getGalleryImages(galleryId: GalleryId): Pager<Int, ImageLink> {
+        return Pager(PagingConfig(50)){
+            GalleryImagesPagingSource(
+                remoteDataSource,
+                galleryId
             )
         }
     }
@@ -79,6 +89,33 @@ class ImageRepositoryImpl @Inject constructor(private val remoteDataSource: Remo
     ): Result<ImageDetails> {
         val remoteResult = remoteDataSource.getNameImagesWithDetails(
             nameId.value,
+            afterCursor,
+            beforeCursor,
+            numberOfFirstImages,
+            numberOfLastImages,
+            imageId?.value
+        )
+
+        return if (remoteResult.isSuccess) {
+            try {
+                Result.success(remoteResult.getOrNull()!!.data.toImageDetails())
+            } catch (ex: Exception) {
+                Result.failure(ex)
+            }
+        } else
+            Result.failure(remoteResult.exceptionOrNull() ?: java.lang.Exception())
+    }
+
+    override suspend fun getGalleryImagesWithDetails(
+        afterCursor: String?,
+        beforeCursor: String?,
+        numberOfFirstImages: Int?,
+        numberOfLastImages: Int?,
+        imageId: ImageId?,
+        galleryId: GalleryId
+    ): Result<ImageDetails> {
+        val remoteResult = remoteDataSource.getGalleryImagesWithDetails(
+            galleryId.value,
             afterCursor,
             beforeCursor,
             numberOfFirstImages,

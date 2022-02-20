@@ -13,10 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.ImageDetails
 import com.mabahmani.domain.vo.NameBio
-import com.mabahmani.domain.vo.common.ImageId
-import com.mabahmani.domain.vo.common.ListId
-import com.mabahmani.domain.vo.common.NameId
-import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.domain.vo.common.*
 import com.mabahmani.imdb_scraping.databinding.FragmentImageDetailsBinding
 import com.mabahmani.imdb_scraping.ui.main.image.state.ImageDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
@@ -77,6 +74,9 @@ class ImageDetailsFragment: Fragment() {
             }
             id.startsWith("nm") -> {
                 viewModel.launchGetNameImageDetailsUseCase(NameId(id), ImageId(imageId))
+            }
+            id.startsWith("rg") -> {
+                viewModel.launchGetGalleryImageDetailsUseCase(GalleryId(id), ImageId(imageId))
             }
             else -> {
                 viewModel.launchGetListImageDetailsUseCase(ListId(id), ImageId(imageId))

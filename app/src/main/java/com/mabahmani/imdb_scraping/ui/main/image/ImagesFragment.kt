@@ -100,6 +100,9 @@ class ImagesFragment : Fragment (){
             id.startsWith("nm") -> {
                 viewModel.launchGetNameImagesUseCase(NameId(id))
             }
+            id.startsWith("rg") -> {
+                viewModel.launchGetGalleryImagesUseCase(GalleryId(id))
+            }
             else -> {
                 viewModel.launchGetListImagesUseCase(ListId(id))
             }

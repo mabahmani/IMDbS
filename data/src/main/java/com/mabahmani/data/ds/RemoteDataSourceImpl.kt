@@ -153,6 +153,17 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getGalleryImages(
+        galleryId: String,
+        page: String
+    ): Result<ApiResponse<ImagesRes>> {
+        return withContext(ioDispatcher){
+            safeApiCall(okHttpClient) {
+                imdbScrapingApiService.getGalleryImages(galleryId, page)
+            }
+        }
+    }
+
     override suspend fun getNameImagesWithDetails(
         nameId: String,
         after: String?,
@@ -165,6 +176,28 @@ class RemoteDataSourceImpl @Inject constructor(
             safeApiCall(okHttpClient) {
                 imdbScrapingApiService.getNameImagesWithDetails(
                     nameId,
+                    after,
+                    before,
+                    first,
+                    last,
+                    imageId
+                )
+            }
+        }
+    }
+
+    override suspend fun getGalleryImagesWithDetails(
+        galleryId: String,
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?
+    ): Result<ApiResponse<ImageDetailsRes>> {
+        return withContext(ioDispatcher){
+            safeApiCall(okHttpClient) {
+                imdbScrapingApiService.getGalleryImagesWithDetails(
+                    galleryId,
                     after,
                     before,
                     first,

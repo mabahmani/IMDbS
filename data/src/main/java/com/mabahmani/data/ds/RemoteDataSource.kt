@@ -46,8 +46,22 @@ interface RemoteDataSource {
         page: String
     ): Result<ApiResponse<ImagesRes>>
 
+    suspend fun getGalleryImages(
+        galleryId: String,
+        page: String
+    ): Result<ApiResponse<ImagesRes>>
+
     suspend fun getNameImagesWithDetails(
         nameId: String,
+        after: String?,
+        before: String?,
+        first: Int?,
+        last: Int?,
+        imageId: String?,
+    ): Result<ApiResponse<ImageDetailsRes>>
+
+    suspend fun getGalleryImagesWithDetails(
+        galleryId: String,
         after: String?,
         before: String?,
         first: Int?,

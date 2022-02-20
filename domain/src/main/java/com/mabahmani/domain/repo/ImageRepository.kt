@@ -10,6 +10,8 @@ interface ImageRepository {
 
     suspend fun getNameImages(nameId: NameId) : Pager<Int, ImageLink>
 
+    suspend fun getGalleryImages(galleryId: GalleryId) : Pager<Int, ImageLink>
+
     suspend fun getListImages(listId: ListId) : Pager<Int, ImageLink>
 
     suspend fun getTitleImagesWithDetails(
@@ -28,6 +30,15 @@ interface ImageRepository {
         numberOfLastImages: Int? = null,
         imageId: ImageId? = null,
         nameId: NameId
+    ) : Result<ImageDetails>
+
+    suspend fun getGalleryImagesWithDetails(
+        afterCursor: String? = null,
+        beforeCursor: String? = null,
+        numberOfFirstImages: Int? = null,
+        numberOfLastImages: Int? = null,
+        imageId: ImageId? = null,
+        galleryId: GalleryId
     ) : Result<ImageDetails>
 
     suspend fun getListImagesWithDetails(
