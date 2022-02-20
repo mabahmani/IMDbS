@@ -370,7 +370,12 @@ class HomeFragment : Fragment() {
 
     private fun showTrailers(trailers: List<Trailer>) {
         val adapter = HomeTrailerAdapter {
-
+            findNavController().navigate(R.id.videoDetailsFragment,
+                    Bundle().apply {
+                        putString("videoId", it.videoId.value)
+                        putString("title", it.title)
+                    }
+                )
         }
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.trailersList)
@@ -388,7 +393,34 @@ class HomeFragment : Fragment() {
 
     private fun showFeaturedToday(medias: List<Home.Media>) {
         val adapter = HomeMediaAdapter {
+            when(it.type){
+                HomeMediaType.GALLERY ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                HomeMediaType.LIST ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+
+                HomeMediaType.VIDEO ->{
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+            }
         }
 
         binding.featuredTodayList.layoutManager =
