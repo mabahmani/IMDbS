@@ -1,24 +1,29 @@
 package com.mabahmani.imdb_scraping.ui.main.search
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.Calender
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.Genre
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.ItemCalenderBinding
 import com.mabahmani.imdb_scraping.databinding.ItemGenreBinding
+import com.mabahmani.imdb_scraping.util.toast
 
-class CalenderAdapter (private val itemClickListener: (Calender) -> Unit) : ListAdapter<Calender, CalenderAdapter.ViewHolder>(
+class CalenderAdapter : ListAdapter<Calender, CalenderAdapter.ViewHolder>(
     DiffCallback
-)  {
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemCalenderBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            itemClickListener
+            ItemCalenderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -26,7 +31,7 @@ class CalenderAdapter (private val itemClickListener: (Calender) -> Unit) : List
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemCalenderBinding, private val itemClickListener: (Calender) -> Unit) :
+    class ViewHolder(itemView: ItemCalenderBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemCalenderBinding
@@ -35,11 +40,26 @@ class CalenderAdapter (private val itemClickListener: (Calender) -> Unit) : List
             itemView.executePendingBindings()
             binding = itemView
         }
-        fun bind(model: Calender){
+
+        fun bind(model: Calender) {
             binding.date = model.date
 
-            val adapter = CalenderTitleAdapter{
+            val adapter = CalenderTitleAdapter {
+                when (it.titleId.validate()) {
+                    is Either.Right -> {
+                        Navigation.findNavController(binding.root).navigate(
+                            R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.titleId.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
 
+                    else -> {
+                        binding.root.context.toast(binding.root.context.getString(R.string.invalid_title_id))
+                    }
+                }
             }
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)

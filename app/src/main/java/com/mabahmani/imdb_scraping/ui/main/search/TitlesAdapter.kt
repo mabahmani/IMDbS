@@ -66,6 +66,12 @@ class TitlesAdapter(private val itemClickListener: (Title) -> Unit) :
             binding.stars = model?.stars?.joinToString { it.name }
 
             binding.summary = model?.summary
+
+            binding.root.setOnClickListener {
+                if (model != null) {
+                    itemClickListener.invoke(model)
+                }
+            }
         }
     }
 

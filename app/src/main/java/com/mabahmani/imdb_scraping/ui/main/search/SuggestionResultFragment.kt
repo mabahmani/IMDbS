@@ -10,13 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.Suggestion
+import com.mabahmani.domain.vo.common.Either
+import com.mabahmani.domain.vo.common.Id
 import com.mabahmani.domain.vo.enum.SuggestionType
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentSuggestionResultBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.SuggestionsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -51,9 +56,52 @@ class SuggestionResultFragment : Fragment() {
     }
 
     private fun setupList() {
-        adapter = SuggestionAdapter {
 
+        adapter = SuggestionAdapter { it, video ->
+
+            if (it != null){
+                when (it.evalId()) {
+                    is Id.TitleId -> {
+                        findNavController().navigate(
+                            R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.id)
+                                putString("title", it.name)
+                            }
+                        )
+                    }
+
+                    is Id.NameId -> {
+                        findNavController().navigate(
+                            R.id.nameDetailsFragment,
+                            Bundle().apply {
+                                putString("nameId", it.id)
+                                putString("name", it.name)
+                            }
+                        )
+                    }
+                }
+            }
+
+
+            else{
+                when (video?.videoId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.videoDetailsFragment,
+                            Bundle().apply {
+                                putString("videoId", video.videoId.value)
+                                putString("title", video.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_video_id))
+                    }
+                }
+            }
         }
+
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter

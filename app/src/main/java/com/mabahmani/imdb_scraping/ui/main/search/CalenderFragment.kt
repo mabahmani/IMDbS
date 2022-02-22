@@ -87,9 +87,7 @@ class CalenderFragment : Fragment() {
 
     private fun showCalender(calenders: List<Calender>) {
 
-        val adapter = CalenderAdapter {
-
-        }
+        val adapter = CalenderAdapter()
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter

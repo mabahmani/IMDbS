@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.Suggestion
 import com.mabahmani.domain.vo.common.Genre
+import com.mabahmani.domain.vo.common.Video
 import com.mabahmani.imdb_scraping.databinding.ItemGenreBinding
 import com.mabahmani.imdb_scraping.databinding.ItemSuggestBinding
 
-class SuggestionAdapter (private val itemClickListener: (Suggestion) -> Unit) : ListAdapter<Suggestion, SuggestionAdapter.ViewHolder>(
+class SuggestionAdapter (private val itemClickListener: (Suggestion?, Video?) -> Unit) : ListAdapter<Suggestion, SuggestionAdapter.ViewHolder>(
     DiffCallback
 )  {
 
@@ -26,7 +27,7 @@ class SuggestionAdapter (private val itemClickListener: (Suggestion) -> Unit) : 
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemSuggestBinding, private val itemClickListener: (Suggestion) -> Unit) :
+    class ViewHolder(itemView: ItemSuggestBinding, private val itemClickListener: (Suggestion?, Video?) -> Unit) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemSuggestBinding
@@ -66,6 +67,17 @@ class SuggestionAdapter (private val itemClickListener: (Suggestion) -> Unit) : 
                 }
             }
 
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(model, null)
+            }
+
+            binding.videoImage1Parent.setOnClickListener {
+                itemClickListener.invoke(null, model.videos[0])
+            }
+
+            binding.videoImage2Parent.setOnClickListener {
+                itemClickListener.invoke(null, model.videos[1])
+            }
         }
     }
 

@@ -8,18 +8,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.EventDetails
 import com.mabahmani.imdb_scraping.databinding.ItemEventAwardBinding
-import com.mabahmani.imdb_scraping.databinding.ItemEventAwardCategoryBinding
-import com.mabahmani.imdb_scraping.databinding.ItemEventNomineeBinding
-import com.mabahmani.imdb_scraping.databinding.ItemEventSubNomineeBinding
 
-class EventAwardAdapter (private val itemClickListener: (EventDetails.Award) -> Unit) : ListAdapter<EventDetails.Award, EventAwardAdapter.ViewHolder>(
+class EventAwardAdapter : ListAdapter<EventDetails.Award, EventAwardAdapter.ViewHolder>(
     DiffCallback
 )  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemEventAwardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            itemClickListener
+            ItemEventAwardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -27,7 +23,7 @@ class EventAwardAdapter (private val itemClickListener: (EventDetails.Award) -> 
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemEventAwardBinding, private val itemClickListener: (EventDetails.Award) -> Unit) :
+    class ViewHolder(itemView: ItemEventAwardBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemEventAwardBinding
@@ -41,17 +37,13 @@ class EventAwardAdapter (private val itemClickListener: (EventDetails.Award) -> 
             binding.award = model.awardName
 
 
-            val adapter = EventAwardCategoryAdapter{
+            val adapter = EventAwardCategoryAdapter()
 
-            }
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
             binding.list.adapter = adapter
 
             adapter.submitList(model.awardCategories)
 
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
-            }
         }
     }
 

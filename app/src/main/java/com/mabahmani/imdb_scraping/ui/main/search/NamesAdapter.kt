@@ -38,6 +38,12 @@ class NamesAdapter(private val itemClickListener: (Name) -> Unit) :
             binding.role = model?.topRole
             binding.title = model?.topTitle?.title
             binding.summary = model?.summary
+
+            binding.root.setOnClickListener {
+                if (model != null) {
+                    itemClickListener.invoke(model)
+                }
+            }
         }
     }
 

@@ -36,6 +36,10 @@ class CalenderTitleAdapter (private val itemClickListener: (TitleLink) -> Unit) 
         }
         fun bind(model: TitleLink){
             binding.title = model.title
+
+            binding.root.setOnClickListener {
+                itemClickListener.invoke(model)
+            }
         }
     }
 

@@ -9,14 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.Name
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentCelebsBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
@@ -52,7 +56,21 @@ class NamesFragment : Fragment (){
     private fun setupList() {
 
         adapter = NamesAdapter{
+            when (it.nameId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(
+                        R.id.nameDetailsFragment,
+                        Bundle().apply {
+                            putString("nameId", it.nameId.value)
+                            putString("name", it.name)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_name_id))
+                }
+            }
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())

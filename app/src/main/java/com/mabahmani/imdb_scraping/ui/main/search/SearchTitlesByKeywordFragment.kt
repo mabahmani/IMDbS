@@ -9,16 +9,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.Title
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentSearchTitlesByGenreBinding
 import com.mabahmani.imdb_scraping.databinding.FragmentSearchTitlesByKeywordBinding
 import com.mabahmani.imdb_scraping.databinding.FragmentTitlesBinding
 import com.mabahmani.imdb_scraping.ui.main.search.state.TitlesUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
@@ -66,7 +70,21 @@ class SearchTitlesByKeywordFragment : Fragment (){
     private fun setupList() {
 
         adapter = TitlesAdapter{
+            when (it.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(
+                        R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId?.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())

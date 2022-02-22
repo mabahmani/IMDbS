@@ -97,9 +97,7 @@ class EventDetailsFragment: Fragment() {
     }
 
     private fun showEventDetails(eventDetails: EventDetails) {
-        val adapter = EventAwardAdapter{
-
-        }
+        val adapter = EventAwardAdapter()
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter
