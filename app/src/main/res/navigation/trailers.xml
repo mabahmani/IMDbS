@@ -11,4 +11,12 @@
         android:label="TrailersFragment"
         tools:layout="@layout/fragment_trailers"
         />
+    <fragment
+        android:id="@+id/titleDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleDetailsFragment"
+        android:label="TitleDetailsFragment" />
+    <fragment
+        android:id="@+id/videoDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.video.VideoDetailsFragment"
+        android:label="VideoDetailsFragment" />
 </navigation>

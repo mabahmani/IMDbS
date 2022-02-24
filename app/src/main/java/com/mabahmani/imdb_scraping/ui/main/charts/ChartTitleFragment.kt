@@ -9,14 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.Title
 import com.mabahmani.domain.vo.enum.ChartType
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentChartsTitlesBinding
 import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.GenresUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.ChartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -111,7 +115,21 @@ class ChartTitleFragment : Fragment() {
 
     private fun showTitles(titles: List<Title>) {
         val adapter = ChartTitleAdapter {
+            when (it.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(
+                        R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId?.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())

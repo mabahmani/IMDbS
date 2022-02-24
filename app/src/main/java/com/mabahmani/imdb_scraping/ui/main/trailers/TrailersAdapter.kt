@@ -11,7 +11,7 @@ import com.mabahmani.imdb_scraping.databinding.ItemChartBinding
 import com.mabahmani.imdb_scraping.databinding.ItemTrailerBinding
 import com.mabahmani.imdb_scraping.util.formatTwoDecimalNumber
 
-class TrailersAdapter (private val itemClickListener: (Trailer) -> Unit) : ListAdapter<Trailer, TrailersAdapter.ViewHolder>(
+class TrailersAdapter (private val itemClickListener: (Trailer, Boolean) -> Unit) : ListAdapter<Trailer, TrailersAdapter.ViewHolder>(
     DiffCallback
 )  {
 
@@ -26,7 +26,7 @@ class TrailersAdapter (private val itemClickListener: (Trailer) -> Unit) : ListA
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemTrailerBinding, private val itemClickListener: (Trailer) -> Unit) :
+    class ViewHolder(itemView: ItemTrailerBinding, private val itemClickListener: (Trailer, Boolean) -> Unit) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemTrailerBinding
@@ -41,8 +41,12 @@ class TrailersAdapter (private val itemClickListener: (Trailer) -> Unit) : ListA
             binding.title = model.title
             binding.subtitle = model.caption
 
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
+            binding.coverParent.setOnClickListener {
+                itemClickListener.invoke(model, true)
+            }
+
+            binding.titleParent.setOnClickListener {
+                itemClickListener.invoke(model, false)
             }
         }
     }
