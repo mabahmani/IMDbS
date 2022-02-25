@@ -12,18 +12,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.mabahmani.domain.vo.VideoDetails
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.VideoId
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentVideoDetailsBinding
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideoDetailsUiState
 import com.mabahmani.imdb_scraping.util.orZero
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.VideoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -40,6 +44,8 @@ class VideoDetailsFragment: Fragment() {
     private var player: SimpleExoPlayer? = null
 
     private var playerProgressIsTracking = false
+
+    private var videoDetails: VideoDetails? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,6 +91,25 @@ class VideoDetailsFragment: Fragment() {
         binding.playerBackward.setOnClickListener {
             player?.seekTo(player?.currentPosition?.minus(10000) ?: 0)
         }
+
+
+        binding.titleParent.setOnClickListener {
+            when (videoDetails?.relatedTitle?.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(
+                        R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", videoDetails?.relatedTitle?.titleId?.value)
+                            putString("title", videoDetails?.relatedTitle?.title)
+                        }
+                    )
+                }
+
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
+        }
     }
 
     private fun setupAppBar() {
@@ -123,6 +148,9 @@ class VideoDetailsFragment: Fragment() {
     }
 
     private fun showVideoDetails(videoDetails: VideoDetails) {
+
+        this.videoDetails = videoDetails
+
         binding.caption = videoDetails.caption
         binding.titleName = videoDetails.relatedTitle.title
         binding.titleDate = videoDetails.relatedTitle.releaseYear
@@ -132,7 +160,7 @@ class VideoDetailsFragment: Fragment() {
         binding.videoPreviewImageUrl = videoDetails.preview.getCustomImageWidthUrl(512)
 
         val adapter = VideoDetailsRelatedVideosAdapter{
-
+            viewModel.launchGetVideoDetailsUseCase(it.videoId, true)
         }
 
         binding.relatedVideosList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

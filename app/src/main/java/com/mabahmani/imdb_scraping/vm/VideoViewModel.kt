@@ -64,8 +64,8 @@ class VideoViewModel @Inject constructor(
         }
     }
 
-    fun launchGetVideoDetailsUseCase(videoId: VideoId) {
-        if (_videoDetailsUiState.value !is VideoDetailsUiState.ShowVideoDetails) {
+    fun launchGetVideoDetailsUseCase(videoId: VideoId, fetch: Boolean = false) {
+        if (_videoDetailsUiState.value !is VideoDetailsUiState.ShowVideoDetails || fetch) {
 
             viewModelScope.launch {
 
