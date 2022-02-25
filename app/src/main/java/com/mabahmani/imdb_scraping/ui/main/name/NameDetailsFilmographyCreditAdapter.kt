@@ -1,14 +1,19 @@
 package com.mabahmani.imdb_scraping.ui.main.name
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.NameDetails
+import com.mabahmani.domain.vo.common.Either
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.ItemNameDetailFilmographyCreditBinding
 import com.mabahmani.imdb_scraping.databinding.ItemNameDetailFilmographyCreditEpisodeBinding
+import com.mabahmani.imdb_scraping.util.toast
 
 class NameDetailsFilmographyCreditAdapter (private val itemClickListener: (NameDetails.Filmography.Credit) -> Unit) : ListAdapter<NameDetails.Filmography.Credit, NameDetailsFilmographyCreditAdapter.ViewHolder>(
     DiffCallback
@@ -41,7 +46,21 @@ class NameDetailsFilmographyCreditAdapter (private val itemClickListener: (NameD
             binding.year = model.year
 
             val adapter = NameDetailsFilmographyCreditEpisodeAdapter{
+                when (it.titleId.validate()) {
+                    is Either.Right -> {
+                        Navigation.findNavController(binding.root).navigate(
+                            R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.titleId.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
 
+                    else -> {
+                        binding.root.context.toast(binding.root.context.getString(R.string.invalid_title_id))
+                    }
+                }
             }
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)

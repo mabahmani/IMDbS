@@ -33,6 +33,7 @@ class NameDetailsFragment: Fragment() {
     lateinit var binding: FragmentNameDetailsBinding
     lateinit var nameId: String
     lateinit var name: String
+    lateinit var nameDetails: NameDetails
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +68,27 @@ class NameDetailsFragment: Fragment() {
                 }
             )
         }
+
+        binding.trailerParent.setOnClickListener {
+            when (nameDetails.trailer.videoId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", nameDetails.trailer.videoId.value)
+                            putString("title", name)
+                        }
+                    )
+                }
+
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_video_id))
+                }
+            }
+        }
+
+        binding.relatedVideosTitle.setOnClickListener {
+            findNavController().navigate(R.id.videosFragment, Bundle().apply { putString("id", nameId); putString("title", name) })
+        }
     }
 
     private fun observeNameDetailsUiState() {
@@ -88,6 +110,7 @@ class NameDetailsFragment: Fragment() {
                 showLoading()
             }
             is NameDetailUiState.ShowNameDetails -> {
+                nameDetails = state.nameDetails
                 showNameOverview(state.nameDetails)
                 showNamePhotos(state.nameDetails)
                 showNameKnowFor(state.nameDetails)
@@ -118,7 +141,20 @@ class NameDetailsFragment: Fragment() {
 
     private fun showNameRelatedVideos(nameDetails: NameDetails) {
         val adapter = NameDetailsRelatedVideoAdapter{
+            when (it.videoId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.videoId.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_video_id))
+                }
+            }
         }
 
         binding.relatedVideoList.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -128,9 +164,7 @@ class NameDetailsFragment: Fragment() {
     }
 
     private fun showNameFilmographies(nameDetails: NameDetails) {
-        val adapter = NameDetailsFilmographyAdapter{
-
-        }
+        val adapter = NameDetailsFilmographyAdapter()
 
         binding.filmographyList.layoutManager = LinearLayoutManager(requireContext())
         binding.filmographyList.adapter = adapter
@@ -141,7 +175,20 @@ class NameDetailsFragment: Fragment() {
 
     private fun showNameKnowFor(nameDetails: NameDetails) {
         val adapter = NameDetailsKnownForAdapter{
+            when (it.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId?.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.knownForList.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -152,7 +199,13 @@ class NameDetailsFragment: Fragment() {
 
     private fun showNamePhotos(nameDetails: NameDetails) {
         val adapter = NameDetailsPhotoAdapter{
-
+            findNavController().navigate(R.id.imageDetailsFragment,
+                Bundle().apply {
+                    putString("id", nameId)
+                    putString("imageId", it.imageId?.value)
+                    putString("title", name)
+                }
+            )
         }
 
         binding.photoList.layoutManager = GridLayoutManager(requireContext(), 3)

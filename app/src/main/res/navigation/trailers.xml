@@ -82,4 +82,8 @@
         android:label="NameAwardFragment"
         tools:layout="@layout/fragment_name_awards"
         />
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.event.EventDetailsFragment"
+        android:label="EventDetailsFragment" />
 </navigation>

@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.NameAwards
 import com.mabahmani.domain.vo.NameBio
+import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentNameAwardsBinding
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
@@ -80,8 +83,14 @@ class NameAwardFragment: Fragment() {
         binding.avatarUrl = nameAwards.avatar.getCustomImageWidthUrl(320)
         binding.name = nameAwards.name
 
-        val adapter = NameEventsAdapter{
-
+        val adapter = NameEventsAdapter{eventId: EventId, eventYear: String, eventName: String ->
+            findNavController().navigate(R.id.eventDetailsFragment,
+                Bundle().apply {
+                    putString("eventId", eventId.value)
+                    putString("eventYear", eventYear)
+                    putString("eventName", eventName)
+                }
+            )
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())

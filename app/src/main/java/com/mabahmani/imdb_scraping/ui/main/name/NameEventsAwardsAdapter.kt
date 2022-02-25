@@ -40,9 +40,7 @@ class NameEventsAwardsAdapter (private val itemClickListener: (NameAwards.Event.
 
             binding.year = model.eventYear
 
-            val adapter = NameEventsAwardsOutcomesAdapter{
-
-            }
+            val adapter = NameEventsAwardsOutcomesAdapter()
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
             binding.list.adapter = adapter
@@ -52,6 +50,7 @@ class NameEventsAwardsAdapter (private val itemClickListener: (NameAwards.Event.
             binding.root.setOnClickListener {
                 itemClickListener.invoke(model)
             }
+
         }
     }
 

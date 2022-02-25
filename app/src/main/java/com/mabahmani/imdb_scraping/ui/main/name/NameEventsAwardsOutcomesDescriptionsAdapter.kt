@@ -1,23 +1,27 @@
 package com.mabahmani.imdb_scraping.ui.main.name
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.NameAwards
+import com.mabahmani.domain.vo.common.Either
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescriptionBinding
 import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescriptionTitleBinding
+import com.mabahmani.imdb_scraping.util.toast
 
-class NameEventsAwardsOutcomesDescriptionsAdapter (private val itemClickListener: (NameAwards.Event.Award.AwardOutcome.AwardDetail) -> Unit) : ListAdapter<NameAwards.Event.Award.AwardOutcome.AwardDetail, NameEventsAwardsOutcomesDescriptionsAdapter.ViewHolder>(
+class NameEventsAwardsOutcomesDescriptionsAdapter : ListAdapter<NameAwards.Event.Award.AwardOutcome.AwardDetail, NameEventsAwardsOutcomesDescriptionsAdapter.ViewHolder>(
     DiffCallback
 )  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemNameEventsAwardsOutcomeDescriptionBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            itemClickListener
+            ItemNameEventsAwardsOutcomeDescriptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -25,7 +29,7 @@ class NameEventsAwardsOutcomesDescriptionsAdapter (private val itemClickListener
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemNameEventsAwardsOutcomeDescriptionBinding, private val itemClickListener: (NameAwards.Event.Award.AwardOutcome.AwardDetail) -> Unit) :
+    class ViewHolder(itemView: ItemNameEventsAwardsOutcomeDescriptionBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemNameEventsAwardsOutcomeDescriptionBinding
@@ -39,7 +43,21 @@ class NameEventsAwardsOutcomesDescriptionsAdapter (private val itemClickListener
             binding.awardDescription = model.description
 
             val adapter = NameEventsAwardsOutcomesDescriptionTitlesAdapter{
+                when (it.titleLink.titleId.validate()) {
+                    is Either.Right -> {
+                        Navigation.findNavController(binding.root).navigate(
+                            R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.titleLink.titleId.value)
+                                putString("title", it.titleLink.title)
+                            }
+                        )
+                    }
 
+                    else -> {
+                        binding.root.context.toast(binding.root.context.getString(R.string.invalid_title_id))
+                    }
+                }
             }
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
@@ -47,9 +65,6 @@ class NameEventsAwardsOutcomesDescriptionsAdapter (private val itemClickListener
 
             adapter.submitList(model.awardTitles)
 
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
-            }
         }
     }
 

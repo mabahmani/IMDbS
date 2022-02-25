@@ -11,14 +11,13 @@ import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeBindin
 import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescriptionBinding
 import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescriptionTitleBinding
 
-class NameEventsAwardsOutcomesAdapter (private val itemClickListener: (NameAwards.Event.Award.AwardOutcome) -> Unit) : ListAdapter<NameAwards.Event.Award.AwardOutcome, NameEventsAwardsOutcomesAdapter.ViewHolder>(
+class NameEventsAwardsOutcomesAdapter : ListAdapter<NameAwards.Event.Award.AwardOutcome, NameEventsAwardsOutcomesAdapter.ViewHolder>(
     DiffCallback
 )  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemNameEventsAwardsOutcomeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            itemClickListener
+            ItemNameEventsAwardsOutcomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -26,7 +25,7 @@ class NameEventsAwardsOutcomesAdapter (private val itemClickListener: (NameAward
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemNameEventsAwardsOutcomeBinding, private val itemClickListener: (NameAwards.Event.Award.AwardOutcome) -> Unit) :
+    class ViewHolder(itemView: ItemNameEventsAwardsOutcomeBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemNameEventsAwardsOutcomeBinding
@@ -40,18 +39,13 @@ class NameEventsAwardsOutcomesAdapter (private val itemClickListener: (NameAward
             binding.awardName = model.subtitle
             binding.awardOutcome = model.title
 
-            val adapter = NameEventsAwardsOutcomesDescriptionsAdapter{
-
-            }
+            val adapter = NameEventsAwardsOutcomesDescriptionsAdapter()
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
             binding.list.adapter = adapter
 
             adapter.submitList(model.awardDetails)
 
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
-            }
         }
     }
 

@@ -28,6 +28,8 @@ class EventDetailsFragment: Fragment() {
     lateinit var binding: FragmentEventDetailsBinding
     private val viewModel: EventViewModel by viewModels()
     lateinit var eventId: EventId
+    lateinit var eventName: String
+    lateinit var eventYear: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +49,12 @@ class EventDetailsFragment: Fragment() {
     }
 
     private fun setupAppBar() {
-        binding.appBar.getTitleView()?.text = requireArguments().getString("eventName", "")
+        binding.appBar.getTitleView()?.text = eventName
     }
 
     private fun checkArguments() {
+        eventName = requireArguments().getString("eventName", "")
+        eventYear = requireArguments().getString("eventYear", "")
         eventId = EventId(requireArguments().getString("eventId", ""))
     }
 
@@ -68,7 +72,12 @@ class EventDetailsFragment: Fragment() {
 
     private fun initEventDetailsStateObserver() {
 
-        binding.yearInput.setText((Calendar.getInstance().get(Calendar.YEAR) - 1).toString())
+        if (eventYear.isEmpty()){
+            binding.yearInput.setText((Calendar.getInstance().get(Calendar.YEAR) - 1).toString())
+        }
+        else{
+            binding.yearInput.setText(eventYear)
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED){
