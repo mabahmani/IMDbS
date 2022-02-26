@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.TitleDetails
+import com.mabahmani.domain.vo.common.Either
 import com.mabahmani.domain.vo.common.Text
 import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.imdb_scraping.R
@@ -20,9 +22,11 @@ import com.mabahmani.imdb_scraping.databinding.FragmentTitleDetailsBinding
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleDetailUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
 import com.mabahmani.imdb_scraping.util.showUnexpectedError
+import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.TitleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class TitleDetailsFragment : Fragment() {
@@ -30,6 +34,7 @@ class TitleDetailsFragment : Fragment() {
     lateinit var binding: FragmentTitleDetailsBinding
     lateinit var titleId: String
     lateinit var title: String
+    lateinit var titleDetails: TitleDetails
 
     private val viewModel: TitleViewModel by viewModels()
 
@@ -52,27 +57,56 @@ class TitleDetailsFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.seeAwards.setOnClickListener {
-            findNavController().navigate(R.id.titleAwardFragment, Bundle().apply { putString("titleId", titleId) })
+            findNavController().navigate(
+                R.id.titleAwardFragment,
+                Bundle().apply { putString("titleId", titleId) })
         }
 
         binding.fullCasts.setOnClickListener {
-            findNavController().navigate(R.id.titleFullCastsFragment, Bundle().apply { putString("titleId", titleId) })
+            findNavController().navigate(
+                R.id.titleFullCastsFragment,
+                Bundle().apply { putString("titleId", titleId) })
         }
 
         binding.parentsGuideView.setOnClickListener {
-            findNavController().navigate(R.id.titleParentsGuideFragment, Bundle().apply { putString("titleId", titleId) })
+            findNavController().navigate(
+                R.id.titleParentsGuideFragment,
+                Bundle().apply { putString("titleId", titleId) })
         }
 
         binding.technicalSpecs.setOnClickListener {
-            findNavController().navigate(R.id.titleTechnicalSpecsFragment, Bundle().apply { putString("titleId", titleId) })
+            findNavController().navigate(
+                R.id.titleTechnicalSpecsFragment,
+                Bundle().apply { putString("titleId", titleId) })
         }
 
         binding.photos.setOnClickListener {
-            findNavController().navigate(R.id.imagesFragment, Bundle().apply { putString("id", titleId); putString("title", title) })
+            findNavController().navigate(
+                R.id.imagesFragment,
+                Bundle().apply { putString("id", titleId); putString("title", title) })
         }
 
         binding.videos.setOnClickListener {
-            findNavController().navigate(R.id.videosFragment, Bundle().apply { putString("id", titleId); putString("title", title) })
+            findNavController().navigate(
+                R.id.videosFragment,
+                Bundle().apply { putString("id", titleId); putString("title", title) })
+        }
+
+        binding.trailerParent.setOnClickListener {
+            when (titleDetails.trailer.videoId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", titleDetails.trailer.videoId.value)
+                            putString("title", title)
+                        }
+                    )
+                }
+
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_video_id))
+                }
+            }
         }
     }
 
@@ -95,6 +129,7 @@ class TitleDetailsFragment : Fragment() {
                 showLoading()
             }
             is TitleDetailUiState.ShowTitleDetails -> {
+                titleDetails = state.titleDetails
                 showTitleOverview(state.titleDetails)
                 showVideos(state.titleDetails)
                 showPhotos(state.titleDetails)
@@ -166,7 +201,20 @@ class TitleDetailsFragment : Fragment() {
 
     private fun showMoreLikeThis(titleDetails: TitleDetails) {
         val adapter = TitleDetailsRelatedMoviesAdapter {
+            when (it.titleId?.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.titleDetailsFragment,
+                        Bundle().apply {
+                            putString("titleId", it.titleId?.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_title_id))
+                }
+            }
         }
 
         binding.moreLikeThisList.layoutManager =
@@ -178,7 +226,21 @@ class TitleDetailsFragment : Fragment() {
 
     private fun showCasts(titleDetails: TitleDetails) {
         val adapter = TitleDetailsCastsAdapter {
+            when (it.nameId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(
+                        R.id.nameDetailsFragment,
+                        Bundle().apply {
+                            putString("nameId", it.nameId.value)
+                            putString("name", it.name)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_name_id))
+                }
+            }
         }
 
         binding.topCastList.layoutManager = GridLayoutManager(requireContext(), 3)
@@ -189,7 +251,14 @@ class TitleDetailsFragment : Fragment() {
 
     private fun showPhotos(titleDetails: TitleDetails) {
         val adapter = TitleDetailsPhotosAdapter {
-
+            Timber.d("showPhotos %s", it)
+            findNavController().navigate(R.id.imageDetailsFragment,
+                Bundle().apply {
+                    putString("id", titleId)
+                    putString("imageId", it.imageId?.value)
+                    putString("title", title)
+                }
+            )
         }
 
         binding.photoList.layoutManager =
@@ -201,7 +270,20 @@ class TitleDetailsFragment : Fragment() {
 
     private fun showVideos(titleDetails: TitleDetails) {
         val adapter = TitleDetailsVideosAdapter {
+            when (it.videoId.validate()) {
+                is Either.Right -> {
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.videoId.value)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                else -> {
+                    requireContext().toast(getString(R.string.invalid_video_id))
+                }
+            }
         }
 
         binding.videoList.layoutManager =
@@ -225,7 +307,11 @@ class TitleDetailsFragment : Fragment() {
         binding.stars = titleDetails.stars.joinToString { it.name }
 
         val adapter = TitleDetailsGenresAdapter {
-
+            findNavController().navigate(R.id.searchTitlesByGenreFragment,
+                Bundle().apply {
+                    putString("genre", it)
+                }
+            )
         }
 
         binding.genresList.layoutManager =

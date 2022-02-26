@@ -9,9 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mabahmani.domain.vo.TitleAwards
+import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.databinding.FragmentTitleAwardsBinding
 import com.mabahmani.imdb_scraping.ui.main.title.state.TitleAwardsUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
@@ -78,8 +81,15 @@ class TitleAwardFragment: Fragment() {
         binding.titleCoverUrl = titleAwards.cover.getCustomImageWidthUrl(512)
         binding.title = titleAwards.name
 
-        val adapter = TitleEventsAdapter{
-
+        val adapter = TitleEventsAdapter{ eventId: EventId, eventYear: String, eventName: String ->
+            findNavController().navigate(
+                R.id.eventDetailsFragment,
+                Bundle().apply {
+                    putString("eventId", eventId.value)
+                    putString("eventYear", eventYear)
+                    putString("eventName", eventName)
+                }
+            )
         }
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())

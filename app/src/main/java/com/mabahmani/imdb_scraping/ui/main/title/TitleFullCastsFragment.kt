@@ -78,9 +78,7 @@ class TitleFullCastsFragment: Fragment() {
         binding.titleCoverUrl = titleAwards.cover.getCustomImageWidthUrl(512)
         binding.title = titleAwards.name  + " "  + titleAwards.year
 
-        val adapter = TitleFullCastAdapter{
-
-        }
+        val adapter = TitleFullCastAdapter()
 
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter

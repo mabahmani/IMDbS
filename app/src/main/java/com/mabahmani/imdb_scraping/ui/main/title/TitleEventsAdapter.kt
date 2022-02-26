@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mabahmani.domain.vo.NameAwards
 import com.mabahmani.domain.vo.TitleAwards
+import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.imdb_scraping.databinding.*
 
-class TitleEventsAdapter (private val itemClickListener: (TitleAwards.Event) -> Unit) : ListAdapter<TitleAwards.Event, TitleEventsAdapter.ViewHolder>(
+class TitleEventsAdapter (private val itemClickListener: (EventId, String, String) -> Unit) : ListAdapter<TitleAwards.Event, TitleEventsAdapter.ViewHolder>(
     DiffCallback
 )  {
 
@@ -25,7 +26,7 @@ class TitleEventsAdapter (private val itemClickListener: (TitleAwards.Event) -> 
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemTitleEventsBinding, private val itemClickListener: (TitleAwards.Event) -> Unit) :
+    class ViewHolder(itemView: ItemTitleEventsBinding, private val itemClickListener: (EventId,String,String) -> Unit) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemTitleEventsBinding
@@ -40,7 +41,7 @@ class TitleEventsAdapter (private val itemClickListener: (TitleAwards.Event) -> 
             binding.titleWidget.setTitleSize(16f)
 
             val adapter = TitleEventsAwardsAdapter{
-
+                itemClickListener.invoke(it.eventId, it.eventYear, model.name)
             }
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
@@ -48,9 +49,6 @@ class TitleEventsAdapter (private val itemClickListener: (TitleAwards.Event) -> 
 
             adapter.submitList(model.awards)
 
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
-            }
         }
     }
 

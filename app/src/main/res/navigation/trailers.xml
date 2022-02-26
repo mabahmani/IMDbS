@@ -86,4 +86,14 @@
         android:id="@+id/eventDetailsFragment"
         android:name="com.mabahmani.imdb_scraping.ui.main.event.EventDetailsFragment"
         android:label="EventDetailsFragment" />
+    <fragment
+        android:id="@+id/searchTitlesByGenreFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByGenreFragment"
+        android:label="SearchTitlesByGenreFragment"
+        tools:layout="@layout/fragment_search_titles_by_genre" />
+    <fragment
+        android:id="@+id/searchTitlesByKeywordFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByKeywordFragment"
+        android:label="SearchTitlesByKeywordFragment"
+        tools:layout="@layout/fragment_search_titles_by_keyword" />
 </navigation>

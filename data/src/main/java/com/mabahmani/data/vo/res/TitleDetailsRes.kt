@@ -110,7 +110,8 @@ data class TitleDetailsRes(
 
     data class Photo(
         val original: String?,
-        val thumbnail: String?
+        val thumbnail: String?,
+        val id: String?,
     )
 
     data class RelatedMovie(
@@ -195,7 +196,7 @@ data class TitleDetailsRes(
             overview?.writers?.map { NameLink(it.realName.orEmpty(), NameId(it.id.orEmpty())) }?: listOf(),
             overview?.stars?.map { NameLink(it.realName.orEmpty(), NameId(it.id.orEmpty())) }?: listOf(),
             videos?.map { Video(VideoId(it.id.orEmpty()), Image(it.preview.orEmpty()), it.title.orEmpty(), it.duration.orEmpty()) }?: listOf(),
-            photos?.map { ImageLink(Image(it.original.orEmpty()),null) }?: listOf(),
+            photos?.map { ImageLink(Image(it.original.orEmpty()),ImageId(it.id.orEmpty())) }?: listOf(),
             topCasts?.map { Cast(it.realName.orEmpty(),it.movieName.orEmpty(),Image(it.image.orEmpty()),NameId(it.id.orEmpty())) }?: listOf(),
             relatedMovies?.map { Title(Image(it.cover.orEmpty()), it.rate.orEmpty(), null, null, null, null, it.title.orEmpty(), null, null, null, null, null, null, null,TitleId(it.id.orEmpty()), null,                    null,
                 null,

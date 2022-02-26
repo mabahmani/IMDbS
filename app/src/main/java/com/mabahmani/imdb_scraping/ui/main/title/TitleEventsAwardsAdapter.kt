@@ -38,9 +38,7 @@ class TitleEventsAwardsAdapter (private val itemClickListener: (TitleAwards.Even
 
             binding.year = model.eventYear
 
-            val adapter = TitleEventsAwardsOutcomesAdapter{
-
-            }
+            val adapter = TitleEventsAwardsOutcomesAdapter()
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
             binding.list.adapter = adapter

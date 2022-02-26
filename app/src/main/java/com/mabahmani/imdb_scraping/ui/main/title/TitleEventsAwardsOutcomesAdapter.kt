@@ -13,14 +13,13 @@ import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescri
 import com.mabahmani.imdb_scraping.databinding.ItemNameEventsAwardsOutcomeDescriptionTitleBinding
 import com.mabahmani.imdb_scraping.databinding.ItemTitleEventsAwardsOutcomeBinding
 
-class TitleEventsAwardsOutcomesAdapter (private val itemClickListener: (TitleAwards.Event.Award.AwardOutcome) -> Unit) : ListAdapter<TitleAwards.Event.Award.AwardOutcome, TitleEventsAwardsOutcomesAdapter.ViewHolder>(
+class TitleEventsAwardsOutcomesAdapter: ListAdapter<TitleAwards.Event.Award.AwardOutcome, TitleEventsAwardsOutcomesAdapter.ViewHolder>(
     DiffCallback
 )  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemTitleEventsAwardsOutcomeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            itemClickListener
         )
     }
 
@@ -28,7 +27,7 @@ class TitleEventsAwardsOutcomesAdapter (private val itemClickListener: (TitleAwa
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: ItemTitleEventsAwardsOutcomeBinding, private val itemClickListener: (TitleAwards.Event.Award.AwardOutcome) -> Unit) :
+    class ViewHolder(itemView: ItemTitleEventsAwardsOutcomeBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
         private var binding: ItemTitleEventsAwardsOutcomeBinding
@@ -42,18 +41,12 @@ class TitleEventsAwardsOutcomesAdapter (private val itemClickListener: (TitleAwa
             binding.awardName = model.subtitle
             binding.awardOutcome = model.title
 
-            val adapter = TitleEventsAwardsOutcomesDescriptionsAdapter{
-
-            }
+            val adapter = TitleEventsAwardsOutcomesDescriptionsAdapter()
 
             binding.list.layoutManager = LinearLayoutManager(binding.root.context)
             binding.list.adapter = adapter
 
             adapter.submitList(model.awardDetails)
-
-            binding.root.setOnClickListener {
-                itemClickListener.invoke(model)
-            }
         }
     }
 
