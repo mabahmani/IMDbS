@@ -656,4 +656,9 @@ class HomeFragment : Fragment() {
         binding.bornTodayShimmer.visibility = View.VISIBLE
         binding.bornTodayShimmer.startShimmer()
     }
+
+    fun scrollTop() {
+        binding.nestedParent.smoothScrollTo(0, 0)
+    }
+
 }
