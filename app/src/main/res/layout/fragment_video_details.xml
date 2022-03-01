@@ -5,6 +5,9 @@
 
     <data>
 
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
+
         <variable
             name="caption"
             type="String" />
@@ -217,7 +220,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="@{TextUtils.isEmpty(titleRate) || titleRate == `null`  ? View.GONE : View.VISIBLE}"
+                            >
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="16dp"

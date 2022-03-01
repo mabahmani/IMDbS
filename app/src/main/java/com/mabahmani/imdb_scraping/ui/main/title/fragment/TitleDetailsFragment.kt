@@ -169,12 +169,25 @@ class TitleDetailsFragment : Fragment() {
                 result.add(it)
         }
 
-        val adapter = TitleDetailsTechnicalSpecsAdapter()
+        if (result.isEmpty()){
+            binding.technicalSpecs.visibility = View.GONE
+            binding.technicalSpecsList.visibility = View.GONE
+        }
 
-        binding.technicalSpecsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.technicalSpecsList.adapter = adapter
+        else{
 
-        adapter.submitList(result)
+            binding.technicalSpecs.visibility = View.VISIBLE
+            binding.technicalSpecsList.visibility = View.VISIBLE
+
+
+            val adapter = TitleDetailsTechnicalSpecsAdapter()
+
+            binding.technicalSpecsList.layoutManager = LinearLayoutManager(requireContext())
+            binding.technicalSpecsList.adapter = adapter
+
+            adapter.submitList(result)
+        }
+
     }
 
     private fun showBoxOffice(titleDetails: TitleDetails) {
@@ -209,102 +222,159 @@ class TitleDetailsFragment : Fragment() {
     }
 
     private fun showMoreLikeThis(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsRelatedMoviesAdapter {
-            when (it.titleId?.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(R.id.titleDetailsFragment,
-                        Bundle().apply {
-                            putString("titleId", it.titleId?.value)
-                            putString("title", it.title)
-                        }
-                    )
-                }
 
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_title_id))
-                }
-            }
+        if (titleDetails.relatedTitles.isEmpty()){
+            binding.moreLikeThis.visibility = View.GONE
+            binding.moreLikeThisList.visibility = View.GONE
         }
 
-        binding.moreLikeThisList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.moreLikeThisList.adapter = adapter
+        else{
+            binding.moreLikeThis.visibility = View.VISIBLE
+            binding.moreLikeThisList.visibility = View.VISIBLE
 
-        adapter.submitList(titleDetails.relatedTitles)
+            val adapter = TitleDetailsRelatedMoviesAdapter {
+                when (it.titleId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.titleId?.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_title_id))
+                    }
+                }
+            }
+
+            binding.moreLikeThisList.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.moreLikeThisList.adapter = adapter
+
+            adapter.submitList(titleDetails.relatedTitles)
+        }
+
+
     }
 
     private fun showCasts(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsCastsAdapter {
-            when (it.nameId.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(
-                        R.id.nameDetailsFragment,
-                        Bundle().apply {
-                            putString("nameId", it.nameId.value)
-                            putString("name", it.name)
-                        }
-                    )
-                }
 
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_name_id))
+        if (titleDetails.topCasts.isEmpty()){
+            binding.fullCasts.visibility = View.GONE
+            binding.topCastList.visibility = View.GONE
+        }
+        else{
+            binding.fullCasts.visibility = View.VISIBLE
+            binding.topCastList.visibility = View.VISIBLE
+
+            val adapter = TitleDetailsCastsAdapter {
+                when (it.nameId.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(
+                            R.id.nameDetailsFragment,
+                            Bundle().apply {
+                                putString("nameId", it.nameId.value)
+                                putString("name", it.name)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_name_id))
+                    }
                 }
             }
+
+            binding.topCastList.layoutManager = GridLayoutManager(requireContext(), 3)
+            binding.topCastList.adapter = adapter
+
+            adapter.submitList(titleDetails.topCasts)
         }
 
-        binding.topCastList.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.topCastList.adapter = adapter
-
-        adapter.submitList(titleDetails.topCasts)
     }
 
     private fun showPhotos(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsPhotosAdapter {
-            Timber.d("showPhotos %s", it)
-            findNavController().navigate(R.id.imageDetailsFragment,
-                Bundle().apply {
-                    putString("id", titleId)
-                    putString("imageId", it.imageId?.value)
-                    putString("title", title)
-                }
-            )
+
+        if (titleDetails.photos.isEmpty()){
+            binding.photos.visibility = View.GONE
+            binding.photos.visibility = View.GONE
         }
 
-        binding.photoList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.photoList.adapter = adapter
+        else{
 
-        adapter.submitList(titleDetails.photos)
+            binding.photos.visibility = View.VISIBLE
+            binding.photos.visibility = View.VISIBLE
+
+            val adapter = TitleDetailsPhotosAdapter {
+                findNavController().navigate(R.id.imageDetailsFragment,
+                    Bundle().apply {
+                        putString("id", titleId)
+                        putString("imageId", it.imageId?.value)
+                        putString("title", title)
+                    }
+                )
+            }
+
+            binding.photoList.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.photoList.adapter = adapter
+
+            adapter.submitList(titleDetails.photos)
+        }
+
     }
 
     private fun showVideos(titleDetails: TitleDetails) {
-        val adapter = TitleDetailsVideosAdapter {
-            when (it.videoId.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(R.id.videoDetailsFragment,
-                        Bundle().apply {
-                            putString("videoId", it.videoId.value)
-                            putString("title", it.title)
-                        }
-                    )
-                }
 
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_video_id))
-                }
-            }
+        if (titleDetails.videos.isEmpty()){
+            binding.videos.visibility = View.GONE
+            binding.videoList.visibility = View.GONE
         }
 
-        binding.videoList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.videoList.adapter = adapter
+        else{
+            binding.videos.visibility = View.VISIBLE
+            binding.videoList.visibility = View.VISIBLE
 
-        adapter.submitList(titleDetails.videos)
+            val adapter = TitleDetailsVideosAdapter {
+                when (it.videoId.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.videoDetailsFragment,
+                            Bundle().apply {
+                                putString("videoId", it.videoId.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_video_id))
+                    }
+                }
+            }
+
+            binding.videoList.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.videoList.adapter = adapter
+
+            adapter.submitList(titleDetails.videos)
+        }
+
     }
 
     private fun showTitleOverview(titleDetails: TitleDetails) {
-        binding.baseInfo =
-            titleDetails.releaseYear + " • " + titleDetails.certificate + " • " + titleDetails.runtime
+        var baseInfo = ""
+        if (titleDetails.releaseYear.isNotEmpty()){
+            baseInfo += titleDetails.releaseYear
+        }
+        if (titleDetails.certificate.isNotEmpty()){
+            baseInfo += " • " + titleDetails.certificate
+        }
+        if (titleDetails.runtime.isNotEmpty()){
+            baseInfo += " • " + titleDetails.runtime
+        }
+        binding.baseInfo = baseInfo
         binding.rate = titleDetails.imdbRating
         binding.voteCount = "| " + titleDetails.numberOfVotes
         binding.coverUrl = titleDetails.cover.getCustomImageWidthUrl(512)

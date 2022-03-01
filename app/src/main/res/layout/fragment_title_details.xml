@@ -5,8 +5,9 @@
 
     <data>
 
-        <import type="android.view.View"/>
-        <import type="android.text.TextUtils"/>
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
 
         <variable
             name="baseInfo"
@@ -150,8 +151,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/mainView"
@@ -171,6 +171,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{baseInfo}"
                             android:textColor="@color/gray_900"
+                            android:visibility="@{TextUtils.isEmpty(baseInfo) ? View.GONE: View.VISIBLE}"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             bind:text="1994 . R . 2h 22m" />
@@ -179,6 +180,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
+                            android:visibility="@{TextUtils.isEmpty(rate) ? View.GONE: View.VISIBLE}"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -452,6 +454,7 @@
                         android:paddingHorizontal="8dp" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:id="@+id/moreLikeThis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -483,7 +486,8 @@
                         android:layout_marginTop="16dp"
                         android:justificationMode="inter_word"
                         android:text="@{story}"
-                        android:textColor="@color/sky_900" />
+                        android:textColor="@color/sky_900"
+                        android:visibility="@{TextUtils.isEmpty(story) ? View.GONE:View.VISIBLE}" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.RecyclerView
                         android:id="@+id/keywordList"
@@ -497,7 +501,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/taglines"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(tagline) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -505,7 +510,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:text="@{tagline}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(tagline) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_medium"
@@ -514,7 +520,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/genres"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(genres) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -522,7 +529,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:text="@{genres}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(genres) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_medium"
@@ -531,7 +539,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/motion_picture_rating_mpaa"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(motionPictureRating) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -539,7 +548,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:text="@{motionPictureRating}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(motionPictureRating) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/parentsGuideView"
@@ -560,6 +570,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
+                        android:visibility="@{TextUtils.isEmpty(review) ? View.GONE:View.VISIBLE}"
                         app:TW_Title="@string/user_reviews"
                         app:TW_TitleColor="@color/sky_900" />
 
@@ -567,7 +578,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="16dp"
+                        android:visibility="@{TextUtils.isEmpty(review) ? View.GONE:View.VISIBLE}">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             fontPath="@string/font_bold"
@@ -615,7 +627,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@{reviewTitle}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(review) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -625,14 +638,16 @@
                         android:layout_marginTop="8dp"
                         android:justificationMode="inter_word"
                         android:text="@{review}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(review) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="@{TextUtils.isEmpty(review) ? View.GONE:View.VISIBLE}">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             fontPath="@string/font_medium"
@@ -658,6 +673,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         app:TW_Title="@string/details"
+                        android:visibility="@{TextUtils.isEmpty(releaseDateDetails) &amp;&amp; TextUtils.isEmpty(countryOfOrigins) &amp;&amp; TextUtils.isEmpty(officialSites) &amp;&amp; TextUtils.isEmpty(languages) &amp;&amp; TextUtils.isEmpty(filmingLocations) &amp;&amp; TextUtils.isEmpty(productionCompanies)? View.GONE:View.VISIBLE}"
                         app:TW_TitleColor="@color/sky_900" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -667,7 +683,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/release_date"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(releaseDateDetails) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -676,7 +693,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{releaseDateDetails}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(releaseDateDetails) ? View.GONE:View.VISIBLE}" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -686,7 +704,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/country_of_origin"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(countryOfOrigins) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -695,7 +714,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{countryOfOrigins}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(countryOfOrigins) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -704,7 +724,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/official_sites"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(officialSites) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -713,7 +734,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{officialSites}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(officialSites) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -722,7 +744,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/languages"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(languages) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -731,7 +754,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{languages}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(languages) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -740,7 +764,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/filming_locations"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(filmingLocations) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -749,7 +774,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{filmingLocations}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(filmingLocations) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -758,7 +784,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/production_companies"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(productionCompanies) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -767,13 +794,15 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{productionCompanies}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(productionCompanies) ? View.GONE:View.VISIBLE}" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="32dp"
+                        android:visibility="@{TextUtils.isEmpty(budget) &amp;&amp; TextUtils.isEmpty(grossUsAndCanada) &amp;&amp; TextUtils.isEmpty(openingWeekendUsAndCanada) &amp;&amp; TextUtils.isEmpty(grossWorldwide)? View.GONE:View.VISIBLE}"
                         app:TW_Title="@string/box_office"
                         app:TW_TitleColor="@color/sky_900" />
 
@@ -784,7 +813,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/budget"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(budget) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -793,7 +823,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{budget}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(budget) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -802,7 +833,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/gross_us_and_canada"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(grossUsAndCanada) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -811,7 +843,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{grossUsAndCanada}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(grossUsAndCanada) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -820,7 +853,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/opening_weekend_us_and_canada"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(openingWeekendUsAndCanada) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -829,7 +863,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{openingWeekendUsAndCanada}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(openingWeekendUsAndCanada) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_bold"
@@ -838,7 +873,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/gross_world_wide"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(grossWorldwide) ? View.GONE:View.VISIBLE}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         fontPath="@string/font_light"
@@ -847,7 +883,8 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="4dp"
                         android:text="@{grossWorldwide}"
-                        android:textColor="@color/gray_900" />
+                        android:textColor="@color/gray_900"
+                        android:visibility="@{TextUtils.isEmpty(grossWorldwide) ? View.GONE:View.VISIBLE}" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
                         android:id="@+id/technicalSpecs"
@@ -874,45 +911,28 @@
                     android:id="@+id/shimmer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    >
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
-                        <include
-                            layout="@layout/shimmer_title_details_overview"
-                            />
+                        <include layout="@layout/shimmer_title_details_overview" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_video"
-                            />
+                        <include layout="@layout/shimmer_title_details_video" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_photo"
-                            />
+                        <include layout="@layout/shimmer_title_details_photo" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_top_casts"
-                            />
+                        <include layout="@layout/shimmer_title_details_top_casts" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_related_movie"
-                            />
+                        <include layout="@layout/shimmer_title_details_related_movie" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_info"
-                            />
+                        <include layout="@layout/shimmer_title_details_info" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_info"
-                            />
+                        <include layout="@layout/shimmer_title_details_info" />
 
-                        <include
-                            layout="@layout/shimmer_title_details_info"
-                            />
+                        <include layout="@layout/shimmer_title_details_info" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </com.facebook.shimmer.ShimmerFrameLayout>
