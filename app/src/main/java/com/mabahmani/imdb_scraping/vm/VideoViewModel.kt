@@ -3,11 +3,12 @@ package com.mabahmani.imdb_scraping.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.mabahmani.domain.interactor.*
-import com.mabahmani.domain.vo.common.*
-import com.mabahmani.imdb_scraping.ui.main.image.state.ImageDetailsUiState
-import com.mabahmani.imdb_scraping.ui.main.image.state.ImagesUiState
-import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
+import com.mabahmani.domain.interactor.GetNameVideosUseCase
+import com.mabahmani.domain.interactor.GetTitleVideosUseCase
+import com.mabahmani.domain.interactor.GetVideoDetailsUseCase
+import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.domain.vo.common.VideoId
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideoDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideosUiState
 import dagger.hilt.android.lifecycle.HiltViewModel

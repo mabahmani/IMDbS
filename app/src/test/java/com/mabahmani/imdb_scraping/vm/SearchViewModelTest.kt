@@ -14,11 +14,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.lang.RuntimeException
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi

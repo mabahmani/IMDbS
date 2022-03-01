@@ -47,10 +47,12 @@
                 android:textColor="@color/gray_900"
                 android:textSize="24sp"
                 android:visibility="gone"
+                android:ellipsize="marquee"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/back"
                 app:layout_constraintRight_toLeftOf="@id/actionIcon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:singleLine="true" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/searchBar"

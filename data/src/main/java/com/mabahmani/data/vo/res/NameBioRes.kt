@@ -1,10 +1,8 @@
 package com.mabahmani.data.vo.res
 
 import com.mabahmani.domain.vo.NameBio
-import com.mabahmani.domain.vo.common.Id
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.TextLink
-import com.mabahmani.domain.vo.common.TitleId
 
 data class NameBioRes(
     val avatar: String?,

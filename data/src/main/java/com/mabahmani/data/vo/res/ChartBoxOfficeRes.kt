@@ -1,6 +1,8 @@
 package com.mabahmani.data.vo.res
 
-import com.mabahmani.domain.vo.common.*
+import com.mabahmani.domain.vo.common.BoxOffice
+import com.mabahmani.domain.vo.common.Image
+import com.mabahmani.domain.vo.common.TitleId
 
 data class ChartBoxOfficeRes(
     val weekendDate: String,

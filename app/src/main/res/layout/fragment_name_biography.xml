@@ -50,6 +50,7 @@
                     >
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/avatarParent"
                         android:layout_width="180dp"
                         android:layout_height="180dp"
                         android:layout_gravity="center_horizontal"

@@ -1,13 +1,8 @@
 package com.mabahmani.data.repo
 
 import com.mabahmani.data.ds.RemoteDataSource
-import com.mabahmani.domain.repo.NameRepository
 import com.mabahmani.domain.repo.NewsRepository
-import com.mabahmani.domain.vo.NameAwards
-import com.mabahmani.domain.vo.NameBio
-import com.mabahmani.domain.vo.NameDetails
 import com.mabahmani.domain.vo.NewsDetails
-import com.mabahmani.domain.vo.common.NameId
 import com.mabahmani.domain.vo.common.NewsId
 import javax.inject.Inject
 

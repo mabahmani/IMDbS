@@ -2,7 +2,6 @@ package com.mabahmani.imdb_scraping.ui.custom
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerView @JvmOverloads constructor(

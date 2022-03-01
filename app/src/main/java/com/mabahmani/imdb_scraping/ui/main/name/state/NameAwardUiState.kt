@@ -1,7 +1,6 @@
 package com.mabahmani.imdb_scraping.ui.main.name.state
 
-import com.mabahmani.domain.vo.*
-import com.mabahmani.domain.vo.common.Trailer
+import com.mabahmani.domain.vo.NameAwards
 
 sealed class NameAwardUiState {
     object  Loading : NameAwardUiState()

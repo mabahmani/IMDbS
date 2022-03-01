@@ -13,8 +13,6 @@ import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

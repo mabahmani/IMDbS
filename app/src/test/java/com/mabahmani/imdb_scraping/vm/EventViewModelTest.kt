@@ -1,31 +1,21 @@
 package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.GetEventDetailsUseCase
-import com.mabahmani.domain.interactor.GetHomeExtraUseCase
-import com.mabahmani.domain.interactor.GetHomeUseCase
 import com.mabahmani.domain.vo.EventDetails
-import com.mabahmani.domain.vo.Home
-import com.mabahmani.domain.vo.HomeExtra
-import com.mabahmani.domain.vo.common.*
-import com.mabahmani.domain.vo.enum.HomeMediaType
+import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.imdb_scraping.ui.main.event.state.EventDetailsUiState
-import com.mabahmani.imdb_scraping.ui.main.home.state.HomeExtraUiState
-import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
-import java.lang.RuntimeException
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi

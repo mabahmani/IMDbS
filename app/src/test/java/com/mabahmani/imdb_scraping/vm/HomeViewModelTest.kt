@@ -10,19 +10,16 @@ import com.mabahmani.imdb_scraping.ui.main.home.state.HomeExtraUiState
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
-import java.lang.RuntimeException
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi

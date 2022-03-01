@@ -6,7 +6,6 @@ import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.vo.generic.ApiResponse
 import com.mabahmani.data.vo.res.ImagesRes
 import com.mabahmani.domain.vo.common.ImageLink
-import com.mabahmani.domain.vo.common.Title
 import com.mabahmani.domain.vo.common.TitleId
 
 class TitleImagesPagingSource(

@@ -1,16 +1,14 @@
 package com.mabahmani.imdb_scraping
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mabahmani.imdb_scraping.databinding.ActivityMainBinding
-import com.mabahmani.imdb_scraping.ui.main.home.HomeFragment
+import com.mabahmani.imdb_scraping.ui.main.home.fragment.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 

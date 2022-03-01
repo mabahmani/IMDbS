@@ -1,11 +1,7 @@
 package com.mabahmani.domain.interactor
 
-import com.mabahmani.domain.repo.ChartRepository
 import com.mabahmani.domain.repo.EventRepository
-import com.mabahmani.domain.repo.SearchRepository
-import com.mabahmani.domain.repo.TrailerRepository
 import com.mabahmani.domain.vo.common.EventId
-import com.mabahmani.domain.vo.enum.SuggestionType
 import javax.inject.Inject
 
 class GetEventDetailsUseCase @Inject constructor(private val eventRepository: EventRepository){

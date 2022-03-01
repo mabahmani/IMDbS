@@ -7,7 +7,6 @@ import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.imdb_scraping.ui.main.image.state.ImageDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.image.state.ImagesUiState
-import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -4,11 +4,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.vo.generic.ApiResponse
-import com.mabahmani.data.vo.res.ImagesRes
 import com.mabahmani.data.vo.res.VideosRes
-import com.mabahmani.domain.vo.common.Video
-import com.mabahmani.domain.vo.common.Title
 import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.domain.vo.common.Video
 
 class TitleVideosPagingSource(
     private val remoteDataSource: RemoteDataSource,

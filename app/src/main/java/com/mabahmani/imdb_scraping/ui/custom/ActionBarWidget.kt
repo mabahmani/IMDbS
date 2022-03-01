@@ -42,6 +42,8 @@ class ActionBarWidget @JvmOverloads constructor(
                 val actionIcon = findViewById<AppCompatImageView>(R.id.actionIcon)
 
 
+                title.isSelected = true
+
                 if (actionIconDrawable == null && !showBackAction){
                     back.visibility = GONE
                     actionIcon.visibility = GONE

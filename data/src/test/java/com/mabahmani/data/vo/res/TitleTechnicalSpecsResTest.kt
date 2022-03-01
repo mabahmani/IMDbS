@@ -1,6 +1,5 @@
 package com.mabahmani.data.vo.res
 
-import com.mabahmani.domain.vo.enum.GuideRateType
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

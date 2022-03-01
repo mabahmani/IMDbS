@@ -1,6 +1,5 @@
 package com.mabahmani.domain.vo
 
-import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.domain.vo.common.Id
 import com.mabahmani.domain.vo.common.Image
 

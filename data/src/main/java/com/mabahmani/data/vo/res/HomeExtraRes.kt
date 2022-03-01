@@ -1,10 +1,8 @@
 package com.mabahmani.data.vo.res
 
-import android.util.Log
 import com.mabahmani.data.util.toHumanReadableTime
 import com.mabahmani.domain.vo.HomeExtra
 import com.mabahmani.domain.vo.common.*
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 

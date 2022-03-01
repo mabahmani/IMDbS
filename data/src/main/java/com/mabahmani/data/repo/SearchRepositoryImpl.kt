@@ -2,19 +2,14 @@ package com.mabahmani.data.repo
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import androidx.paging.map
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.ps.SearchNamesPagingSource
 import com.mabahmani.data.ps.SearchTitlesPagingSource
-import com.mabahmani.domain.repo.NameRepository
-import com.mabahmani.domain.repo.NewsRepository
 import com.mabahmani.domain.repo.SearchRepository
-import com.mabahmani.domain.vo.*
+import com.mabahmani.domain.vo.Calender
+import com.mabahmani.domain.vo.Suggestion
 import com.mabahmani.domain.vo.common.*
 import com.mabahmani.domain.vo.enum.*
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource): SearchRepository {

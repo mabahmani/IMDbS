@@ -7,104 +7,110 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.fragment.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/calenderFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.CalenderFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.fragment.CalenderFragment"
         android:label="CalenderFragment"
         tools:layout="@layout/fragment_calender" />
     <fragment
         android:id="@+id/suggestionFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.SuggestionFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.fragment.SuggestionFragment"
         android:label="SuggestionFragment"
         tools:layout="@layout/fragment_suggestion" />
     <fragment
         android:id="@+id/searchTitlesByGenreFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByGenreFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.fragment.SearchTitlesByGenreFragment"
         android:label="SearchTitlesByGenreFragment"
         tools:layout="@layout/fragment_search_titles_by_genre" />
     <fragment
         android:id="@+id/searchTitlesByKeywordFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.search.SearchTitlesByKeywordFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.search.fragment.SearchTitlesByKeywordFragment"
         android:label="SearchTitlesByKeywordFragment"
         tools:layout="@layout/fragment_search_titles_by_keyword" />
     <fragment
         android:id="@+id/eventDetailsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.event.EventDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.event.fragment.EventDetailsFragment"
         android:label="EventDetailsFragment"
         tools:layout="@layout/fragment_event_details" />
     <fragment
         android:id="@+id/nameDetailsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.fragment.NameDetailsFragment"
         android:label="NameDetailsFragment"
         tools:layout="@layout/fragment_name_details" />
 
     <fragment
         android:id="@+id/titleDetailsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.fragment.TitleDetailsFragment"
         android:label="TitleDetailsFragment"
         tools:layout="@layout/fragment_title_details" />
     <fragment
         android:id="@+id/videoDetailsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.video.VideoDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.video.fragment.VideoDetailsFragment"
         android:label="VideoDetailsFragment"
         tools:layout="@layout/fragment_video_details" />
 
     <fragment
         android:id="@+id/titleAwardFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleAwardFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.fragment.TitleAwardFragment"
         android:label="TitleAwardFragment"
         tools:layout="@layout/fragment_title_awards"
         />
     <fragment
         android:id="@+id/titleFullCastsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleFullCastsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.fragment.TitleFullCastsFragment"
         android:label="TitleFullCastsFragment"
         tools:layout="@layout/fragment_title_fullcast"
         />
     <fragment
         android:id="@+id/titleParentsGuideFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleParentsGuideFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.fragment.TitleParentsGuideFragment"
         android:label="TitleParentsGuideFragment"
         tools:layout="@layout/shimmer_title_parents_guide"
         />
     <fragment
         android:id="@+id/titleTechnicalSpecsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.title.TitleTechnicalSpecsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.title.fragment.TitleTechnicalSpecsFragment"
         android:label="TitleTechnicalSpecsFragment"
         tools:layout="@layout/fragment_title_technical_specs"
         />
     <fragment
         android:id="@+id/imagesFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.image.ImagesFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.image.fragment.ImagesFragment"
         android:label="ImagesFragment"
         tools:layout="@layout/fragment_images"
         />
     <fragment
         android:id="@+id/imageDetailsFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.image.ImageDetailsFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.image.fragment.ImageDetailsFragment"
         android:label="ImageDetailsFragment"
         tools:layout="@layout/fragment_image_details"
         />
     <fragment
         android:id="@+id/videosFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.video.VideosFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.video.fragment.VideosFragment"
         android:label="VideosFragment"
         tools:layout="@layout/fragment_videos"
         />
 
     <fragment
         android:id="@+id/nameBiographyFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameBiographyFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.fragment.NameBiographyFragment"
         android:label="NameBiographyFragment"
         tools:layout="@layout/fragment_name_biography"
         />
     <fragment
         android:id="@+id/nameAwardFragment"
-        android:name="com.mabahmani.imdb_scraping.ui.main.name.NameAwardFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.name.fragment.NameAwardFragment"
         android:label="NameAwardFragment"
         tools:layout="@layout/fragment_name_awards"
+        />
+    <fragment
+        android:id="@+id/imageViewerFragment"
+        android:name="com.mabahmani.imdb_scraping.ui.main.image.fragment.ImageViewerFragment"
+        android:label="ImageViewerFragment"
+        tools:layout="@layout/fragment_image_viewer"
         />
 </navigation>

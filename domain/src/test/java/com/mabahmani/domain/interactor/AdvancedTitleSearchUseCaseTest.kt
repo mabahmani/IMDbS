@@ -3,8 +3,6 @@ package com.mabahmani.domain.interactor
 import com.mabahmani.domain.repo.SearchRepository
 import com.mabahmani.domain.vo.common.Title
 import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK

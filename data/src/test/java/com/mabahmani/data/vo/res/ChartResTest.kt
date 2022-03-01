@@ -1,6 +1,6 @@
 package com.mabahmani.data.vo.res
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 

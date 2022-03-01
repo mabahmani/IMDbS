@@ -7,7 +7,7 @@
 
     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:background="@color/gray_300"
         android:layout_marginTop="16dp"

@@ -3,7 +3,6 @@ package com.mabahmani.domain.vo
 import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.domain.vo.common.Image
 import com.mabahmani.domain.vo.common.NameLink
-import com.mabahmani.domain.vo.common.TitleLink
 
 data class TitleAwards(
     val name: String,

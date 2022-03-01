@@ -1,7 +1,5 @@
 package com.mabahmani.imdb_scraping.ui.main.search.state
 
-import com.mabahmani.domain.vo.common.Title
-
 sealed class KeywordsUiState {
     object  Loading : KeywordsUiState()
     object  NetworkError : KeywordsUiState()

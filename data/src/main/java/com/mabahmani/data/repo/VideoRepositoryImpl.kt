@@ -4,11 +4,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.ps.NameVideosPagingSource
-import com.mabahmani.data.ps.TitleImagesPagingSource
 import com.mabahmani.data.ps.TitleVideosPagingSource
 import com.mabahmani.domain.repo.VideoRepository
 import com.mabahmani.domain.vo.VideoDetails
-import com.mabahmani.domain.vo.common.*
+import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.domain.vo.common.Video
+import com.mabahmani.domain.vo.common.VideoId
 import javax.inject.Inject
 
 class VideoRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) :

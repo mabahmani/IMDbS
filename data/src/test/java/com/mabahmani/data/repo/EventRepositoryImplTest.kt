@@ -4,14 +4,15 @@ import com.mabahmani.data.ds.RemoteDataSourceImpl
 import com.mabahmani.data.vo.generic.ApiResponse
 import com.mabahmani.data.vo.res.EventDetailsRes
 import com.mabahmani.domain.vo.common.EventId
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.unmockkAll
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

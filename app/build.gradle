@@ -65,6 +65,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.1.0"
     implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 
 }

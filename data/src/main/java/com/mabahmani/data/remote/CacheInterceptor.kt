@@ -1,9 +1,8 @@
 package com.mabahmani.data.remote
 
-import android.util.Log
+import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
-import okhttp3.CacheControl
 import java.util.concurrent.TimeUnit
 
 

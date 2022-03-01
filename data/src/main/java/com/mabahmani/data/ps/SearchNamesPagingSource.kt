@@ -4,10 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mabahmani.data.ds.RemoteDataSource
 import com.mabahmani.data.vo.generic.ApiResponse
-import com.mabahmani.data.vo.res.SearchNameRes
 import com.mabahmani.domain.vo.common.Name
-import java.lang.RuntimeException
-import javax.inject.Inject
 
 class SearchNamesPagingSource(
     private val remoteDataSource: RemoteDataSource,

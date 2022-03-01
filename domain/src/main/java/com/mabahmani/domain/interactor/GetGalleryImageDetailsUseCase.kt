@@ -1,8 +1,8 @@
 package com.mabahmani.domain.interactor
 
-import com.mabahmani.domain.repo.*
-import com.mabahmani.domain.vo.common.*
-import com.mabahmani.domain.vo.enum.SuggestionType
+import com.mabahmani.domain.repo.ImageRepository
+import com.mabahmani.domain.vo.common.GalleryId
+import com.mabahmani.domain.vo.common.ImageId
 import javax.inject.Inject
 
 class GetGalleryImageDetailsUseCase @Inject constructor(private val imageRepository: ImageRepository) {

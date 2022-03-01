@@ -7,8 +7,6 @@ import com.mabahmani.data.vo.generic.ApiResponse
 import com.mabahmani.data.vo.res.ImagesRes
 import com.mabahmani.domain.vo.common.ImageLink
 import com.mabahmani.domain.vo.common.NameId
-import com.mabahmani.domain.vo.common.Title
-import com.mabahmani.domain.vo.common.TitleId
 
 class NameImagesPagingSource(
     private val remoteDataSource: RemoteDataSource,

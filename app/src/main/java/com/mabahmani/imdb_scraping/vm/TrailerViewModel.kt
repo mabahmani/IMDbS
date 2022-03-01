@@ -6,7 +6,6 @@ import com.mabahmani.domain.interactor.GetAnticipatedTrailersUseCase
 import com.mabahmani.domain.interactor.GetPopularTrailersUseCase
 import com.mabahmani.domain.interactor.GetRecentTrailersUseCase
 import com.mabahmani.domain.interactor.GetTrendingTrailersUseCase
-import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartUiState
 import com.mabahmani.imdb_scraping.ui.main.trailers.state.TrailersUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

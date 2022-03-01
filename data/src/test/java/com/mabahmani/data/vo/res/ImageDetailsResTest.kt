@@ -1,6 +1,5 @@
 package com.mabahmani.data.vo.res
 
-import com.mabahmani.domain.vo.enum.HomeMediaType
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test

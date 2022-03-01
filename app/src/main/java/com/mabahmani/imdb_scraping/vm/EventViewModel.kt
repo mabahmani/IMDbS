@@ -2,12 +2,9 @@ package com.mabahmani.imdb_scraping.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
 import com.mabahmani.domain.interactor.GetEventDetailsUseCase
 import com.mabahmani.domain.vo.common.EventId
 import com.mabahmani.imdb_scraping.ui.main.event.state.EventDetailsUiState
-import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.CelebsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

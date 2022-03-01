@@ -7,8 +7,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mabahmani.imdb_scraping.R
-import timber.log.Timber
-import java.lang.Exception
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

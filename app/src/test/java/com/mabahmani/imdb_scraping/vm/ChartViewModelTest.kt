@@ -1,12 +1,12 @@
 package com.mabahmani.imdb_scraping.vm
 
 import com.mabahmani.domain.interactor.*
-import com.mabahmani.domain.vo.Calender
-import com.mabahmani.domain.vo.Suggestion
-import com.mabahmani.domain.vo.common.*
+import com.mabahmani.domain.vo.common.BoxOffice
+import com.mabahmani.domain.vo.common.Image
+import com.mabahmani.domain.vo.common.Title
+import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartBoxOfficeUiState
 import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -16,11 +16,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.lang.RuntimeException
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi

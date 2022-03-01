@@ -1,6 +1,6 @@
 package com.mabahmani.domain.interactor
 
-import com.mabahmani.domain.repo.*
+import com.mabahmani.domain.repo.ImageRepository
 import com.mabahmani.domain.vo.common.TitleId
 import javax.inject.Inject
 

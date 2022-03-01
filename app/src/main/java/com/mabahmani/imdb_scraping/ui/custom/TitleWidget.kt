@@ -4,12 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
-import com.google.android.material.appbar.AppBarLayout
 import com.mabahmani.imdb_scraping.R
 import com.mabahmani.imdb_scraping.util.Shape
 import com.mabahmani.imdb_scraping.util.dp

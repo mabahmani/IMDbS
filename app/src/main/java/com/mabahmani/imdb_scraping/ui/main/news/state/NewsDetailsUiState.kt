@@ -1,7 +1,6 @@
 package com.mabahmani.imdb_scraping.ui.main.news.state
 
-import com.mabahmani.domain.vo.*
-import com.mabahmani.domain.vo.common.Trailer
+import com.mabahmani.domain.vo.NewsDetails
 
 sealed class NewsDetailsUiState {
     object  Loading : NewsDetailsUiState()

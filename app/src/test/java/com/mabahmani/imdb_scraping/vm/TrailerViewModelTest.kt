@@ -1,12 +1,13 @@
 package com.mabahmani.imdb_scraping.vm
 
-import com.mabahmani.domain.interactor.*
-import com.mabahmani.domain.vo.Calender
-import com.mabahmani.domain.vo.Suggestion
-import com.mabahmani.domain.vo.common.*
-import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartBoxOfficeUiState
-import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartUiState
-import com.mabahmani.imdb_scraping.ui.main.search.state.*
+import com.mabahmani.domain.interactor.GetAnticipatedTrailersUseCase
+import com.mabahmani.domain.interactor.GetPopularTrailersUseCase
+import com.mabahmani.domain.interactor.GetRecentTrailersUseCase
+import com.mabahmani.domain.interactor.GetTrendingTrailersUseCase
+import com.mabahmani.domain.vo.common.Image
+import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.domain.vo.common.Trailer
+import com.mabahmani.domain.vo.common.VideoId
 import com.mabahmani.imdb_scraping.ui.main.trailers.state.TrailersUiState
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
@@ -17,11 +18,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.lang.RuntimeException
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi
