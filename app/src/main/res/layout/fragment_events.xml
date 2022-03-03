@@ -19,7 +19,6 @@
             app:fastScrollThumbColor="@color/sky_900"
             app:fastScrollTrackColor="@color/gray_100"
             app:fastScrollEnableThumbInactiveColor="false"
-            android:overScrollMode="never"
             />
 
         <com.facebook.shimmer.ShimmerFrameLayout
