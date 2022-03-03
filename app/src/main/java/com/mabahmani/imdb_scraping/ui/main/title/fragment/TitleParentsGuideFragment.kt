@@ -131,12 +131,23 @@ class TitleParentsGuideFragment: Fragment() {
     }
 
     private fun setupCertificates(titleParentsGuide: TitleParentsGuide) {
-        val adapter = TitleParentsGuideCertificateAdapter()
+        if (titleParentsGuide.certifications.isNullOrEmpty()){
+            binding.certification.visibility = View.GONE
+            binding.certificationList.visibility = View.GONE
+        }
 
-        binding.certificationList.layoutManager = LinearLayoutManager(requireContext())
-        binding.certificationList.adapter = adapter
+        else{
+            binding.certification.visibility = View.VISIBLE
+            binding.certificationList.visibility = View.VISIBLE
 
-        adapter.submitList(titleParentsGuide.certifications)
+            val adapter = TitleParentsGuideCertificateAdapter()
+
+            binding.certificationList.layoutManager = LinearLayoutManager(requireContext())
+            binding.certificationList.adapter = adapter
+
+            adapter.submitList(titleParentsGuide.certifications)
+        }
+
     }
 
     private fun showError(message: String) {

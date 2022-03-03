@@ -146,89 +146,146 @@ class NameDetailsFragment: Fragment() {
     }
 
     private fun showNamePersonalDetails(nameDetails: NameDetails) {
-        val adapter = NameDetailsPersonalDetailsAdapter{
-
+        if (nameDetails.personalDetails.isNullOrEmpty()){
+            binding.personalDetailsTitle.visibility = View.GONE
+            binding.personalDetailsList.visibility = View.GONE
         }
 
-        binding.personalDetailsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.personalDetailsList.adapter = adapter
+        else{
+            binding.personalDetailsTitle.visibility = View.VISIBLE
+            binding.personalDetailsList.visibility = View.VISIBLE
 
-        adapter.submitList(nameDetails.personalDetails)
+            val adapter = NameDetailsPersonalDetailsAdapter{
+
+            }
+
+            binding.personalDetailsList.layoutManager = LinearLayoutManager(requireContext())
+            binding.personalDetailsList.adapter = adapter
+
+            adapter.submitList(nameDetails.personalDetails)
+        }
+
     }
 
     private fun showNameRelatedVideos(nameDetails: NameDetails) {
-        val adapter = NameDetailsRelatedVideoAdapter{
-            when (it.videoId.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(R.id.videoDetailsFragment,
-                        Bundle().apply {
-                            putString("videoId", it.videoId.value)
-                            putString("title", it.title)
-                        }
-                    )
-                }
-
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_video_id))
-                }
-            }
+        if (nameDetails.relatedVideos.isNullOrEmpty()){
+            binding.relatedVideosTitle.visibility = View.GONE
+            binding.relatedVideoList.visibility = View.GONE
         }
 
-        binding.relatedVideoList.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.relatedVideoList.adapter = adapter
+        else{
+            binding.relatedVideosTitle.visibility = View.VISIBLE
+            binding.relatedVideoList.visibility = View.VISIBLE
 
-        adapter.submitList(nameDetails.relatedVideos)
+            val adapter = NameDetailsRelatedVideoAdapter{
+                when (it.videoId.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.videoDetailsFragment,
+                            Bundle().apply {
+                                putString("videoId", it.videoId.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_video_id))
+                    }
+                }
+            }
+
+            binding.relatedVideoList.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.relatedVideoList.adapter = adapter
+
+            adapter.submitList(nameDetails.relatedVideos)
+        }
+
     }
 
     private fun showNameFilmographies(nameDetails: NameDetails) {
-        val adapter = NameDetailsFilmographyAdapter()
 
-        binding.filmographyList.layoutManager = LinearLayoutManager(requireContext())
-        binding.filmographyList.adapter = adapter
+        if (nameDetails.filmographies.isNullOrEmpty()){
+            binding.filmographyTitle.visibility = View.GONE
+            binding.filmographyList.visibility = View.GONE
+        }
 
-        adapter.submitList(nameDetails.filmographies)
+        else{
+            binding.filmographyTitle.visibility = View.VISIBLE
+            binding.filmographyList.visibility = View.VISIBLE
+
+            val adapter = NameDetailsFilmographyAdapter()
+
+            binding.filmographyList.layoutManager = LinearLayoutManager(requireContext())
+            binding.filmographyList.adapter = adapter
+
+            adapter.submitList(nameDetails.filmographies)
+        }
+
 
     }
 
     private fun showNameKnowFor(nameDetails: NameDetails) {
-        val adapter = NameDetailsKnownForAdapter{
-            when (it.titleId?.validate()) {
-                is Either.Right -> {
-                    findNavController().navigate(R.id.titleDetailsFragment,
-                        Bundle().apply {
-                            putString("titleId", it.titleId?.value)
-                            putString("title", it.title)
-                        }
-                    )
-                }
 
-                else -> {
-                    requireContext().toast(getString(R.string.invalid_title_id))
-                }
-            }
+        if (nameDetails.knownForTitles.isNullOrEmpty()){
+            binding.knownFor.visibility = View.GONE
+            binding.knownForList.visibility = View.GONE
         }
 
-        binding.knownForList.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.knownForList.adapter = adapter
+        else{
+            binding.knownFor.visibility = View.VISIBLE
+            binding.knownForList.visibility = View.VISIBLE
 
-        adapter.submitList(nameDetails.knownForTitles)
+            val adapter = NameDetailsKnownForAdapter{
+                when (it.titleId?.validate()) {
+                    is Either.Right -> {
+                        findNavController().navigate(R.id.titleDetailsFragment,
+                            Bundle().apply {
+                                putString("titleId", it.titleId?.value)
+                                putString("title", it.title)
+                            }
+                        )
+                    }
+
+                    else -> {
+                        requireContext().toast(getString(R.string.invalid_title_id))
+                    }
+                }
+            }
+
+            binding.knownForList.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.knownForList.adapter = adapter
+
+            adapter.submitList(nameDetails.knownForTitles)
+        }
+
     }
 
     private fun showNamePhotos(nameDetails: NameDetails) {
-        val adapter = NameDetailsPhotoAdapter{
-            findNavController().navigate(R.id.imageDetailsFragment,
-                Bundle().apply {
-                    putString("id", nameId)
-                    putString("imageId", it.imageId?.value)
-                    putString("title", name)
-                }
-            )
+        if (nameDetails.photos.isNullOrEmpty()){
+            binding.photos.visibility = View.GONE
+            binding.photoList.visibility = View.GONE
         }
 
-        binding.photoList.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.photoList.adapter = adapter
+        else{
+            binding.photos.visibility = View.VISIBLE
+            binding.photoList.visibility = View.VISIBLE
 
-        adapter.submitList(nameDetails.photos)
+            val adapter = NameDetailsPhotoAdapter{
+                findNavController().navigate(R.id.imageDetailsFragment,
+                    Bundle().apply {
+                        putString("id", nameId)
+                        putString("imageId", it.imageId?.value)
+                        putString("title", name)
+                    }
+                )
+            }
+
+            binding.photoList.layoutManager = GridLayoutManager(requireContext(), 3)
+            binding.photoList.adapter = adapter
+
+            adapter.submitList(nameDetails.photos)
+        }
+
     }
 
     private fun showNameOverview(nameDetails: NameDetails) {

@@ -1,6 +1,7 @@
 package com.mabahmani.imdb_scraping.ui.main.title.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,15 +40,29 @@ class TitleParentsGuideAdapter : ListAdapter<TitleParentsGuide.Guide, TitleParen
 
         fun bind(model: TitleParentsGuide.Guide) {
 
-            binding.titleWidget.setTitle(model.title)
-            binding.guideRateType = model.guideRateType?.name.orEmpty()
+            if (model.guides.isNullOrEmpty()){
 
-            val adapter = TitleParentsGuideTextAdapter()
+                binding.titleWidget.visibility = View.GONE
+                binding.list.visibility = View.GONE
 
-            binding.list.layoutManager = LinearLayoutManager(binding.root.context)
-            binding.list.adapter = adapter
+            }
 
-            adapter.submitList(model.guides)
+            else{
+
+                binding.titleWidget.visibility = View.VISIBLE
+                binding.list.visibility = View.VISIBLE
+
+                binding.titleWidget.setTitle(model.title)
+                binding.guideRateType = model.guideRateType?.name.orEmpty()
+
+                val adapter = TitleParentsGuideTextAdapter()
+
+                binding.list.layoutManager = LinearLayoutManager(binding.root.context)
+                binding.list.adapter = adapter
+
+                adapter.submitList(model.guides)
+            }
+
         }
     }
 

@@ -66,6 +66,7 @@
                         android:textSize="20sp" />
 
                     <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                        android:id="@+id/certification"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"

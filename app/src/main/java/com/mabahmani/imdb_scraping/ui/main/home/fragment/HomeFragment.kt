@@ -213,7 +213,34 @@ class HomeFragment : Fragment() {
 
 
         val adapter = HomeMediaAdapter {
+            when(it.type){
+                HomeMediaType.GALLERY ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
 
+                HomeMediaType.LIST ->{
+                    findNavController().navigate(R.id.imagesFragment,
+                        Bundle().apply {
+                            putString("id", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+
+                HomeMediaType.VIDEO ->{
+                    findNavController().navigate(R.id.videoDetailsFragment,
+                        Bundle().apply {
+                            putString("videoId", it.id)
+                            putString("title", it.title)
+                        }
+                    )
+                }
+            }
         }
 
         binding.comingSoonList.layoutManager =

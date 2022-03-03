@@ -198,6 +198,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{titleName}"
+                            android:visibility="@{TextUtils.isEmpty(titleName) ? View.GONE:View.VISIBLE}"
                             android:textColor="@color/gray_900" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -205,6 +206,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="@{titleDate}"
+                            android:visibility="@{TextUtils.isEmpty(titleDate) ? View.GONE:View.VISIBLE}"
                             android:textColor="@color/gray_900" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -214,6 +216,7 @@
                             android:layout_marginTop="8dp"
                             android:textSize="12sp"
                             android:text="@{titleCategory}"
+                            android:visibility="@{TextUtils.isEmpty(titleCategory) ? View.GONE:View.VISIBLE}"
                             android:textColor="@color/gray_900" />
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -245,6 +248,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <com.mabahmani.imdb_scraping.ui.custom.TitleWidget
+                    android:id="@+id/relatedVideo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"

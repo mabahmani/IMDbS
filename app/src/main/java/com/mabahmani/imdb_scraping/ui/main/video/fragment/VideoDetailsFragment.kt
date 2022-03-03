@@ -158,16 +158,27 @@ class VideoDetailsFragment: Fragment() {
         binding.titleCategory = videoDetails.relatedTitle.genres
         binding.titleRate = videoDetails.relatedTitle.rate
         binding.titleCoverUrl = videoDetails.relatedTitle.cover?.getCustomImageWidthUrl(512)
-        binding.videoPreviewImageUrl = videoDetails.preview.getCustomImageWidthUrl(512)
+        binding.videoPreviewImageUrl = videoDetails.preview.getCustomImageWidthUrl(800)
 
-        val adapter = VideoDetailsRelatedVideosAdapter{
-            viewModel.launchGetVideoDetailsUseCase(it.videoId, true)
+        if (videoDetails.relatedVideos.isNullOrEmpty()){
+            binding.relatedVideo.visibility = View.GONE
+            binding.relatedVideosList.visibility = View.GONE
+        }
+        else{
+
+            binding.relatedVideo.visibility = View.VISIBLE
+            binding.relatedVideosList.visibility = View.VISIBLE
+
+            val adapter = VideoDetailsRelatedVideosAdapter{
+                viewModel.launchGetVideoDetailsUseCase(it.videoId, true)
+            }
+
+            binding.relatedVideosList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.relatedVideosList.adapter = adapter
+
+            adapter.submitList(videoDetails.relatedVideos)
         }
 
-        binding.relatedVideosList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.relatedVideosList.adapter = adapter
-
-        adapter.submitList(videoDetails.relatedVideos)
 
         setupVideoPlayer(videoDetails.highQualityUrl)
     }
