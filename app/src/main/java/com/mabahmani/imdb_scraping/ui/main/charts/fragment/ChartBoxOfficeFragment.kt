@@ -72,7 +72,14 @@ class ChartBoxOfficeFragment : Fragment() {
             is ChartBoxOfficeUiState.NetworkError -> {
                 showNetworkError()
             }
+            ChartBoxOfficeUiState.TimeOutError -> {
+                retry()
+            }
         }
+    }
+
+    private fun retry() {
+        launchUseCase()
     }
 
     private fun showNetworkError() {
@@ -82,8 +89,7 @@ class ChartBoxOfficeFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        launchUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showBoxOffice(boxOffice: BoxOffice) {

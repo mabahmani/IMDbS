@@ -6,6 +6,7 @@ import com.mabahmani.domain.interactor.GetNameAwardsUseCase
 import com.mabahmani.domain.interactor.GetNameBioUseCase
 import com.mabahmani.domain.interactor.GetNameDetailsUseCase
 import com.mabahmani.domain.vo.common.NameId
+import com.mabahmani.imdb_scraping.ui.main.image.state.ImageDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameBioUiState
 import com.mabahmani.imdb_scraping.ui.main.name.state.NameDetailUiState
@@ -13,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -54,6 +56,10 @@ class NameViewModel @Inject constructor(
                                 _nameDetailsUiState.emit(NameDetailUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _nameDetailsUiState.emit(NameDetailUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _nameDetailsUiState.emit(NameDetailUiState.Error(it.message.toString()))
                             }
@@ -87,6 +93,9 @@ class NameViewModel @Inject constructor(
                                 _nameBioUiState.emit(NameBioUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _nameBioUiState.emit(NameBioUiState.TimeOutError)
+                            }
                             else ->{
                                 _nameBioUiState.emit(NameBioUiState.Error(it.message.toString()))
                             }
@@ -119,6 +128,10 @@ class NameViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _nameAwardUiState.emit(NameAwardUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _nameAwardUiState.emit(NameAwardUiState.TimeOutError)
                             }
 
                             else ->{

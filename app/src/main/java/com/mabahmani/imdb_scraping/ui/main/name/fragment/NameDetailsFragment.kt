@@ -142,7 +142,12 @@ class NameDetailsFragment: Fragment() {
             is NameDetailUiState.NetworkError -> {
                 showNetworkError()
             }
+            NameDetailUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetNameDetailsUseCase(NameId(nameId))
     }
 
     private fun showNamePersonalDetails(nameDetails: NameDetails) {
@@ -298,8 +303,7 @@ class NameDetailsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetNameDetailsUseCase(NameId(nameId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

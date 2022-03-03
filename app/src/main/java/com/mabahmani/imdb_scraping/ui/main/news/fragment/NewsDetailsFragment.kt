@@ -94,7 +94,12 @@ class NewsDetailsFragment : Fragment() {
             is NewsDetailsUiState.NetworkError -> {
                 showNetworkError()
             }
+            NewsDetailsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetNewsDetailsUseCase(NewsId(newsId))
     }
 
     private fun showNetworkError() {
@@ -104,8 +109,7 @@ class NewsDetailsFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetNewsDetailsUseCase(NewsId(newsId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNewsDetails(newsDetails: NewsDetails) {

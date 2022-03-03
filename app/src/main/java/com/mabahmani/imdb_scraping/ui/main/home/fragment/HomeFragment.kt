@@ -119,7 +119,12 @@ class HomeFragment : Fragment() {
             is HomeUiState.NetworkError -> {
                 showHomeNetworkError()
             }
+            HomeUiState.TimeOutError -> retryHome()
         }
+    }
+
+    private fun retryHome() {
+        viewModel.launchHomeUseCase()
     }
 
     private fun handleHomeExtraStates(state: HomeExtraUiState) {
@@ -141,7 +146,12 @@ class HomeFragment : Fragment() {
             is HomeExtraUiState.NetworkError -> {
                 showHomeExtraNetworkError()
             }
+            HomeExtraUiState.TimeOutError -> retryHomeExtra()
         }
+    }
+
+    private fun retryHomeExtra() {
+        viewModel.launchHomeExtraUseCase()
     }
 
     private fun showBornToday(bornTodayList: List<HomeExtra.BornToday>) {
@@ -436,13 +446,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun showHomeError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchHomeUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showHomeExtraError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchHomeExtraUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showTrailers(trailers: List<Trailer>) {

@@ -88,7 +88,12 @@ class TitleTechnicalSpecsFragment: Fragment() {
             is TitleTechnicalSpecsUiState.NetworkError -> {
                 showNetworkError()
             }
+            TitleTechnicalSpecsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
     }
 
     private fun showTechnicalSpecs(titleTechnicalSpecs: TitleTechnicalSpecs) {
@@ -105,8 +110,7 @@ class TitleTechnicalSpecsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

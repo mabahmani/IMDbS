@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.mabahmani.domain.interactor.*
+import com.mabahmani.imdb_scraping.ui.main.news.state.NewsDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.search.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -66,6 +68,10 @@ class SearchViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _calenderUiState.emit(CalenderUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _calenderUiState.emit(CalenderUiState.TimeOutError)
                         }
 
                         else ->{
@@ -130,6 +136,10 @@ class SearchViewModel @Inject constructor(
                                 _eventsUiState.emit(EventsUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _eventsUiState.emit(EventsUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _eventsUiState.emit(EventsUiState.Error(it.message.toString()))
                             }
@@ -162,6 +172,10 @@ class SearchViewModel @Inject constructor(
                                 _genresUiState.emit(GenresUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _genresUiState.emit(GenresUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _genresUiState.emit(GenresUiState.Error(it.message.toString()))
                             }
@@ -192,6 +206,10 @@ class SearchViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _keywordsUiState.emit(KeywordsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _keywordsUiState.emit(KeywordsUiState.TimeOutError)
                             }
 
                             else ->{
@@ -251,6 +269,10 @@ class SearchViewModel @Inject constructor(
                             _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
                         }
 
+                        is SocketTimeoutException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.TimeOutError)
+                        }
+
                         else ->{
                             _suggestionsUiState.emit(SuggestionsUiState.Error(it.message.toString()))
                         }
@@ -277,6 +299,10 @@ class SearchViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.TimeOutError)
                         }
 
                         else ->{
@@ -306,6 +332,10 @@ class SearchViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _suggestionsUiState.emit(SuggestionsUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _suggestionsUiState.emit(SuggestionsUiState.TimeOutError)
                         }
 
                         else ->{

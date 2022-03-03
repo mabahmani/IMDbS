@@ -21,15 +21,17 @@ import com.mabahmani.imdb_scraping.databinding.FragmentVideosBinding
 import com.mabahmani.imdb_scraping.ui.main.video.adapter.VideosAdapter
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideosUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
+import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.VideoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 @AndroidEntryPoint
-class VideosFragment : Fragment (){
+class VideosFragment : Fragment() {
 
     lateinit var binding: FragmentVideosBinding
 
@@ -68,13 +70,13 @@ class VideosFragment : Fragment (){
 
     private fun setupList() {
 
-        adapter = VideosAdapter{
+        adapter = VideosAdapter {
             findNavController().navigate(R.id.videoDetailsFragment,
-                    Bundle().apply {
-                        putString("videoId", it?.videoId?.value)
-                        putString("title", it?.title)
-                    }
-                )
+                Bundle().apply {
+                    putString("videoId", it?.videoId?.value)
+                    putString("title", it?.title)
+                }
+            )
         }
 
         binding.list.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -124,7 +126,7 @@ class VideosFragment : Fragment (){
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch{
+        viewLifecycleOwner.lifecycleScope.launch {
             adapter.loadStateFlow.collectLatest {
                 when (it.refresh) {
                     is LoadState.Loading -> {
@@ -135,17 +137,19 @@ class VideosFragment : Fragment (){
                     }
                     is LoadState.Error -> {
                         val error = (it.refresh as LoadState.Error).error
-                        when((it.refresh as LoadState.Error).error){
+                        when ((it.refresh as LoadState.Error).error) {
                             is UnknownHostException -> showNetworkError()
+                            is SocketTimeoutException -> retry()
                             else -> showError(error.message.orEmpty())
                         }
                     }
                 }
 
-                if (it.append is LoadState.Error){
+                if (it.append is LoadState.Error) {
                     val error = (it.append as LoadState.Error).error
-                    when((it.append as LoadState.Error).error){
+                    when ((it.append as LoadState.Error).error) {
                         is UnknownHostException -> showNetworkError()
+                        is SocketTimeoutException -> retry()
                         else -> showError(error.message.orEmpty())
                     }
                 }
@@ -155,6 +159,10 @@ class VideosFragment : Fragment (){
 
     }
 
+    private fun retry() {
+        adapter.retry()
+    }
+
     private fun showNetworkError() {
         requireContext().showNetworkConnectionError {
             adapter.retry()
@@ -162,8 +170,7 @@ class VideosFragment : Fragment (){
     }
 
     private fun showError(message: String) {
-//        requireContext().showUnexpectedError()
-//        adapter.retry()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showLoading() {

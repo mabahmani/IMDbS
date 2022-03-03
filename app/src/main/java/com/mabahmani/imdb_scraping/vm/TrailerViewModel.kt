@@ -6,11 +6,13 @@ import com.mabahmani.domain.interactor.GetAnticipatedTrailersUseCase
 import com.mabahmani.domain.interactor.GetPopularTrailersUseCase
 import com.mabahmani.domain.interactor.GetRecentTrailersUseCase
 import com.mabahmani.domain.interactor.GetTrendingTrailersUseCase
+import com.mabahmani.imdb_scraping.ui.main.title.state.TitleTechnicalSpecsUiState
 import com.mabahmani.imdb_scraping.ui.main.trailers.state.TrailersUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -46,6 +48,10 @@ class TrailerViewModel @Inject constructor(
                                 _trailersUiState.emit(TrailersUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _trailersUiState.emit(TrailersUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _trailersUiState.emit(TrailersUiState.Error(it.message.toString()))
                             }
@@ -75,6 +81,10 @@ class TrailerViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _trailersUiState.emit(TrailersUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _trailersUiState.emit(TrailersUiState.TimeOutError)
                             }
 
                             else ->{
@@ -108,6 +118,10 @@ class TrailerViewModel @Inject constructor(
                                 _trailersUiState.emit(TrailersUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _trailersUiState.emit(TrailersUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _trailersUiState.emit(TrailersUiState.Error(it.message.toString()))
                             }
@@ -137,6 +151,10 @@ class TrailerViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _trailersUiState.emit(TrailersUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _trailersUiState.emit(TrailersUiState.TimeOutError)
                             }
 
                             else ->{

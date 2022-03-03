@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mabahmani.domain.interactor.GetEventDetailsUseCase
 import com.mabahmani.domain.vo.common.EventId
+import com.mabahmani.imdb_scraping.ui.main.charts.state.ChartUiState
 import com.mabahmani.imdb_scraping.ui.main.event.state.EventDetailsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -39,6 +41,10 @@ class EventViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _eventDetailsUiState.emit(EventDetailsUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _eventDetailsUiState.emit(EventDetailsUiState.TimeOutError)
                         }
 
                         else ->{

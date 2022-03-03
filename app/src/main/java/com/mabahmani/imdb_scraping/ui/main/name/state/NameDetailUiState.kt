@@ -5,6 +5,7 @@ import com.mabahmani.domain.vo.NameDetails
 sealed class NameDetailUiState {
     object  Loading : NameDetailUiState()
     object  NetworkError : NameDetailUiState()
+    object  TimeOutError : NameDetailUiState()
     class   Error(val message: String) : NameDetailUiState()
     class   ShowNameDetails(val nameDetails: NameDetails) : NameDetailUiState()
 }

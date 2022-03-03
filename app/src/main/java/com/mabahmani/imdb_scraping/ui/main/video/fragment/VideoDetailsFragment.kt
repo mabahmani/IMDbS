@@ -145,13 +145,17 @@ class VideoDetailsFragment: Fragment() {
             is VideoDetailsUiState.NetworkError -> {
                 showNetworkError()
             }
+            VideoDetailsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetVideoDetailsUseCase(VideoId(videoId))
     }
 
     private fun showVideoDetails(videoDetails: VideoDetails) {
 
         this.videoDetails = videoDetails
-
         binding.caption = videoDetails.caption
         binding.titleName = videoDetails.relatedTitle.title
         binding.titleDate = videoDetails.relatedTitle.releaseYear
@@ -190,8 +194,7 @@ class VideoDetailsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetVideoDetailsUseCase(VideoId(videoId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

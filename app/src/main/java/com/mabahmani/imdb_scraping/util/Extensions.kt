@@ -2,10 +2,12 @@ package com.mabahmani.imdb_scraping.util
 
 import android.content.Context
 import android.content.res.Resources
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.mabahmani.imdb_scraping.BuildConfig
 import com.mabahmani.imdb_scraping.R
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -38,8 +40,13 @@ fun Context.showNetworkConnectionError(retry: () -> Unit){
         .show()
 }
 
-fun Context.showUnexpectedError(){
-    Toast.makeText(this, resources.getString(R.string.unexpected_error_suggest), Toast.LENGTH_SHORT).show()
+fun Context.showUnexpectedError(message: String) {
+    if (BuildConfig.DEBUG){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    else{
+        Toast.makeText(this, resources.getString(R.string.unexpected_error_suggest), Toast.LENGTH_SHORT).show()
+    }
 }
 
 fun Int.formatNumber(): String{

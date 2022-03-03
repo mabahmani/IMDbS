@@ -26,7 +26,6 @@ import com.mabahmani.imdb_scraping.util.toast
 import com.mabahmani.imdb_scraping.vm.TitleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class TitleDetailsFragment : Fragment() {
@@ -157,7 +156,12 @@ class TitleDetailsFragment : Fragment() {
             is TitleDetailUiState.NetworkError -> {
                 showNetworkError()
             }
+            TitleDetailUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetTitleDetailsUseCase(TitleId(titleId))
     }
 
     private fun showTechnicalSpecs(titleDetails: TitleDetails) {
@@ -419,8 +423,7 @@ class TitleDetailsFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetTitleDetailsUseCase(TitleId(titleId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun setupAppBar() {

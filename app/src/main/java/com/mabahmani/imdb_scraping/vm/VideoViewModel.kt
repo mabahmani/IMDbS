@@ -9,12 +9,14 @@ import com.mabahmani.domain.interactor.GetVideoDetailsUseCase
 import com.mabahmani.domain.vo.common.NameId
 import com.mabahmani.domain.vo.common.TitleId
 import com.mabahmani.domain.vo.common.VideoId
+import com.mabahmani.imdb_scraping.ui.main.trailers.state.TrailersUiState
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideoDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.video.state.VideosUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -83,6 +85,10 @@ class VideoViewModel @Inject constructor(
                         when (it) {
                             is UnknownHostException -> {
                                 _videoDetailsUiState.emit(VideoDetailsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _videoDetailsUiState.emit(VideoDetailsUiState.TimeOutError)
                             }
 
                             else -> {

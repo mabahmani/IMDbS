@@ -93,7 +93,12 @@ class NameBiographyFragment: Fragment() {
             is NameBioUiState.NetworkError -> {
                 showNetworkError()
             }
+            NameBioUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetNameBioUseCase(NameId(nameId))
     }
 
     private fun showSalary(nameBio: NameBio) {
@@ -150,8 +155,7 @@ class NameBiographyFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetNameBioUseCase(NameId(nameId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

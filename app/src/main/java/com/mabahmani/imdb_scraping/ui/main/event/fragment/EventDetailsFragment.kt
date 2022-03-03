@@ -74,7 +74,8 @@ class EventDetailsFragment: Fragment() {
     private fun initEventDetailsStateObserver() {
 
         if (eventYear.isEmpty()){
-            binding.yearInput.setText((Calendar.getInstance().get(Calendar.YEAR) - 1).toString())
+            eventYear = (Calendar.getInstance().get(Calendar.YEAR) - 1).toString()
+            binding.yearInput.setText(eventYear)
         }
         else{
             binding.yearInput.setText(eventYear)
@@ -103,7 +104,12 @@ class EventDetailsFragment: Fragment() {
             is EventDetailsUiState.NetworkError ->{
                 showNetworkError()
             }
+            EventDetailsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetEventDetailsUseCase(eventId, binding.yearInput.text.toString().toInt())
     }
 
     private fun showEventDetails(eventDetails: EventDetails) {
@@ -133,8 +139,12 @@ class EventDetailsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetEventDetailsUseCase(eventId, binding.yearInput.text.toString().toInt())
+        try {
+            eventYear = (eventYear.toInt() -1).toString()
+            binding.yearInput.setText(eventYear)
+        }catch (ex: java.lang.Exception){
+            requireContext().showUnexpectedError(message)
+        }
     }
 
     private fun showLoading() {

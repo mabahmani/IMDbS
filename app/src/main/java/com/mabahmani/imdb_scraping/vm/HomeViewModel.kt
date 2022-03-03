@@ -4,12 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mabahmani.domain.interactor.GetHomeExtraUseCase
 import com.mabahmani.domain.interactor.GetHomeUseCase
+import com.mabahmani.imdb_scraping.ui.main.event.state.EventDetailsUiState
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeExtraUiState
 import com.mabahmani.imdb_scraping.ui.main.home.state.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -50,6 +52,10 @@ class HomeViewModel @Inject constructor(
                             _homeUiState.emit(HomeUiState.NetworkError)
                         }
 
+                        is SocketTimeoutException ->{
+                            _homeUiState.emit(HomeUiState.TimeOutError)
+                        }
+
                         else ->{
                             _homeUiState.emit(HomeUiState.Error(it.message.toString()))
                         }
@@ -78,6 +84,10 @@ class HomeViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _homeExtraUiState.emit(HomeExtraUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _homeExtraUiState.emit(HomeExtraUiState.TimeOutError)
                         }
 
                         else ->{

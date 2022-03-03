@@ -70,7 +70,12 @@ class CalenderFragment : Fragment() {
             is CalenderUiState.NetworkError -> {
                 showNetworkError()
             }
+            CalenderUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetCalenderUseCase()
     }
 
     private fun showNetworkError() {
@@ -80,8 +85,7 @@ class CalenderFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetCalenderUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showCalender(calenders: List<Calender>) {

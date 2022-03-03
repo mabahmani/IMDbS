@@ -5,6 +5,7 @@ import com.mabahmani.domain.vo.common.Title
 sealed class ChartUiState{
     object  Loading : ChartUiState()
     object  NetworkError : ChartUiState()
+    object  TimeOutError : ChartUiState()
     class   Error(val message: String) : ChartUiState()
     class   ShowChartsData(val titles: List<Title>) : ChartUiState()
 }

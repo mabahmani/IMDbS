@@ -88,7 +88,12 @@ class TitleAwardFragment: Fragment() {
             is TitleAwardsUiState.NetworkError -> {
                 showNetworkError()
             }
+            TitleAwardsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetTitleAwardsUseCase(TitleId(titleId))
     }
 
     private fun showAwards(titleAwards: TitleAwards) {
@@ -114,8 +119,7 @@ class TitleAwardFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetTitleAwardsUseCase(TitleId(titleId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

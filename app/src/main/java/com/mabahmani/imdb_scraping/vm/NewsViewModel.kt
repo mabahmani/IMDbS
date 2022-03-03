@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mabahmani.domain.interactor.GetNewsDetailsUseCase
 import com.mabahmani.domain.vo.common.NewsId
+import com.mabahmani.imdb_scraping.ui.main.name.state.NameAwardUiState
 import com.mabahmani.imdb_scraping.ui.main.news.state.NewsDetailsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -38,6 +40,10 @@ class NewsViewModel @Inject constructor(
                     when(it){
                         is UnknownHostException ->{
                             _newsDetailsUiState.emit(NewsDetailsUiState.NetworkError)
+                        }
+
+                        is SocketTimeoutException ->{
+                            _newsDetailsUiState.emit(NewsDetailsUiState.TimeOutError)
                         }
 
                         else ->{

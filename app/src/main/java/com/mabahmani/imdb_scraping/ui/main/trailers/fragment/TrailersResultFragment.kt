@@ -104,7 +104,12 @@ class TrailersResultFragment: Fragment() {
             is TrailersUiState.NetworkError -> {
                 showNetworkError()
             }
+            TrailersUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        launchUseCase()
     }
 
     private fun showTrailers(trailers: List<Trailer>) {
@@ -164,8 +169,7 @@ class TrailersResultFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        launchUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showLoading() {

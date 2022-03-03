@@ -110,7 +110,12 @@ class ImageDetailsFragment: Fragment() {
             is ImageDetailsUiState.NetworkError -> {
                 showNetworkError()
             }
+            ImageDetailsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        launchUseCase()
     }
 
     private fun showImageDetails(imageDetails: ImageDetails) {
@@ -174,8 +179,7 @@ class ImageDetailsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        launchUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

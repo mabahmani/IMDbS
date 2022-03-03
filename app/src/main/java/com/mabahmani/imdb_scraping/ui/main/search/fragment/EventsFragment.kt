@@ -72,7 +72,12 @@ class EventsFragment : Fragment() {
             is EventsUiState.NetworkError -> {
                 showNetworkError()
             }
+            EventsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetEventsUseCase()
     }
 
     private fun showNetworkError() {
@@ -82,8 +87,7 @@ class EventsFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetEventsUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showEvents(events: List<Event>) {

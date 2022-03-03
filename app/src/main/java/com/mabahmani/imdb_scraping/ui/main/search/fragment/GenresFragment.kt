@@ -72,7 +72,12 @@ class GenresFragment : Fragment() {
             is GenresUiState.NetworkError -> {
                 showNetworkError()
             }
+            GenresUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetGenresUseCase()
     }
 
     private fun showNetworkError() {
@@ -82,8 +87,7 @@ class GenresFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetGenresUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showGenres(genres: List<Genre>) {

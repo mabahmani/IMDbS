@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 @AndroidEntryPoint
@@ -123,6 +124,7 @@ class TitlesFragment : Fragment (){
                         val error = (it.refresh as LoadState.Error).error
                         when((it.refresh as LoadState.Error).error){
                             is UnknownHostException -> showNetworkError()
+                            is SocketTimeoutException -> retry()
                             else -> showError(error.message.orEmpty())
                         }
                     }
@@ -132,6 +134,7 @@ class TitlesFragment : Fragment (){
                     val error = (it.append as LoadState.Error).error
                     when((it.append as LoadState.Error).error){
                         is UnknownHostException -> showNetworkError()
+                        is SocketTimeoutException -> retry()
                         else -> showError(error.message.orEmpty())
                     }
                 }
@@ -145,6 +148,10 @@ class TitlesFragment : Fragment (){
 
     }
 
+    private fun retry() {
+        adapter.retry()
+    }
+
     private fun showNetworkError() {
         requireContext().showNetworkConnectionError {
             adapter.retry()
@@ -152,8 +159,7 @@ class TitlesFragment : Fragment (){
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        adapter.retry()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showLoading() {

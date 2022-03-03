@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -127,6 +128,10 @@ class ImageViewModel @Inject constructor(
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _imagesDetailsUiState.emit(ImageDetailsUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.Error(it.message.toString()))
                             }
@@ -163,6 +168,10 @@ class ImageViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _imagesDetailsUiState.emit(ImageDetailsUiState.TimeOutError)
                             }
 
                             else ->{
@@ -203,6 +212,10 @@ class ImageViewModel @Inject constructor(
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _imagesDetailsUiState.emit(ImageDetailsUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.Error(it.message.toString()))
                             }
@@ -239,6 +252,10 @@ class ImageViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _imagesDetailsUiState.emit(ImageDetailsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _imagesDetailsUiState.emit(ImageDetailsUiState.TimeOutError)
                             }
 
                             else ->{

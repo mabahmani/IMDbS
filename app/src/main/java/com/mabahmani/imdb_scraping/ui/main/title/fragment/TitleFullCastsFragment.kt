@@ -88,7 +88,12 @@ class TitleFullCastsFragment: Fragment() {
             is TitleFullCastsUiState.NetworkError -> {
                 showNetworkError()
             }
+            TitleFullCastsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
     }
 
     private fun showFullCasts(titleAwards: TitleFullCasts) {
@@ -105,8 +110,7 @@ class TitleFullCastsFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

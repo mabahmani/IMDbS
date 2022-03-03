@@ -71,7 +71,12 @@ class KeywordsFragment : Fragment() {
             is KeywordsUiState.NetworkError -> {
                 showNetworkError()
             }
+            KeywordsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetKeywordsUseCase()
     }
 
     private fun showNetworkError() {
@@ -81,8 +86,7 @@ class KeywordsFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetKeywordsUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showKeywords(keywords: List<String>) {

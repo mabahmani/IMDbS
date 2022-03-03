@@ -89,7 +89,12 @@ class NameAwardFragment: Fragment() {
             is NameAwardUiState.NetworkError -> {
                 showNetworkError()
             }
+            NameAwardUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetNameAwardsUseCase(NameId(nameId))
     }
 
     private fun showAwards(nameAwards: NameAwards) {
@@ -114,8 +119,7 @@ class NameAwardFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetNameAwardsUseCase(NameId(nameId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {

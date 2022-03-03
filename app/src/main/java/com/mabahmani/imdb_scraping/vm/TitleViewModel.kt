@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mabahmani.domain.interactor.*
 import com.mabahmani.domain.vo.common.TitleId
+import com.mabahmani.imdb_scraping.ui.main.search.state.SuggestionsUiState
 import com.mabahmani.imdb_scraping.ui.main.title.state.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -56,6 +58,10 @@ class TitleViewModel @Inject constructor(
                                 _titleDetailsUiState.emit(TitleDetailUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _titleDetailsUiState.emit(TitleDetailUiState.TimeOutError)
+                            }
+
                             else -> {
                                 _titleDetailsUiState.emit(TitleDetailUiState.Error(it.message.toString()))
                             }
@@ -85,6 +91,10 @@ class TitleViewModel @Inject constructor(
                         when (it) {
                             is UnknownHostException -> {
                                 _titleAwardsUiState.emit(TitleAwardsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _titleAwardsUiState.emit(TitleAwardsUiState.TimeOutError)
                             }
 
                             else -> {
@@ -118,6 +128,10 @@ class TitleViewModel @Inject constructor(
                                 _titleFullCastsUiState.emit(TitleFullCastsUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _titleFullCastsUiState.emit(TitleFullCastsUiState.TimeOutError)
+                            }
+
                             else -> {
                                 _titleFullCastsUiState.emit(TitleFullCastsUiState.Error(it.message.toString()))
                             }
@@ -149,6 +163,10 @@ class TitleViewModel @Inject constructor(
                                 _titleParentsGuideUiState.emit(TitleParentsGuideUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _titleParentsGuideUiState.emit(TitleParentsGuideUiState.TimeOutError)
+                            }
+
                             else -> {
                                 _titleParentsGuideUiState.emit(TitleParentsGuideUiState.Error(it.message.toString()))
                             }
@@ -178,6 +196,10 @@ class TitleViewModel @Inject constructor(
                         when (it) {
                             is UnknownHostException -> {
                                 _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _titleTechnicalSpecsUiState.emit(TitleTechnicalSpecsUiState.TimeOutError)
                             }
 
                             else -> {

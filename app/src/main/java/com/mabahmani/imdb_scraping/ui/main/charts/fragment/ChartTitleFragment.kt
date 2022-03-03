@@ -99,7 +99,12 @@ class ChartTitleFragment : Fragment() {
             is ChartUiState.NetworkError -> {
                 showNetworkError()
             }
+            ChartUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        launchUseCase()
     }
 
     private fun showNetworkError() {
@@ -109,8 +114,7 @@ class ChartTitleFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        launchUseCase()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showTitles(titles: List<Title>) {

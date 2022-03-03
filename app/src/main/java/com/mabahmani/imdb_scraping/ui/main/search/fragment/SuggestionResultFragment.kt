@@ -138,7 +138,12 @@ class SuggestionResultFragment : Fragment() {
             is SuggestionsUiState.NetworkError -> {
                 showNetworkError()
             }
+            SuggestionsUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        checkLastInput()
     }
 
     private fun showNetworkError() {
@@ -149,8 +154,7 @@ class SuggestionResultFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        checkLastInput()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showSuggestions(suggestions: List<Suggestion>) {

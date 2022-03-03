@@ -19,15 +19,17 @@ import com.mabahmani.imdb_scraping.databinding.FragmentImagesBinding
 import com.mabahmani.imdb_scraping.ui.main.image.adapter.ImagesAdapter
 import com.mabahmani.imdb_scraping.ui.main.image.state.ImagesUiState
 import com.mabahmani.imdb_scraping.util.showNetworkConnectionError
+import com.mabahmani.imdb_scraping.util.showUnexpectedError
 import com.mabahmani.imdb_scraping.vm.ImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 @AndroidEntryPoint
-class ImagesFragment : Fragment (){
+class ImagesFragment : Fragment() {
 
     lateinit var binding: FragmentImagesBinding
 
@@ -66,14 +68,14 @@ class ImagesFragment : Fragment (){
 
     private fun setupList() {
 
-        adapter = ImagesAdapter{
+        adapter = ImagesAdapter {
             findNavController().navigate(R.id.imageDetailsFragment,
-                    Bundle().apply {
-                        putString("id", id)
-                        putString("imageId", it?.imageId?.value)
-                        putString("title", title)
-                    }
-                )
+                Bundle().apply {
+                    putString("id", id)
+                    putString("imageId", it?.imageId?.value)
+                    putString("title", title)
+                }
+            )
         }
 
         binding.list.layoutManager = GridLayoutManager(requireContext(), 3)
@@ -129,7 +131,7 @@ class ImagesFragment : Fragment (){
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch{
+        viewLifecycleOwner.lifecycleScope.launch {
             adapter.loadStateFlow.collectLatest {
                 when (it.refresh) {
                     is LoadState.Loading -> {
@@ -140,17 +142,19 @@ class ImagesFragment : Fragment (){
                     }
                     is LoadState.Error -> {
                         val error = (it.refresh as LoadState.Error).error
-                        when((it.refresh as LoadState.Error).error){
+                        when ((it.refresh as LoadState.Error).error) {
                             is UnknownHostException -> showNetworkError()
+                            is SocketTimeoutException -> retry()
                             else -> showError(error.message.orEmpty())
                         }
                     }
                 }
 
-                if (it.append is LoadState.Error){
+                if (it.append is LoadState.Error) {
                     val error = (it.append as LoadState.Error).error
-                    when((it.append as LoadState.Error).error){
+                    when ((it.append as LoadState.Error).error) {
                         is UnknownHostException -> showNetworkError()
+                        is SocketTimeoutException -> retry()
                         else -> showError(error.message.orEmpty())
                     }
                 }
@@ -160,6 +164,10 @@ class ImagesFragment : Fragment (){
 
     }
 
+    private fun retry() {
+        adapter.retry()
+    }
+
     private fun showNetworkError() {
         requireContext().showNetworkConnectionError {
             adapter.retry()
@@ -167,8 +175,7 @@ class ImagesFragment : Fragment (){
     }
 
     private fun showError(message: String) {
-//        requireContext().showUnexpectedError()
-//        adapter.retry()
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showLoading() {

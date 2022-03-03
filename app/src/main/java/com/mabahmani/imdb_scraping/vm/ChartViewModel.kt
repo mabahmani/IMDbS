@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -49,6 +50,10 @@ class ChartViewModel @Inject constructor(
                                 _chartsUiState.emit(ChartUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _chartsUiState.emit(ChartUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _chartsUiState.emit(ChartUiState.Error(it.message.toString()))
                             }
@@ -78,6 +83,10 @@ class ChartViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _boxOfficeUiState.emit(ChartBoxOfficeUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _boxOfficeUiState.emit(ChartBoxOfficeUiState.TimeOutError)
                             }
 
                             else ->{
@@ -111,6 +120,10 @@ class ChartViewModel @Inject constructor(
                                 _chartsUiState.emit(ChartUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _chartsUiState.emit(ChartUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _chartsUiState.emit(ChartUiState.Error(it.message.toString()))
                             }
@@ -140,6 +153,10 @@ class ChartViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _chartsUiState.emit(ChartUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _chartsUiState.emit(ChartUiState.TimeOutError)
                             }
 
                             else ->{
@@ -173,6 +190,10 @@ class ChartViewModel @Inject constructor(
                                 _chartsUiState.emit(ChartUiState.NetworkError)
                             }
 
+                            is SocketTimeoutException ->{
+                                _chartsUiState.emit(ChartUiState.TimeOutError)
+                            }
+
                             else ->{
                                 _chartsUiState.emit(ChartUiState.Error(it.message.toString()))
                             }
@@ -202,6 +223,10 @@ class ChartViewModel @Inject constructor(
                         when(it){
                             is UnknownHostException ->{
                                 _chartsUiState.emit(ChartUiState.NetworkError)
+                            }
+
+                            is SocketTimeoutException ->{
+                                _chartsUiState.emit(ChartUiState.TimeOutError)
                             }
 
                             else ->{

@@ -89,7 +89,12 @@ class TitleParentsGuideFragment: Fragment() {
             is TitleParentsGuideUiState.NetworkError -> {
                 showNetworkError()
             }
+            TitleParentsGuideUiState.TimeOutError -> retry()
         }
+    }
+
+    private fun retry() {
+        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
     }
 
     private fun showTitleParentsGuide(titleParentsGuide: TitleParentsGuide) {
@@ -151,8 +156,7 @@ class TitleParentsGuideFragment: Fragment() {
     }
 
     private fun showError(message: String) {
-        requireContext().showUnexpectedError()
-        viewModel.launchGetTitleFullCastsUseCase(TitleId(titleId))
+        requireContext().showUnexpectedError(message)
     }
 
     private fun showNetworkError() {
