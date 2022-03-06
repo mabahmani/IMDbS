@@ -24,3 +24,10 @@ The Project writen in Kotlin with help of this major components and libararies:
 
 and unit-tested with **MockK**.
 
+# Screenshots
+
+<img src="/../main/screenshots/photo1%20(9).jpg" width="300" height="3000" />     <img src="/../main/screenshots/photo1%20(10).jpg" width="300" height="3000" />     <img src="/../main/screenshots/photo1%20(11).jpg" width="300" height="3000" />
+
+<img src="/../main/screenshots/photo1%20(1).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(2).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(8).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(4).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(5).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(6).jpg" width="300" height="500" />     <img src="/../main/screenshots/photo1%20(7).jpg" width="300" height="500" />
+
+
